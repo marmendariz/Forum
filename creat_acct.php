@@ -27,15 +27,15 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
             include 'header.php';
         ?>
     <br>
-<!--------------------------LOGIN FORM------------------------------>
+<!--------------------------CREATE ACCOUNT FORM------------------------------>
 <div class='row'>
 <div class='large-7 large-centered columns panel medium-7 medium-centered small-10 small-centered'>
   <!----------------------------------------->
   <form method='post' action='login.php'>
         
     <div class="row">
-      <div class='large-3 columns large-centered text-center'>
-      <h5>Please Login</h5>
+      <div class='large-4 columns large-centered text-center'>
+      <h5>Create an Account</h5>
       </div>
     </div>
     
@@ -58,19 +58,6 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
       <input type='submit' class='button expand' value='Submit'>    
       </div>
     </div>
-    
-    <hr>
-    <div class='row'>
-      <div class='row'>
-        <div class='large-4 columns large-centered text-center'>        
-          <h5>New to the Forum?</h5>
-        </div>
-      </div>
-      <div class='large-6 large-centered columns'>
-        <a href="creat_acct.php"><input type='button' class='button expand' value='Create an Account'></a>
-      </div>
-    </div>
-    
   </form>
   <!---------------------------------------->
   </div>
