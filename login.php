@@ -67,7 +67,7 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
         </div>
       </div>
       <div class='large-6 large-centered columns'>
-        <a href="creat_acct.php"><input type='button' class='button expand' value='Create an Account'></a>
+        <a href="create_acct.php"><input type='button' class='button expand' value='Create an Account'></a>
       </div>
     </div>
     
