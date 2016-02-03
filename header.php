@@ -19,8 +19,9 @@
           <ul class="dropdown">
             <li><a href="#">Page 5</a></li>
           </ul>
-          
           </li>
+          <li><a href="login.php">Sign-In</a></li>
+          <li><a href="#">Logout</a></li>
         </ul>
       </section>
     </nav>
