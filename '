@@ -25,8 +25,6 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
 
 /****************QUERY DB FOR LOGIN************************/
 if(isset($_POST['username']) && isset($_POST['password'])){
-    $username = htmlspecialchars($_POST['username']);
-    $pwd = htmlspecialchars($_POST['password']);
 
     @ $db = new mysqli('localhost','quadcore','Vek,6zum','quadcore');
     if(mysqli_connect_errno()){
@@ -34,30 +32,30 @@ if(isset($_POST['username']) && isset($_POST['password'])){
         exit;
     } 
     else{
-        //echo 'Success<br<';
-        $query = 'select * from login where username=? and pwd=?';
-        $stmt = $db->prepare($query);
-        $stmt->bind_param('ss',$username, $pwd);
-        $stmt->execute();
-        $stmt->store_result();
-        $num_rows = $stmt->num_rows;
-        if($num_rows>0)
-            $_SESSION['valid_user'] = $username;
-        $stmt->close();
+        echo 'Success<br<';
     }
-    $db->close();
+
+
+
 }
+
+
+$_SESSION['valid_user'] = 'mark';
+unset($_SESSION['valid_user']);
 
 /**********************************************/
 /*IF VALID LOGIN STILL ACTIVE, DISPLAY MESSAGE*/
 if(isset($_SESSION['valid_user'])){
 ?>
+
 <div class='row'>
     <div class='large-7 columns panel large-centered text-center'>
-        <h5>You are already logged in as <?php echo $_SESSION['valid_user'] ?>.</h5>
-        <h6>Not you?<a href='#'> Logout.</a></h6>
+        <h5>You are already logged in.</h5>
     </div>
 </div>
+
+   
+   
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
@@ -67,7 +65,8 @@ if(isset($_SESSION['valid_user'])){
 </html>
 <?php
     exit;
-    }
+}
+/***********************************************************/
 ?>
 <!--------------------------LOGIN FORM------------------------------>
 <div class='row'>
@@ -118,6 +117,7 @@ if(isset($_SESSION['valid_user'])){
   </div>
 </div>
 <!-------------------------------------------------------------------->    
+    
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
