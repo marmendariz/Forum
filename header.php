@@ -19,7 +19,7 @@
           </ul>
           </li>
           <li><a href="login.php">Sign-In</a></li>
-          <li><a href="#">Logout</a></li>
+          <li><a href="logout.php">Logout</a></li>
         </ul>
       </section>
     </nav>

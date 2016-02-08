@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
 <style>
+    #login_error{
+        color: red;
+    }
 </style>
 </head>
 <body>
@@ -15,6 +18,8 @@
 session_start();
 include 'header.php';
 echo '<br>';
+
+$login_failed = false;
 
 /*********************FORCE SSL SECURED CONNECTION********************************/
 if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
@@ -43,6 +48,8 @@ if(isset($_POST['username']) && isset($_POST['password'])){
         $num_rows = $stmt->num_rows;
         if($num_rows>0)
             $_SESSION['valid_user'] = $username;
+        else
+            $login_failed = true;
         $stmt->close();
     }
     $db->close();
@@ -54,8 +61,8 @@ if(isset($_SESSION['valid_user'])){
 ?>
 <div class='row'>
     <div class='large-7 columns panel large-centered text-center'>
-        <h5>You are already logged in as <?php echo $_SESSION['valid_user'] ?>.</h5>
-        <h6>Not you?<a href='#'> Logout.</a></h6>
+        <h5>You are logged in as <?php echo $_SESSION['valid_user'] ?>.</h5>
+        <h6>Not you?<a href='logout.php'> Logout.</a></h6>
     </div>
 </div>
     <script src="js/vendor/jquery.js"></script>
@@ -100,7 +107,19 @@ if(isset($_SESSION['valid_user'])){
       <input type='submit' class='button expand' value='Submit'>    
       </div>
     </div>
-    
+
+<?php
+if($login_failed){
+    echo "
+    <div class='row'>
+        <div class='columns large-4 large-centered text-center'>
+            <h5 id='login_error'>Login Failed</h5>
+        </div>
+    </div>
+    ";
+    }
+?>
+
     <hr>
     <div class='row'>
       <div class='row'>
