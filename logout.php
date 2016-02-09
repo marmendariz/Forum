@@ -33,7 +33,7 @@ if(isset($_SESSION['valid_user'])){
 ?>
     <div class='row'>
         <div class='large-7 columns panel large-centered text-center'>
-            <h5>You are not logged out.</h5>
+            <h5>You are now logged out.</h5>
         </div>
     </div>
 
