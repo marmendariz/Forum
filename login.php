@@ -10,6 +10,30 @@
     #login_error{
         color: red;
     }
+
+.button:hover {
+    /*background-color: #00cc66;*/
+    background-color: #007095; 
+    -webkit-transition: all 0.5s;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border: 1px solid rgba(0,0,0,1000.0);
+    border-radius: 25px;    
+}
+
+button:hover, button:focus, .button:hover, .button:focus {
+
+    background-color: #007095; 
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    position: relative;
+    border: 1px solid rgba(0,0,0,1000.0);
+    border-color: #339966;
+
+}
+
 </style>
 </head>
 <body>
@@ -89,21 +113,21 @@ if(isset($_SESSION['valid_user'])){
     </div>
     
     <div class='row'>
-      <div class='large-6 columns large-centered'>
+      <div class='large-8 columns large-centered medium-8 medium-centered'>
         <label for='username'><b>Username:</b></label>
         <input type="text" id = 'username' placeholder="" name='username'/>
       </div>         
     </div>
     
     <div class='row'>
-      <div class='large-6 columns large-centered'>
+      <div class='large-8 columns large-centered medium-8 medium-centered'>
         <label for='password'><b>Password:</b></label>
         <input type="password" id = 'password' placeholder="" name='password'/>
       </div>         
     </div>
         
     <div class='row'>
-      <div class='columns large-4 large-centered'>
+      <div class='columns large-6 large-centered medium-6 medium-centered small-12 small-centered'>
       <input type='submit' class='button expand' value='Submit'>    
       </div>
     </div>
@@ -127,7 +151,7 @@ if($login_failed){
           <h5>New to the Forum?</h5>
         </div>
       </div>
-      <div class='large-6 large-centered columns'>
+      <div class='large-8 large-centered columns medium-8 medium-centered'>
         <a href="create_acct.php"><input type='button' class='button expand' value='Create an Account'></a>
       </div>
     </div>
