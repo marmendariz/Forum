@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_POST['username'])){
-    $username = htmlspecialchars($_POST['username']);
+    $username = htmlspecialchars(trim($_POST['username']));
     @ $db = new mysqli('localhost','quadcore','Vek,6zum','quadcore');
     if(mysqli_connect_errno()){
         echo "Database error<br>";

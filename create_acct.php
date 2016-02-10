@@ -20,9 +20,7 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
 
   </head>
   <body>
-        <?php
-            include 'header.php';
-        ?>
+        <?php include 'header.php'; ?>
     <br>
 <!--------------------------CREATE ACCOUNT FORM------------------------------>
 <div class='row'>
