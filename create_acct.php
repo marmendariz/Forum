@@ -16,16 +16,6 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
     <script src="js/vendor/modernizr.js"></script>
     <script src='js/jquery-1.12.0.min.js' type='text/javascript'></script>
 <style>
-
-.large-3{
-    
-}
-
-#username_msg{
-/*line-height: 0;*/
-/*display: none;*/
-}
-
 </style>
 
   </head>
