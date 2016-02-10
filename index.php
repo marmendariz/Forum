@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Forum | Welcome</title>
+    <title>Quadcore Forum| Home </title>
     <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/quadcore.css" />
     <script src="js/vendor/modernizr.js"></script>
   </head>
   <body>
@@ -156,7 +157,7 @@
 
       <div class="large-4 medium-4 columns">
         <h5>Try one of these buttons:</h5>
-        <p><a href="#" class="small button">Simple Button</a><br/>
+        <p><input type="submit" class="small button" value="Submit"><br/>
         <a href="#" class="small radius button">Radius Button</a><br/>
         <a href="#" class="small round button">Round Button</a><br/>            
         <a href="#" class="medium success button">Success Btn</a><br/>

@@ -3,38 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Forum | Login</title>
+    <title>Quadcore Forum | Login</title>
     <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/quadcore.css" />
     <script src="js/vendor/modernizr.js"></script>
-<style>
-    #login_error{
-        color: red;
-    }
-
-.button:hover {
-    /*background-color: #00cc66;*/
-    background-color: #007095; 
-    -webkit-transition: all 0.5s;
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    border: 1px solid rgba(0,0,0,1000.0);
-    border-radius: 25px;    
-}
-
-button:hover, button:focus, .button:hover, .button:focus {
-
-    background-color: #007095; 
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    transition: all 0.5s;
-    position: relative;
-    border: 1px solid rgba(0,0,0,1000.0);
-    border-color: #339966;
-
-}
-
-</style>
 </head>
 <body>
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Forum | Logout</title>
+    <title>Quadcore Forum | Logout</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
 <style>
@@ -33,7 +33,7 @@ if(isset($_SESSION['valid_user'])){
 ?>
     <div class='row'>
         <div class='large-7 columns panel large-centered text-center'>
-            <h5>You are now logged out.</h5>
+            <h5>You have been logged out.</h5>
         </div>
     </div>
 

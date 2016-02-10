@@ -5,3 +5,21 @@
 [07-Feb-2016 12:29:21 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '*' in /home/stu/marmendariz/public_html/Forum/login.php on line 35
 [07-Feb-2016 12:29:47 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '*' in /home/stu/marmendariz/public_html/Forum/login.php on line 35
 [07-Feb-2016 12:30:50 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '*' in /home/stu/marmendariz/public_html/Forum/login.php on line 33
+[09-Feb-2016 15:43:57 America/Los_Angeles] PHP Warning:  session_start(): open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in /home/stu/quadcore/public_html/Forum/login.php on line 42
+[09-Feb-2016 15:43:57 America/Los_Angeles] PHP Warning:  Unknown: open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in Unknown on line 0
+[09-Feb-2016 15:43:57 America/Los_Angeles] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php5) in Unknown on line 0
+[09-Feb-2016 15:44:09 America/Los_Angeles] PHP Warning:  session_start(): open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in /home/stu/quadcore/public_html/Forum/login.php on line 42
+[09-Feb-2016 15:44:09 America/Los_Angeles] PHP Warning:  Unknown: open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in Unknown on line 0
+[09-Feb-2016 15:44:09 America/Los_Angeles] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php5) in Unknown on line 0
+[09-Feb-2016 15:44:14 America/Los_Angeles] PHP Warning:  session_start(): open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in /home/stu/quadcore/public_html/Forum/logout.php on line 15
+[09-Feb-2016 15:44:14 America/Los_Angeles] PHP Warning:  Unknown: open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in Unknown on line 0
+[09-Feb-2016 15:44:14 America/Los_Angeles] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php5) in Unknown on line 0
+[09-Feb-2016 15:44:16 America/Los_Angeles] PHP Warning:  session_start(): open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in /home/stu/quadcore/public_html/Forum/login.php on line 42
+[09-Feb-2016 15:44:16 America/Los_Angeles] PHP Warning:  Unknown: open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in Unknown on line 0
+[09-Feb-2016 15:44:16 America/Los_Angeles] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php5) in Unknown on line 0
+[09-Feb-2016 15:44:21 America/Los_Angeles] PHP Warning:  session_start(): open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in /home/stu/quadcore/public_html/Forum/login.php on line 42
+[09-Feb-2016 15:44:21 America/Los_Angeles] PHP Warning:  Unknown: open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in Unknown on line 0
+[09-Feb-2016 15:44:21 America/Los_Angeles] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php5) in Unknown on line 0
+[09-Feb-2016 15:44:23 America/Los_Angeles] PHP Warning:  session_start(): open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in /home/stu/quadcore/public_html/Forum/logout.php on line 15
+[09-Feb-2016 15:44:23 America/Los_Angeles] PHP Warning:  Unknown: open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in Unknown on line 0
+[09-Feb-2016 15:44:23 America/Los_Angeles] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php5) in Unknown on line 0
