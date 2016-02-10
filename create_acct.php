@@ -14,10 +14,16 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/quadcore.css" />
     <script src="js/vendor/modernizr.js"></script>
+    <script src='js/jquery-1.12.0.min.js' type='text/javascript'></script>
 <style>
 
 .large-3{
     
+}
+
+#username_msg{
+/*line-height: 0;*/
+/*display: none;*/
 }
 
 </style>
@@ -32,26 +38,34 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
 <div class='row'>
 <div class='large-7 large-centered columns panel medium-7 medium-centered small-10 small-centered'>
   <!----------------------------------------->
-  <form method='post' action='login.php'>
+  <form method='post' action='create_acct.php'>
         
     <div class="row">
-      <div class='large-4 columns large-centered text-center medium-8 medium-centered'>
+      <div class='large-8 columns large-centered text-center medium-8 medium-centered'>
       <h5>Create an Account. You know the drill.</h5>
       </div>
     </div>
-    
+
     <div class='row'>
-      <div class='large-6 columns large-centered medium-6 medium-centered'>
-        <label for='username'><b>Username:</b></label>
-        <input type="text" id = 'username' placeholder="" name='username'/>
-      </div>         
+        <!-- <div class='large-6 columns large-centered medium-6 medium-centered'> -->
+        <div class='large-6 columns medium-6'>
+            <label for='username'><b>Username:</b></label>
+            <input type="text" id = 'username' placeholder="" name='username'/>
+        </div>
+        <div class='large-6 columns'>
+            <p id='username_msg'>Choose a username</p>
+        </div>
     </div>
     
     <div class='row'>
-      <div class='large-6 columns large-centered medium-6 medium-centered'>
+      <!--<div class='large-6 columns large-centered medium-6 medium-centered'>-->
+      <div class='large-6 columns medium-6 small-8'>
         <label for='password'><b>Password:</b></label>
         <input type="password" id = 'password' placeholder="" name='password'/>
-      </div>         
+      </div> 
+      <div class='large-6 columns'>
+            <p id='password_msg'>Choose a password</p>
+       </div>
     </div>
         
     <div class='row'>
@@ -68,7 +82,23 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
-      $(document).foundation();
+        $(document).foundation();
+        $(document).ready(function(){
+            //$('#username_msg').hide();
+            //$('#username');
+            
+            $('#username').on('keyup',function(){
+                var txt = $('#username').val();
+            $.post('check_username.php', { username: txt },
+                function(result){
+                    $('#username_msg').html(result).show();
+                });
+            });
+
+            $('#password').on('keyup', function(){
+            });
+
+        });
     </script>
   </body>
 </html>
