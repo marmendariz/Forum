@@ -96,8 +96,12 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
             });
 
             $('#password').on('keyup', function(){
+                var txt = $('#password').val();
+                $.post('check_password.php', {password: txt},
+                    function(result){
+                        $('#password_msg').html(result).show();                
+                    });
             });
-
         });
     </script>
   </body>
