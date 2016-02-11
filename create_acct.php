@@ -75,17 +75,6 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
             //$('#username_msg').hide();
             //$('#username');
 
-            /*
-            $('#username').on('keyup',function(){
-                var txt = $('#username').val();
-                //alert('a');
-            $.post('check_username.php', { username: txt },
-                function(result){
-                    alert('a');
-                    $('#username_msg').html(result).show();
-                });
-        });*/
-
             $('#username').on('keyup', function(){
                 var txt = $('#username').val();
                 $.post('check_username.php', {username: txt},
