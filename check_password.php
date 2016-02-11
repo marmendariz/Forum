@@ -1,9 +1,10 @@
 <?php
+$length = 5;
 
 if(isset($_POST['password'])){
     $pwd = htmlspecialchars($_POST['password']);
     $size = strlen($pwd);
-    if($size<5 && $size>0){
+    if($size<$length && $size>0){
         echo 'Too short';
     }
     if($size>=5)
