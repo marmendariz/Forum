@@ -74,13 +74,24 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
         $(document).ready(function(){
             //$('#username_msg').hide();
             //$('#username');
-            
+
+            /*
             $('#username').on('keyup',function(){
                 var txt = $('#username').val();
+                //alert('a');
             $.post('check_username.php', { username: txt },
                 function(result){
+                    alert('a');
                     $('#username_msg').html(result).show();
                 });
+        });*/
+
+            $('#username').on('keyup', function(){
+                var txt = $('#username').val();
+                $.post('check_username.php', {username: txt},
+                    function(result){
+                        $('#username_msg').html(result).show();                
+                    });
             });
 
             $('#password').on('keyup', function(){

@@ -23,3 +23,161 @@
 [09-Feb-2016 15:44:23 America/Los_Angeles] PHP Warning:  session_start(): open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in /home/stu/quadcore/public_html/Forum/logout.php on line 15
 [09-Feb-2016 15:44:23 America/Los_Angeles] PHP Warning:  Unknown: open(/var/lib/php5/sess_s1p9koalmicv82uq3lklosusi1, O_RDWR) failed: Permission denied (13) in Unknown on line 0
 [09-Feb-2016 15:44:23 America/Los_Angeles] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php5) in Unknown on line 0
+[10-Feb-2016 18:45:22 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:23 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:23 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:23 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:23 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:23 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:23 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:23 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:23 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:23 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:24 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:32 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:32 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:32 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:32 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:33 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:34 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:34 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:34 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:34 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:34 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:34 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:34 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:35 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:35 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:35 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:35 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:45:36 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:12 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:13 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:13 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:13 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:14 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:14 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:14 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:14 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:15 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:42 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:44 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:45 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:45 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:46 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:46 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:46 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:46 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:47 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:46:50 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:48:15 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:48:15 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:48:16 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:49:48 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:49:48 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:49:48 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:49:49 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:49:49 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:49:49 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:50:44 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:50:44 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:50:45 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:50:45 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:50:45 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:50:45 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:50:47 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:08 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:08 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:09 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:09 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:09 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:09 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:25 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:25 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:25 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:25 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:25 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:25 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:26 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:26 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:26 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:26 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:51:26 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/check_username.php on line 14
+[10-Feb-2016 18:53:08 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:53:09 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:53:09 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:53:09 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:53:10 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:53:10 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:54:09 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/login.php on line 41
+[10-Feb-2016 18:54:24 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/login.php on line 41
+[10-Feb-2016 18:56:15 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/login.php on line 41
+[10-Feb-2016 18:56:27 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:56:27 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:56:27 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:56:27 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:56:28 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:56:28 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:56:28 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:56:28 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:56:28 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:56:28 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:56:28 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:56:30 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:12 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:13 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:13 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:13 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:13 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:13 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:13 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:13 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:13 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:14 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:14 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:15 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:18 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:18 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:18 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:18 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:18 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:19 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:19 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:19 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:19 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:19 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:57:19 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:01 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:01 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:01 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:02 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:02 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:02 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:02 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:02 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:02 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:02 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:02 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:07 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:07 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:08 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:09 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:09 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:09 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:09 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 18:58:09 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:10 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:10 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:10 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:10 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:10 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:10 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:11 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:11 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:11 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:11 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:11 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:11 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:11 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:12 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[10-Feb-2016 19:01:12 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12

@@ -1,15 +1,14 @@
 <?php
 
 if(isset($_POST['username'])){
-    $username = htmlspecialchars(trim($_POST['username']));
+    $username = trim($_POST['username']);
     @ $db = new mysqli('localhost','quadcore','Vek,6zum','quadcore');
     if(mysqli_connect_errno()){
-        echo "Database error<br>";
+        echo "Database error";
         exit;
     } 
-
     else{
-        $query = 'select * from login where username=?';
+        $query = 'select * from user where user_name=?';
         $stmt = $db->prepare($query);
         $stmt->bind_param('s',$username);
         $stmt->execute();
