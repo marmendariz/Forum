@@ -30,14 +30,50 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
         
     <div class="row">
       <div class='large-8 columns large-centered text-center medium-8 medium-centered'>
-      <h5>Create an Account. You know the drill.</h5>
+      <h5>Create an account. You know the drill.</h5>
       </div>
+    </div>
+    <hr>
+
+    <div class='row'>
+        <div class='large-6 columns medium-6'>
+            <label for='fname'><b>First Name</b></label>
+            <input type='text' id='fname' name='fname'>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class='large-6 columns medium-6'>
+            <label for='mname'><b>Middle Name (Optional)</b></label>
+            <input type='text' id='mname' name='mname'>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class='large-6 columns medium-6'>
+            <label for='lname'><b>Last Name</b></label>
+            <input type='text' id='lname' name='lname'>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class='large-6 columns medium-6'>
+            <label for='email'><b>Email</b></label>
+            <input type='email' id='email' name='email'>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class='large-6 columns medium-6'>
+            <label for='phone'><b>Phone Number (Optional)</b></label>
+            <input type='text' id='phone' name='phone' placeholder='(555)-555-5555'>
+        </div>
     </div>
 
     <div class='row'>
         <!-- <div class='large-6 columns large-centered medium-6 medium-centered'> -->
         <div class='large-6 columns medium-6'>
-            <label for='username'><b>Username:</b></label>
+            <label for='username'><b>Username</b></label>
             <input type="text" id = 'username' placeholder="" name='username'/>
         </div>
         <div class='large-6 columns'>
@@ -48,7 +84,7 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
     <div class='row'>
       <!--<div class='large-6 columns large-centered medium-6 medium-centered'>-->
       <div class='large-6 columns medium-6 small-8'>
-        <label for='password'><b>Password:</b></label>
+        <label for='password'><b>Password</b></label>
         <input type="password" id = 'password' placeholder="" name='password'/>
       </div> 
       <div class='large-6 columns'>
@@ -58,7 +94,7 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
         
     <div class='row'>
       <div class='columns large-4 large-centered medium-6 medium-centered'>
-      <input type='submit' class='button expand' value='Submit'>    
+      <input type='submit' class='button expand' value='Create Account'>    
       </div>
     </div>
   </form>
