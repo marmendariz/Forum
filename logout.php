@@ -13,7 +13,7 @@
 
 <?php
 session_start();
-include 'header.php';
+include_once 'header.php';
 echo '<br>';
 
 /*********************FORCE SSL SECURED CONNECTION********************************/

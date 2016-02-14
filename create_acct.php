@@ -15,12 +15,12 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
     <link rel="stylesheet" href="css/quadcore.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script src='js/jquery-1.12.0.min.js' type='text/javascript'></script>
-<style>
+
 </style>
 
   </head>
   <body>
-        <?php include 'header.php'; ?>
+        <?php include_once 'header.php'; ?>
     <br>
 <!--------------------------CREATE ACCOUNT FORM------------------------------>
 <div class='row'>
@@ -66,7 +66,7 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
     <div class='row'>
         <div class='large-6 columns medium-6'>
             <label for='phone'><b>Phone Number (Optional)</b></label>
-            <input type='text' id='phone' name='phone' placeholder='(555)-555-5555'>
+            <input type='text' id='phone' name='phone'>
         </div>
     </div>
 
@@ -102,8 +102,8 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
   </div>
 </div>
 <!-------------------------------------------------------------------->    
-    
     <script src="js/vendor/jquery.js"></script>
+    <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="js/foundation.min.js"></script>
     <script>
         $(document).foundation();
@@ -111,7 +111,10 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
             //$('#username_msg').hide();
             //$('#username');
 
-            $('#username').on('keyup', function(){
+            //$('#phone').mask("(999)-999-9999");
+
+    
+        $('#username').on('keyup', function(){
                 var txt = $('#username').val();
                 $.post('check_username.php', {username: txt},
                     function(result){
@@ -127,6 +130,8 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
                     });
             });
         });
+        $("#phone").mask("(999) 999-9999");
+
     </script>
   </body>
 </html>
