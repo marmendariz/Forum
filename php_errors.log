@@ -181,3 +181,4 @@
 [10-Feb-2016 19:01:11 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
 [10-Feb-2016 19:01:12 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
 [10-Feb-2016 19:01:12 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
+[14-Feb-2016 17:34:21 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/login.php on line 41

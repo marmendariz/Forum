@@ -36,7 +36,7 @@ if(isset($_POST['username']) && isset($_POST['password'])){
     } 
     else{
         //echo 'Success<br<';
-        $query = 'select * from user where user_name=? and hashed_pwd=?';
+        $query = 'select * from login where username=? and password=?';
         $stmt = $db->prepare($query);
         $stmt->bind_param('ss',$username, $pwd);
         $stmt->execute();

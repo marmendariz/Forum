@@ -8,7 +8,7 @@ if(isset($_POST['username'])){
         exit;
     } 
     else{
-        $query = 'select * from user where user_name=?';
+        $query = 'select * from login where username=?';
         $stmt = $db->prepare($query);
         $stmt->bind_param('s',$username);
         $stmt->execute();
