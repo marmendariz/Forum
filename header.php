@@ -3,7 +3,7 @@
     <nav class="top-bar" data-topbar data-options="is_hover: false">
       <ul class="title-area">
         <li class="name">
-          <h1><a href="index.php">LOGO HERE</a></h1>
+          <h1><a href="index.php"><img src="img/Q.gif" height="35px" width="35px"> uadCore Forum</a></h1>
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
