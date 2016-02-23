@@ -14,7 +14,6 @@
 <?php
 session_start();
 include_once 'header.php';
-echo '<br>';
 
 /*********************FORCE SSL SECURED CONNECTION********************************/
 if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){

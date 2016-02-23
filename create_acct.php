@@ -21,7 +21,6 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
   </head>
   <body>
         <?php include_once 'header.php'; ?>
-    <br>
 <!--------------------------CREATE ACCOUNT FORM------------------------------>
 <div class='row'>
 <div class='large-7 large-centered columns panel medium-7 medium-centered small-10 small-centered'>

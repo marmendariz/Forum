@@ -13,7 +13,6 @@
 <?php
 session_start();
 include_once 'header.php';
-echo '<br>';
 
 $login_failed = false;
 
