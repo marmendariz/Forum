@@ -13,9 +13,10 @@
           <li class="active"><a href="index.php">Home</a></li>
           <li><a href="#">Page 1</a></li>
           <li class="has-dropdown">
-          <a href="#">Page 2</a>
+          <a href="#">Account</a>
           <ul class="dropdown">
-            <li><a href="#">Page 3</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="#">Account Info</a></li>
           </ul>
           </li>
           <li><a href="login.php">Sign-In</a></li>
