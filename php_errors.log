@@ -182,3 +182,12 @@
 [10-Feb-2016 19:01:12 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
 [10-Feb-2016 19:01:12 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/marmendariz/public_html/Forum/check_username.php on line 12
 [14-Feb-2016 17:34:21 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/marmendariz/public_html/Forum/login.php on line 41
+[23-Feb-2016 14:11:07 America/Los_Angeles] PHP Warning:  session_start(): open(/var/lib/php5/sess_s0rj4srottamkcod67a3r1an33, O_RDWR) failed: Permission denied (13) in /home/stu/marmendariz/public_html/Forum/login.php on line 14
+[23-Feb-2016 14:11:07 America/Los_Angeles] PHP Warning:  Unknown: open(/var/lib/php5/sess_s0rj4srottamkcod67a3r1an33, O_RDWR) failed: Permission denied (13) in Unknown on line 0
+[23-Feb-2016 14:11:07 America/Los_Angeles] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php5) in Unknown on line 0
+[23-Feb-2016 14:11:34 America/Los_Angeles] PHP Warning:  session_start(): open(/var/lib/php5/sess_s0rj4srottamkcod67a3r1an33, O_RDWR) failed: Permission denied (13) in /home/stu/marmendariz/public_html/Forum/profile.php on line 14
+[23-Feb-2016 14:11:34 America/Los_Angeles] PHP Warning:  Unknown: open(/var/lib/php5/sess_s0rj4srottamkcod67a3r1an33, O_RDWR) failed: Permission denied (13) in Unknown on line 0
+[23-Feb-2016 14:11:34 America/Los_Angeles] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php5) in Unknown on line 0
+[23-Feb-2016 14:11:37 America/Los_Angeles] PHP Warning:  session_start(): open(/var/lib/php5/sess_s0rj4srottamkcod67a3r1an33, O_RDWR) failed: Permission denied (13) in /home/stu/marmendariz/public_html/Forum/login.php on line 14
+[23-Feb-2016 14:11:37 America/Los_Angeles] PHP Warning:  Unknown: open(/var/lib/php5/sess_s0rj4srottamkcod67a3r1an33, O_RDWR) failed: Permission denied (13) in Unknown on line 0
+[23-Feb-2016 14:11:37 America/Los_Angeles] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php5) in Unknown on line 0

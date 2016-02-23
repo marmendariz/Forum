@@ -1,6 +1,9 @@
 #login_error{
         color: red;
     }
+.error_txt{
+    color: red !important;
+}
 
 .button:hover {
     /*background-color: #00cc66;*/
