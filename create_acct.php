@@ -33,7 +33,6 @@ $pwStat = true;
 
 /********IF Form was submitted, check inputs***********/
 if(isset($_POST['submit'])){
-    
 /******************First Name**************************/
 if(!isset($_POST['fname']) || empty($_POST['fname'])){
     $fnStat = false;
@@ -72,6 +71,10 @@ if(!isset($_POST['email']) || empty($_POST['email'])){
     $emStat = false;
 }
 else{
+    $email = input_clean($_POST['email']);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    if(filter_var($email, FILTER_VALIDATE_EMAIL)===false)
+        $emStat = false;
     
 }
 /*******************************************************/
@@ -154,7 +157,7 @@ else
     <div class='row'>
         <div class='large-6 columns medium-6'>
             <label for='email'><b>Email</b></label>
-            <input type='email' id='email' name='email' required maxlength="30">
+            <input type='text' id='email' name='email' required maxlength="30">
         </div>
 <?php
         echo "<div class='large-6 columns'>";

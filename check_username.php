@@ -2,12 +2,12 @@
 include_once 'lib.php';
 
 if(isset($_POST['username'])){
-    $username = input_clean($_POST['username']);
     if(!($db = db_connect())){
         echo "Database error";
         exit;
     } 
     else{
+        $username = mysqli_real_escape_string($db,input_clean($_POST['username']));
         $query = 'select * from login where username=?';
         $stmt = $db->prepare($query);
         $stmt->bind_param('s',$username);
