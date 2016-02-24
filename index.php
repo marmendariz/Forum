@@ -13,6 +13,7 @@
 <?php
     include_once 'header.php';
 ?>
+    <a href='show_parent_cat.php'> SHOW PARENT CATEGORIES HERE</a>
     <div class="row">
       <div class="large-12 columns">
         <div class="panel">

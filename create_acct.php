@@ -77,11 +77,26 @@ else{
     
 }
 /*******************************************************/
+
+if(!isset($_POST['password']) || empty($_POST['password'])){
+    $pwStat = false;
+}
+else{
+    $password = input_clean($_POST['password']);
+    
+}
+
 }
 
 /***********If every input is fine, insert into db****************/
 if($fnStat && $mnStat && $lnStat && $emStat && $unStat && $pwStat){
-
+    $fp = fopen('/dev/urandom','r');
+    $randomString = fread($fp,32);
+    fclose($fp);
+    //store
+    $salt = base64_encode($randomString);
+    //store
+    $hashed = crypt($password,'$6$',$salt);
 }
 /*********************************************************/
 ?>
