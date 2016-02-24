@@ -1,9 +1,9 @@
 <?php
+include_once 'lib.php';
 
 if(isset($_POST['username'])){
-    $username = trim($_POST['username']);
-    @ $db = new mysqli('localhost','quadcore','Vek,6zum','quadcore');
-    if(mysqli_connect_errno()){
+    $username = input_clean($_POST['username']);
+    if(!($db = db_connect())){
         echo "Database error";
         exit;
     } 
