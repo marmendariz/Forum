@@ -50,7 +50,7 @@ if(!isset($_POST['mname']) || empty($_POST['mname'])){
     $mnStat = false;
 }
 else{
-    $mname = input_clean($_POST['mname']);
+   $mname = input_clean($_POST['mname']);
     if(!preg_match('/^[a-zA-Z]+$/',$mname))
         $mnStat = false;
 }

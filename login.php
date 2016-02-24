@@ -14,6 +14,7 @@
 <?php
 session_start();
 include_once 'header.php';
+include_once 'lib.php';
 
 $login_failed = false;
 
@@ -26,8 +27,6 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
 
 /****************QUERY DB FOR LOGIN************************/
 if(isset($_POST['username']) && isset($_POST['password'])){
-    $username = htmlspecialchars($_POST['username']);
-    $pwd = htmlspecialchars($_POST['password']);
 
     @ $db = new mysqli('localhost','quadcore','Vek,6zum','quadcore');
     if(mysqli_connect_errno()){
@@ -35,7 +34,8 @@ if(isset($_POST['username']) && isset($_POST['password'])){
         exit;
     } 
     else{
-        //echo 'Success<br<';
+        $username = mysqli_real_escape_string($db, input_clean($_POST['username']));
+        $pwd = mysqli_real_escape_string($db,input_clean($_POST['password']));
         $query = 'select * from login where username=? and password=?';
         $stmt = $db->prepare($query);
         $stmt->bind_param('ss',$username, $pwd);
