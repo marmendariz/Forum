@@ -1732,6 +1732,9 @@ meta.foundation-mq-topbar {
 
 .top-bar {
   background: #333333;
+  /*height: 2.8125rem;
+  line-height: 2.8125rem;
+  */
   height: 2.8125rem;
   line-height: 2.8125rem;
   margin-bottom: 0;

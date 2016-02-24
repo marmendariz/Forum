@@ -22,49 +22,60 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
 <?php 
 
 include_once 'header.php'; 
+include_once 'lib.php';
 
 $fnStat = true;
 $mnStat = true;
 $lnStat = true;
 $emStat = true;
-//$pnStat = false;
 $unStat = true;
 $pwStat = true;
 
+/********IF Form was submitted, check inputs***********/
 if(isset($_POST['submit'])){
-/*first Name*/
+    
+/******************First Name**************************/
 if(!isset($_POST['fname']) || empty($_POST['fname'])){
     $fnStat = false;
 }
 else{
-    //Check firstName and store it
+    $fname = input_clean($_POST['fname']);
+    if(!preg_match('/^[a-zA-Z]+$/',$fname))
+        $fnStat = false;
 }
-/***********/
-/*Middle Name (optional)*/
+/*****************************************************/
+
+/***************Middle Name (optional)***************/
 if(!isset($_POST['mname']) || empty($_POST['mname'])){
     $mnStat = false;
 }
 else{
-    //Check middleName and store it
+    $mname = input_clean($_POST['mname']);
+    if(!preg_match('/^[a-zA-Z]+$/',$mname))
+        $mnStat = false;
 }
-/***********/
-/*last Name*/
+/********************************************************/
+
+/*******************Last Name***************************/
 if(!isset($_POST['lname']) || empty($_POST['lname'])){
     $lnStat = false;
 }
 else{
-    //Check lastName and store it
+    $lname = input_clean($_POST['lname']);
+    if(!preg_match('/^[a-zA-Z]+$/',$lname))
+        $lnStat = false;
 }
-/**********/
-/*Email*/
+/*******************************************************/
+
+/*************************Email************************/
 if(!isset($_POST['email']) || empty($_POST['email'])){
     $emStat = false;
 }
 else{
-    //Check userName and store it
 }
-/**********/
+/*******************************************************/
 }
+/*********************************************************/
 ?>
 <!--------------------------CREATE ACCOUNT FORM------------------------------>
 <div class='row'>
