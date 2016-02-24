@@ -13,7 +13,7 @@
 <?php
 session_start();
 include_once 'header.php';
-echo '<br>';
+include_once 'lib.php';
 
 $login_failed = false;
 
