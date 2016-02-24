@@ -72,6 +72,7 @@ if(!isset($_POST['email']) || empty($_POST['email'])){
     $emStat = false;
 }
 else{
+    
 }
 /*******************************************************/
 }
@@ -99,7 +100,7 @@ if($fnStat && $mnStat && $lnStat && $emStat && $unStat && $pwStat){
     <div class='row'>
         <div class='large-6 columns medium-6'>
             <label for='fname'><b>First Name</b></label>
-            <input type='text' id='fname' name='fname' required>
+            <input type='text' id='fname' name='fname' required maxlength="12"/>
         </div>
 <?php
         echo "<div class='large-6 columns'>";
@@ -117,7 +118,7 @@ else
     <div class='row'>
         <div class='large-6 columns medium-6'>
             <label for='mname'><b>Middle Name (Optional)</b></label>
-            <input type='text' id='mname' name='mname'>
+            <input type='text' id='mname' name='mname' maxlength="12">
         </div>
 <?php
         echo "<div class='large-6 columns'>";
@@ -135,7 +136,7 @@ else
     <div class='row'>
         <div class='large-6 columns medium-6'>
             <label for='lname'><b>Last Name</b></label>
-            <input type='text' id='lname' name='lname' required>
+            <input type='text' id='lname' name='lname' required maxlength="20">
         </div>
 <?php
         echo "<div class='large-6 columns'>";
@@ -153,7 +154,7 @@ else
     <div class='row'>
         <div class='large-6 columns medium-6'>
             <label for='email'><b>Email</b></label>
-            <input type='email' id='email' name='email' required>
+            <input type='email' id='email' name='email' required maxlength="30">
         </div>
 <?php
         echo "<div class='large-6 columns'>";
@@ -181,7 +182,7 @@ else
     <div class='row'>
         <div class='large-6 columns medium-6'>
             <label for='username'><b>Username</b></label>
-            <input type="text" id = 'username' placeholder="" name='username' required/>
+            <input type="text" id = 'username' placeholder="" name='username' required maxlength="20"/>
         </div>
 <?php
         /*
@@ -204,7 +205,7 @@ else
     <div class='row'>
       <div class='large-6 columns medium-6 small-8'>
         <label for='password'><b>Password</b></label>
-        <input type="password" id = 'password' placeholder="" name='password' required/>
+        <input type="password" id = 'password' placeholder="" name='password' required maxlength="15"/>
       </div> 
 <?php
         /*
