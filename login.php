@@ -27,12 +27,11 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
 
 /****************QUERY DB FOR LOGIN************************/
 if(isset($_POST['username']) && isset($_POST['password'])){
-
-    @ $db = new mysqli('localhost','quadcore','Vek,6zum','quadcore');
-    if(mysqli_connect_errno()){
+    if(!($db = db_connect()))
+    {
         echo "Database error<br>";
         exit;
-    } 
+    }
     else{
         $username = mysqli_real_escape_string($db, input_clean($_POST['username']));
         $pwd = mysqli_real_escape_string($db,input_clean($_POST['password']));

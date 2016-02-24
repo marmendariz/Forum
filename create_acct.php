@@ -20,7 +20,7 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on")
   <body>
 
 <?php 
-
+session_start();
 include_once 'header.php'; 
 include_once 'lib.php';
 
@@ -74,6 +74,11 @@ if(!isset($_POST['email']) || empty($_POST['email'])){
 else{
 }
 /*******************************************************/
+}
+
+/***********If every input is fine, insert into db****************/
+if($fnStat && $mnStat && $lnStat && $emStat && $unStat && $pwStat){
+
 }
 /*********************************************************/
 ?>
