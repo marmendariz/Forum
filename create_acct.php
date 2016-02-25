@@ -284,34 +284,54 @@ else
 
             /*Username status ajax*/ 
         $('#username').on('keyup', function(){
-                var txt = $('#username').val();
+                 var txt = $('#username').val();
                 $.post('check_username.php', {username: txt},
                     function(result){
-                        $('#username_stat').html(result).show();                
+                        $('#username_stat').html(result).show();
+                        var text = $('#username_stat').text();
+                        if(text=='Username taken')
+                            $('#username_stat').removeClass('success_txt');
+                            $('#username_stat').addClass('error_txt');
+                        if(text=='Username available!'){
+                            $('#username_stat').removeClass('error_txt');
+                            $('#username_stat').addClass('success_txt');
+                        }
+                        if(text=='Choose a username'){
+                            $('#username_stat').removeClass('error_txt');
+                           $('#username_stat').removeClass('success_txt');
+                        }               
                     });
-            });
+                           });
 
         /*Password status ajax*/
             $('#password').on('keyup', function(){
                 var txt = $('#password').val();
                 $.post('check_password.php', {password: txt},
                     function(result){
-                        $('#password_stat').html(result).show();                
+                        $('#password_stat').html(result).show();
+                        var text = $('#password_stat').text();
+                        if(text=='Invalid password' || text=='Too short')
+                            $('#password_stat').removeClass('success_txt');
+                            $('#password_stat').addClass('error_txt');
+                        if(text=='Great!'){
+                            $('#password_stat').removeClass('error_txt');
+                            $('#password_stat').addClass('success_txt');
+                        }
+                        if(text=='Choose a password'){
+                            $('#password_stat').removeClass('error_txt');
+                           $('#password_stat').removeClass('success_txt');
+                        }
                     });
             });
 
-            /*If username & password AJAX messages aren't good,
-                make it known to user and preventDefault*/
+            /*If username & password AJAX messages aren't good, preventDefault*/
             $("#submit").on("click",function(event){
                 var usernameStat = $('#username_stat').text();
                 var passwordStat = $('#password_stat').text();
-                if(usernameStat !='Username available!'){
+                if(usernameStat !='Username available!')
                     event.preventDefault();
-                    $('#username_stat').addClass('error_txt');
-                }if(passwordStat != 'Great!'){
+                if(passwordStat != 'Great!')
                     event.preventDefault();
-                    $('#password_stat').addClass('error_txt');
-                }
             });
         });
     </script>
