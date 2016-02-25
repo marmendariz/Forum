@@ -12,10 +12,10 @@
 <body>
 
 <?php
+session_save_path('/tmp');
 session_start();
 include_once 'header.php';
 include_once 'lib.php';
-
 $login_failed = false;
 
 /*********************FORCE SSL SECURED CONNECTION********************************/
@@ -35,9 +35,19 @@ if(isset($_POST['username']) && isset($_POST['password'])){
     else{
         $username = mysqli_real_escape_string($db, input_clean($_POST['username']));
         $pwd = mysqli_real_escape_string($db,input_clean($_POST['password']));
-        $query = 'select * from login where username=? and password=?';
+        $query = 'select salt from user where user_name=?';
         $stmt = $db->prepare($query);
-        $stmt->bind_param('ss',$username, $pwd);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($salt);
+        $stmt->fetch();
+        $salt = stripslashes($salt);
+        $hashed=crypt($pwd,'$6$'.$salt);
+
+        $query = 'select * from user where user_name=? and hashed_pwd=?';
+        $stmt = $db->prepare($query);
+        $stmt->bind_param('ss',$username, $hashed);
         $stmt->execute();
         $stmt->store_result();
         $num_rows = $stmt->num_rows;

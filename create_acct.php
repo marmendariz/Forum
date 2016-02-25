@@ -18,7 +18,8 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
   </head>
   <body>
 
-<?php 
+<?php
+session_save_path('/tmp');
 session_start();
 include_once 'header.php'; 
 include_once 'lib.php';
@@ -78,27 +79,58 @@ else{
 }
 /*******************************************************/
 
+if(!isset($_POST['username']) || empty($_POST['username'])){
+    $unStat = false;
+}
+else{
+    $username = input_clean($_POST['username']);
+}
+
 if(!isset($_POST['password']) || empty($_POST['password'])){
     $pwStat = false;
 }
 else{
     $password = input_clean($_POST['password']);
-    
-}
-
 }
 
 /***********If every input is fine, insert into db****************/
 if($fnStat && $mnStat && $lnStat && $emStat && $unStat && $pwStat){
+    if(!($db = db_connect())){
+        echo 'Database error<br>';
+        exit;
+    }
+
+    $query = 'Insert into user (user_name,user_type, f_name, 
+                               m_name, l_name, email, date_joined, 
+                               hashed_pwd, salt)
+                               values (?,?,?,?,?,?,?,?,?)';
+    $stmt = $db->prepare($query);
+
+    $username = mysqli_real_escape_string($db, $username);
+    $password = mysqli_real_escape_string($db, $password);
+
     $fp = fopen('/dev/urandom','r');
     $randomString = fread($fp,32);
     fclose($fp);
-    //store
     $salt = base64_encode($randomString);
-    //store
-    $hashed = crypt($password,'$6$',$salt);
+    $hashed = crypt($password,'$6$'.$salt); 
+    $salt = mysqli_real_escape_string($db, $salt);
+    $hashed = mysqli_real_escape_string($db, $hashed);
+    
+    $type = 0;
+    $date = date('Y-m-d H:i:s');
+    $stmt->bind_param('sisssssss',$username, $type, $fname, $mname,
+                                  $lname, $email, $date,
+                                  $hashed, $salt);
+    if(!$stmt->execute()){
+        echo '<br><br><br>Error<br>';
+        exit;
+    }
+    $stmt->close();
+    $db->close();
 }
 /*********************************************************/
+}
 ?>
 <!--------------------------CREATE ACCOUNT FORM------------------------------>
 <div class='row'>
@@ -171,7 +203,7 @@ else
     <div class='row'>
         <div class='large-6 columns medium-6'>
             <label for='email'><b>Email</b></label>
-            <input type='text' id='email' name='email' required maxlength="30">
+            <input type='email' id='email' name='email' required maxlength="30">
         </div>
 <?php
         echo "<div class='large-6 columns'>";
