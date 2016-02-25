@@ -39,9 +39,9 @@ $stmt->execute();
 $stmt->store_result();
 $stmt->bind_result($cat_id, $cat_name, $cat_level, $cat_text, $parent_cat_id);
 while($stmt->fetch()){
-    $text = wordwrap($cat_text, 70, "<br>");
-    echo "<a href='show_child_cat.php?cat_id=$cat_id'>$cat_name </a>";
-    echo "<br><pre >    $text</pre>"; 
+    //$text = wordwrap($cat_text, 70, "<br>");
+    echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name<h3></a>";
+    echo "<p>&nbsp &nbsp &nbsp &nbsp$cat_text</p>"; 
     echo '<hr>';
 }
 

@@ -7,3 +7,5 @@
 [24-Feb-2016 14:31:36 America/Los_Angeles] PHP Warning:  crypt() expects at most 2 parameters, 3 given in /home/stu/marmendariz/public_html/Forum/create_acct.php on line 99
 [24-Feb-2016 15:49:23 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/show_parent_cat.php on line 44
 [24-Feb-2016 15:49:25 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/show_parent_cat.php on line 44
+[24-Feb-2016 18:18:14 America/Los_Angeles] PHP Warning:  crypt() expects at most 2 parameters, 3 given in /home/stu/quadcore/public_html/Forum/create_acct.php on line 99
+[24-Feb-2016 19:29:31 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'color' (T_STRING), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/show_parent_cat.php on line 43
