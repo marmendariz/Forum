@@ -5,3 +5,5 @@
 [24-Feb-2016 14:14:38 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/marmendariz/public_html/Forum/show_child_cat.php on line 41
 [24-Feb-2016 14:14:54 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/marmendariz/public_html/Forum/show_child_cat.php on line 41
 [24-Feb-2016 14:31:36 America/Los_Angeles] PHP Warning:  crypt() expects at most 2 parameters, 3 given in /home/stu/marmendariz/public_html/Forum/create_acct.php on line 99
+[24-Feb-2016 15:49:23 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/show_parent_cat.php on line 44
+[24-Feb-2016 15:49:25 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/show_parent_cat.php on line 44

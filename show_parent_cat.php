@@ -33,13 +33,15 @@ if(!($db = db_connect())){
     echo "Database error<br>";
     exit;
 }
-$query = 'select * from category where parent_cat_id=1';
+$query = 'select * from category where cat_level=2';
 $stmt = $db->prepare($query);
 $stmt->execute();
 $stmt->store_result();
 $stmt->bind_result($cat_id, $cat_name, $cat_level, $cat_text, $parent_cat_id);
 while($stmt->fetch()){
-    echo "<a href='show_child_cat.php?cat_id=$cat_id'><h1>$cat_id $cat_name $cat_text $cat_level</h1></a>";
+    $text = wordwrap($cat_text, 70, "<br>");
+    echo "<a href='show_child_cat.php?cat_id=$cat_id'>$cat_name </a>";
+    echo "<br><pre >    $text</pre>"; 
     echo '<hr>';
 }
 
