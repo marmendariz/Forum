@@ -8,7 +8,7 @@ if(isset($_POST['username'])){
     } 
     else{
         $username = mysqli_real_escape_string($db,input_clean($_POST['username']));
-        $query = 'select * from login where username=?';
+        $query = 'select * from user where user_name=?';
         $stmt = $db->prepare($query);
         $stmt->bind_param('s',$username);
         $stmt->execute();

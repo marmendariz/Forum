@@ -19,7 +19,7 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
   <body>
 
 <?php
-session_save_path('/tmp');
+ini_set('session_save_path','/tmp');
 session_start();
 include_once 'header.php'; 
 include_once 'lib.php';
@@ -123,7 +123,9 @@ if($fnStat && $mnStat && $lnStat && $emStat && $unStat && $pwStat){
                                   $lname, $email, $date,
                                   $hashed, $salt);
     if(!$stmt->execute()){
-        echo '<br><br><br>Error<br>';
+        echo 'Error<br>';
+        $stmt->close();
+        $db->close();
         exit;
     }
     $stmt->close();
@@ -217,16 +219,6 @@ else
     </div>
 <!-------------------------------------------------------------------->
 
-<!-------------------------- PHONE NUMBER ---------------------------------->
-<!--   <div class='row'>
-        <div class='large-6 columns medium-6'>
-            <label for='phone'><b>Phone Number (Optional)</b></label>
-            <input type='text' id='phone' name='phone'>
-        </div>
-    </div>
-   --> 
-<!---------------------------------------------------------------------------->
-
 <!-------------------------- USERNAME ---------------------------------->
     <div class='row'>
         <div class='large-6 columns medium-6'>
@@ -275,7 +267,7 @@ else
 
     <div class='row'>
       <div class='columns large-4 large-centered medium-6 medium-centered'>
-      <input type='submit' name='submit' class='button expand' value='Create Account'>    
+      <input id='submit' type='submit' name='submit' class='button expand' value='Create Account'>    
       </div>
     </div>
   </form>
@@ -289,12 +281,8 @@ else
     <script>
         $(document).foundation();
         $(document).ready(function(){
-            //$('#username_msg').hide();
-            //$('#username');
 
-            //$('#phone').mask("(999)-999-9999");
-
-    
+            /*Username status ajax*/ 
         $('#username').on('keyup', function(){
                 var txt = $('#username').val();
                 $.post('check_username.php', {username: txt},
@@ -303,6 +291,7 @@ else
                     });
             });
 
+        /*Password status ajax*/
             $('#password').on('keyup', function(){
                 var txt = $('#password').val();
                 $.post('check_password.php', {password: txt},
@@ -310,9 +299,21 @@ else
                         $('#password_stat').html(result).show();                
                     });
             });
-        });
-        //$("#phone").mask("(999) 999-9999");
 
+            /*If username & password AJAX messages aren't good,
+                make it known to user and preventDefault*/
+            $("#submit").on("click",function(event){
+                var usernameStat = $('#username_stat').text();
+                var passwordStat = $('#password_stat').text();
+                if(usernameStat !='Username available!'){
+                    event.preventDefault();
+                    $('#username_stat').addClass('error_txt');
+                }if(passwordStat != 'Great!'){
+                    event.preventDefault();
+                    $('#password_stat').addClass('error_txt');
+                }
+            });
+        });
     </script>
   </body>
 </html>
