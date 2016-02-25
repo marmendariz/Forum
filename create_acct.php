@@ -226,19 +226,19 @@ else
             <input type="text" id = 'username' placeholder="" name='username' required maxlength="20"/>
         </div>
 <?php
-        /*
+        
         echo "<div class='large-6 columns'>";
         echo "<br class='show-for-large-up'>";
 if(!$unStat)
-        echo "<p id='fname_stat' class='error_txt'>First name invalid";
+        echo "<p id='username_stat' class='error_txt'>First name invalid";
 else
-    echo "<p id='username_stat'>";
+    echo "<p id='username_stat'>Choose a username";
         echo '</p></div>';
-         */
+         
 ?>
-        <div class='large-6 columns'>
+        <!--<div class='large-6 columns'>
             <p id='username_stat'>Choose a username</p>
-        </div>
+        </div>-->
     </div>
 <!------------------------------------------------------------------------>
 
@@ -249,18 +249,18 @@ else
         <input type="password" id = 'password' placeholder="Enter at least 5 characters" name='password' required maxlength="15"/>
       </div> 
 <?php
-        /*
+        
         echo "<div class='large-6 columns'>";
         echo "<br class='show-for-large-up'>";
 if(!$pwStat)
         echo "<p id='fname_stat' class='error_txt'>First name invalid";
 else
-    echo "<p id='username_stat'>";
+    echo "<p id='password_stat'>Choose a password";
         echo '</p></div>';
-         */
+         
 ?>
-      <div class='large-6 columns'>
-            <p id='password_stat'>Choose a password</p>
+      <!--<div class='large-6 columns'>-->
+           <!-- <p id='password_stat'>Choose a password</p>-->
        </div>
     </div>
 <!-------------------------------------------------------------------->
