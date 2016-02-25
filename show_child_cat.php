@@ -34,6 +34,12 @@ if(!($db = db_connect())){
     exit;
 }
 
+
+if(null == ($parent_cat = filter_input(INPUT_GET, cat_id, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) ) || $_GET['cat_id']=='1'){
+    echo 'Error. Invalid category ID<br>';
+    exit;
+}
+
 $parent_cat = input_clean($_GET['cat_id']);
 
 $query = 'select * from category where parent_cat_id=?';

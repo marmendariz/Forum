@@ -233,18 +233,18 @@ if(!$unStat)
         echo "<p id='username_stat' class='error_txt'>First name invalid";
 else
     echo "<p id='username_stat'>Choose a username";
-        echo '</p></div>';
+        echo '</p>';
          
 ?>
         <!--<div class='large-6 columns'>
             <p id='username_stat'>Choose a username</p>
-        </div>-->
+        --></div>
     </div>
 <!------------------------------------------------------------------------>
 
 <!------------------------------ PASSWORD  ------------------------------>
     <div class='row'>
-      <div class='large-6 columns medium-6 small-8'>
+      <div class='large-6 columns medium-6'>
         <label for='password'><b>Password</b></label>
         <input type="password" id = 'password' placeholder="Enter at least 5 characters" name='password' required maxlength="15"/>
       </div> 
@@ -262,11 +262,11 @@ else
       <!--<div class='large-6 columns'>-->
            <!-- <p id='password_stat'>Choose a password</p>-->
        </div>
-    </div>
+    <!--</div>-->
 <!-------------------------------------------------------------------->
 
     <div class='row'>
-      <div class='columns large-4 large-centered medium-6 medium-centered'>
+      <div class='columns large-10 large-centered medium-10 medium-centered'>
       <input id='submit' type='submit' name='submit' class='button expand' value='Create Account'>    
       </div>
     </div>
