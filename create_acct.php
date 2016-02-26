@@ -91,6 +91,8 @@ if(!isset($_POST['password']) || empty($_POST['password'])){
 }
 else{
     $password = input_clean($_POST['password']);
+    if(strlen($password)<5)
+        $pwStat = false;
 }
 
 /***********If every input is fine, insert into db****************/
