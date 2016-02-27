@@ -19,7 +19,7 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
   <body>
 
 <?php
-session_save_path('/tmp');
+ini_set('session_save_path','/tmp');
 session_start();
 include_once 'header.php'; 
 include_once 'lib.php';
@@ -91,6 +91,8 @@ if(!isset($_POST['password']) || empty($_POST['password'])){
 }
 else{
     $password = input_clean($_POST['password']);
+    if(strlen($password)<5)
+        $pwStat = false;
 }
 
 /***********If every input is fine, insert into db****************/
@@ -123,7 +125,9 @@ if($fnStat && $mnStat && $lnStat && $emStat && $unStat && $pwStat){
                                   $lname, $email, $date,
                                   $hashed, $salt);
     if(!$stmt->execute()){
-        echo '<br><br><br>Error<br>';
+        echo 'Error<br>';
+        $stmt->close();
+        $db->close();
         exit;
     }
     $stmt->close();
@@ -217,16 +221,6 @@ else
     </div>
 <!-------------------------------------------------------------------->
 
-<!-------------------------- PHONE NUMBER ---------------------------------->
-<!--   <div class='row'>
-        <div class='large-6 columns medium-6'>
-            <label for='phone'><b>Phone Number (Optional)</b></label>
-            <input type='text' id='phone' name='phone'>
-        </div>
-    </div>
-   --> 
-<!---------------------------------------------------------------------------->
-
 <!-------------------------- USERNAME ---------------------------------->
     <div class='row'>
         <div class='large-6 columns medium-6'>
@@ -234,48 +228,48 @@ else
             <input type="text" id = 'username' placeholder="" name='username' required maxlength="20"/>
         </div>
 <?php
-        /*
+        
         echo "<div class='large-6 columns'>";
         echo "<br class='show-for-large-up'>";
 if(!$unStat)
-        echo "<p id='fname_stat' class='error_txt'>First name invalid";
+        echo "<p id='username_stat' class='error_txt'>First name invalid";
 else
-    echo "<p id='username_stat'>";
-        echo '</p></div>';
-         */
+    echo "<p id='username_stat'>Choose a username";
+        echo '</p>';
+         
 ?>
-        <div class='large-6 columns'>
+        <!--<div class='large-6 columns'>
             <p id='username_stat'>Choose a username</p>
-        </div>
+        --></div>
     </div>
 <!------------------------------------------------------------------------>
 
 <!------------------------------ PASSWORD  ------------------------------>
     <div class='row'>
-      <div class='large-6 columns medium-6 small-8'>
+      <div class='large-6 columns medium-6'>
         <label for='password'><b>Password</b></label>
-        <input type="password" id = 'password' placeholder="" name='password' required maxlength="15"/>
+        <input type="password" id = 'password' placeholder="Enter at least 5 characters" name='password' required maxlength="15"/>
       </div> 
 <?php
-        /*
+        
         echo "<div class='large-6 columns'>";
         echo "<br class='show-for-large-up'>";
 if(!$pwStat)
         echo "<p id='fname_stat' class='error_txt'>First name invalid";
 else
-    echo "<p id='username_stat'>";
+    echo "<p id='password_stat'>Choose a password";
         echo '</p></div>';
-         */
+         
 ?>
-      <div class='large-6 columns'>
-            <p id='password_stat'>Choose a password</p>
+      <!--<div class='large-6 columns'>-->
+           <!-- <p id='password_stat'>Choose a password</p>-->
        </div>
-    </div>
+    <!--</div>-->
 <!-------------------------------------------------------------------->
 
     <div class='row'>
-      <div class='columns large-4 large-centered medium-6 medium-centered'>
-      <input type='submit' name='submit' class='button expand' value='Create Account'>    
+      <div class='columns large-10 large-centered medium-10 medium-centered'>
+      <input id='submit' type='submit' name='submit' class='button expand' value='Create Account'>    
       </div>
     </div>
   </form>
@@ -289,30 +283,59 @@ else
     <script>
         $(document).foundation();
         $(document).ready(function(){
-            //$('#username_msg').hide();
-            //$('#username');
 
-            //$('#phone').mask("(999)-999-9999");
-
-    
+            /*Username status ajax*/ 
         $('#username').on('keyup', function(){
-                var txt = $('#username').val();
+                 var txt = $('#username').val();
                 $.post('check_username.php', {username: txt},
                     function(result){
-                        $('#username_stat').html(result).show();                
+                        $('#username_stat').html(result).show();
+                        var text = $('#username_stat').text();
+                        if(text=='Username taken')
+                            $('#username_stat').removeClass('success_txt');
+                            $('#username_stat').addClass('error_txt');
+                        if(text=='Username available!'){
+                            $('#username_stat').removeClass('error_txt');
+                            $('#username_stat').addClass('success_txt');
+                        }
+                        if(text=='Choose a username'){
+                            $('#username_stat').removeClass('error_txt');
+                           $('#username_stat').removeClass('success_txt');
+                        }               
                     });
-            });
+                           });
 
+        /*Password status ajax*/
             $('#password').on('keyup', function(){
                 var txt = $('#password').val();
                 $.post('check_password.php', {password: txt},
                     function(result){
-                        $('#password_stat').html(result).show();                
+                        $('#password_stat').html(result).show();
+                        var text = $('#password_stat').text();
+                        if(text=='Invalid password' || text=='Too short')
+                            $('#password_stat').removeClass('success_txt');
+                            $('#password_stat').addClass('error_txt');
+                        if(text=='Great!'){
+                            $('#password_stat').removeClass('error_txt');
+                            $('#password_stat').addClass('success_txt');
+                        }
+                        if(text=='Choose a password'){
+                            $('#password_stat').removeClass('error_txt');
+                           $('#password_stat').removeClass('success_txt');
+                        }
                     });
             });
-        });
-        //$("#phone").mask("(999) 999-9999");
 
+            /*If username & password AJAX messages aren't good, preventDefault*/
+            $("#submit").on("click",function(event){
+                var usernameStat = $('#username_stat').text();
+                var passwordStat = $('#password_stat').text();
+                if(usernameStat !='Username available!')
+                    event.preventDefault();
+                if(passwordStat != 'Great!')
+                    event.preventDefault();
+            });
+        });
     </script>
   </body>
 </html>

@@ -26,7 +26,7 @@ include_once 'lib.php';
 ?>
 <!---------------------- SHOW PARENT CATEGORIES------------------------------>
 <div class='row'>
-<div class='large-9 large-centered columns panel medium-9 medium-centered small-10 small-centered'>
+<div class='large-7 large-centered columns panel medium-7 medium-centered small-10 small-centered'>
   <!-------------------------------------------->
 <?php
 if(!($db = db_connect())){
@@ -34,42 +34,22 @@ if(!($db = db_connect())){
     exit;
 }
 
+
+if(null == ($parent_cat = filter_input(INPUT_GET, cat_id, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) ) || $_GET['cat_id']=='1'){
+    echo 'Error. Invalid category ID<br>';
+    exit;
+}
+
 $parent_cat = input_clean($_GET['cat_id']);
+
 $query = 'select * from category where parent_cat_id=?';
 $stmt = $db->prepare($query);
 $stmt->bind_param('i',$parent_cat);
 $stmt->execute();
 $stmt->store_result();
-$rows = $stmt->num_rows();
 $stmt->bind_result($cat_id, $cat_name, $cat_level, $cat_text, $parent_cat_id);
-if($rows){
-    while($stmt->fetch()){
-        echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name</h3>";
-        echo "<p>&nbsp &nbsp &nbsp &nbsp$cat_text</p>";
-        echo '<hr>';
-    }
-}
-else{
-    $parent_cat = input_clean($_GET['cat_id']);
-    $query2 = 'select * from cat_cont_dis AS c, discussion AS d where c.cat_id = ? AND c.dis_id = d.dis_id';
-    $stmt = $db->prepare($query2);
-    if($stmt){
-        $stmt->bind_param('i',$parent_cat);
-        $stmt->execute();
-        $stmt->store_result();
-        $stmt->bind_result($cat_id, $dis_id1, $dis_id2, $dis_name, $dis_text, $dis_flag, $upvote_count, $downvote_count);
-
-        while($stmt->fetch()){
-            echo "<h1>Discussions<h1>";
-            echo "<hr>"; 
-            echo "<a href='#'><h3 style='color:#008cbb;'>$dis_name</h3>";
-            echo "<p>&nbsp &nbsp &nbsp &nbsp$dis_text</p>";
-            echo '<hr>'; 
-        }
-    }
-    else{
-        echo "<h1>Error</h1>";
-    }
+while($stmt->fetch()){
+    echo "$cat_name<br>";
 }
 
 $stmt->close();
