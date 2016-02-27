@@ -6,8 +6,9 @@ if(isset($_POST['username'])){
         echo "Database error";
         exit;
     } 
+    else{
         $username = mysqli_real_escape_string($db,input_clean($_POST['username']));
-        $query = 'select * from user where user_name=?';
+        $query = 'select * from login where username=?';
         $stmt = $db->prepare($query);
         $stmt->bind_param('s',$username);
         $stmt->execute();
@@ -18,6 +19,7 @@ if(isset($_POST['username'])){
         if($num_rows==0 && !empty($username))
             echo 'Username available!';
         $stmt->close();
+    }
     $db->close();
 }
 if(empty($_POST['username']))

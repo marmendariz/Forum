@@ -11,6 +11,7 @@
 <body>
 
 <?php
+ini_set('session.save_path','/tmp');
 session_start();
 include_once 'header.php';
 include_once 'lib.php';
@@ -49,7 +50,7 @@ else {
 <div class='row'>
     <div class='large-7 columns panel large-centered text-center'>
         <h5>You must be logged in in order to view your profile!</h5>
-        <h6>You can log in <a href='login.php'>here! </a></h6>
+        <h6>You can log in <a href='login.php'>HERE! </a></h6>
     </div>
 </div>
 <!-------------------------------------------------------------------->    

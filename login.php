@@ -42,7 +42,7 @@ if(isset($_POST['username']) && isset($_POST['password'])){
         $stmt->store_result();
         $stmt->bind_result($salt);
         $stmt->fetch();
-        //$salt = stripslashes($salt);
+        $salt = stripslashes($salt);
         $hashed=crypt($pwd,'$6$'.$salt);
 
         $query = 'select * from user where user_name=? and hashed_pwd=?';
