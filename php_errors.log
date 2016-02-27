@@ -1,4 +1,0 @@
-[26-Feb-2016 16:30:49 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_result(): Number of bind variables doesn't match number of fields in prepared statement in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 60
-[26-Feb-2016 16:40:16 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 64
-[26-Feb-2016 16:40:20 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 64
-[26-Feb-2016 16:41:15 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'href' (T_STRING), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 65

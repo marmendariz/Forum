@@ -1,8 +1,9 @@
 <?php
+include_once 'lib.php';
 $length = 5;
 
 if(isset($_POST['password'])){
-    $pwd = htmlspecialchars($_POST['password']);
+    $pwd = input_clean($_POST['password']);
     $size = strlen($pwd);
     if($size<$length && $size>0){
         echo 'Too short';
