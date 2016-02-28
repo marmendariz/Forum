@@ -15,6 +15,9 @@
 ?>
     <a href='show_parent_cat.php'> SHOW PARENT CATEGORIES HERE</a>
     <div class="row">
+        <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
+            <img src="img/Logo.png">
+        </div>
       <div class="large-12 columns">
         <div class="panel">
           <h3 class='text-center'>Welcome to Quadcore Forum! </h3>
