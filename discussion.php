@@ -20,11 +20,12 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
   <body>
 
 <?php 
+ini_set('sesson.save_path','tmp');
 session_start();
 include_once 'header.php'; 
 include_once 'lib.php';
 ?>
-<!---------------------- SHOW PARENT CATEGORIES------------------------------>
+<!---------------------- DISCUSSION PAGE------------------------------>
 <div class='row'>
 <div class='large-7 large-centered columns panel medium-7 medium-centered small-10 small-centered'>
   <!-------------------------------------------->
@@ -39,14 +40,22 @@ if (null == ($parent_dis = filter_input(INPUT_GET, dis_id, FILTER_VALIDATE_INT,F
 }
 
 $parent_dis = input_clean($_GET['dis_id']);
+$dis_query = 'select dis_name, dis_text from discussion where dis_id = ?';
 $query = 'select * from dis_cont_com AS d, com AS c WHERE d.dis_id=? AND d.com_id=c.com_id';
 $stmt = $db->prepare($query);
 $stmt->bind_param('i', $parent_dis);
 $stmt->execute();
 $stmt->store_result();
 $stmt->bind_result($dis_id, $com_id1, $com_id2,$com_name, $com_level, $com_text, $com_flag, $parent_com_id, $upvote_count, $downvote_count);
-   echo "<h1>Discussion Title<h1><hr>";  
-   echo "<h3>Discussion Text<h3><hr>";  
+
+$dis_stmt = $db->prepare($dis_query);
+$dis_stmt->bind_param('i',$parent_dis);
+$dis_stmt->execute();
+$dis_stmt->store_result();
+$dis_stmt->bind_result($dis_name, $dis_text);
+$dis_stmt->fetch();
+   echo "<h1>$dis_name<h1><hr>";  
+   echo "<h3>$dis_text<h3><hr>";  
    echo "<h4>Comments<h4><hr>";  
 while($stmt->fetch()){
     echo "<h5 style='color:#008cbb;'>$com_name<h5>";
@@ -54,7 +63,7 @@ while($stmt->fetch()){
     echo '<hr>';
 }
 
-
+$dis_stmt->close();
 $stmt->close();
 $db->close();
 

@@ -177,7 +177,7 @@ else
         echo "<div class='large-6 columns'>";
         echo "<br class='show-for-large-up'>";
 if(!$mnStat)
-        echo "<p id='fname_stat' class='error_txt'>Middle name invalid";
+        echo "<p id='mname_stat' class='error_txt'>Middle name invalid";
 else
     echo "<p id='mname_stat'>";
          echo '</p></div>';
@@ -195,9 +195,9 @@ else
         echo "<div class='large-6 columns'>";
         echo "<br class='show-for-large-up'>";
 if(!$lnStat)
-        echo "<p id='fname_stat' class='error_txt'>Last name invalid";
+        echo "<p id='lname_stat' class='error_txt'>Last name invalid";
 else
-    echo "<p id='fname_stat'>";
+    echo "<p id='lname_stat'>";
          echo '</p></div>';
 ?>
     </div>
@@ -213,9 +213,9 @@ else
         echo "<div class='large-6 columns'>";
         echo "<br class='show-for-large-up'>";
 if(!$emStat)
-        echo "<p id='fname_stat' class='error_txt'>Email invalid";
+        echo "<p id='email_stat' class='error_txt'>Email invalid";
 else
-    echo "<p id='fname_stat'>";
+    echo "<p id='email_stat'>";
          echo '</p></div>';
 ?>
     </div>
@@ -266,6 +266,11 @@ else
        </div>
     <!--</div>-->
 <!-------------------------------------------------------------------->
+    <div class='row' id='message'>
+        <div>
+            <p class='error_txt text-center'>Please enter information for all required fields.</p>
+        </div>
+    </div>    
 
     <div class='row'>
       <div class='columns large-10 large-centered medium-10 medium-centered'>
@@ -283,6 +288,9 @@ else
     <script>
         $(document).foundation();
         $(document).ready(function(){
+
+            $('#message').hide();
+
 
             /*Username status ajax*/ 
         $('#username').on('keyup', function(){
@@ -330,10 +338,28 @@ else
             $("#submit").on("click",function(event){
                 var usernameStat = $('#username_stat').text();
                 var passwordStat = $('#password_stat').text();
-                if(usernameStat !='Username available!')
+                if(usernameStat !='Username available!'){
+                    $('#message').show();
+                    $('#fname_stat').addClass('error_txt');
+                    $('#fname_stat').text('*Required field');
+                    
+                    $('#lname_stat').addClass('error_txt');
+                    $('#lname_stat').text('*Required field');
+                    
+                    $('#email_stat').addClass('error_txt');
+                    $('#email_stat').text('*Required field');
+                    
+                    $('#username_stat').addClass('error_txt');
+                    $('#username_stat').text('*Required field');
+                    
+                    $('#password_stat').addClass('error_txt');
+                    $('#password_stat').text('*Required field');
                     event.preventDefault();
-                if(passwordStat != 'Great!')
+                }
+                if(passwordStat != 'Great!'){
+                    $('#message').show();
                     event.preventDefault();
+                }
             });
         });
     </script>
