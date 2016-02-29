@@ -11,6 +11,8 @@
   </head>
   <body>
 <?php
+    ini_set('session.save_path','/tmp');
+    session_start();
     include_once 'header.php';
 ?>
     <div class="row">
