@@ -66,8 +66,8 @@ else{
         $stmt->store_result();
         $stmt->bind_result($cat_id, $dis_id1, $dis_id2, $dis_name, $dis_text, $dis_flag, $upvote_count, $downvote_count);
 
-        while($stmt->fetch()){
             echo "<h1>Discussions<h1>";
+        while($stmt->fetch()){
             echo "<hr>"; 
             echo "<a href='#'><h3 style='color:#008cbb;'>$dis_name</h3>";
             echo "<p>&nbsp &nbsp &nbsp &nbsp$dis_text</p>";
