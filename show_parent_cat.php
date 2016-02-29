@@ -8,7 +8,7 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
 <!doctype html>
 <html class="no-js" lang="en">
   <head>
-    <link rel='icon' type='image/x-icon' href='img/Q.gif'>
+    <link rel='icon' type='image/x-icon' href='img/Q.png'>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quadcore Forum | Account Creation</title>
