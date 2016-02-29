@@ -69,7 +69,7 @@ else{
         while($stmt->fetch()){
             echo "<h1>Discussions<h1>";
             echo "<hr>"; 
-            echo "<a href='#'><h3 style='color:#008cbb;'>$dis_name</h3>";
+            echo "<a href='discussion.php?dis_id=$dis_id1'><h3 style='color:#008cbb;'>$dis_name</h3>";
             echo "<p>&nbsp &nbsp &nbsp &nbsp$dis_text</p>";
             echo '<hr>'; 
         }

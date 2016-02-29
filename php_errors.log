@@ -1,0 +1,6 @@
+[28-Feb-2016 19:33:11 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ')', expecting ']' in /home/stu/quadcore/public_html/sarahbeth/Forum/discussion.php on line 37
+[28-Feb-2016 19:49:10 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'style' (T_STRING), expecting ',' or ';' in /home/stu/quadcore/public_html/sarahbeth/Forum/discussion.php on line 51
+[28-Feb-2016 19:50:57 America/Los_Angeles] PHP Fatal error:  Call to a member function execute() on a non-object in /home/stu/quadcore/public_html/sarahbeth/Forum/discussion.php on line 44
+[28-Feb-2016 19:51:14 America/Los_Angeles] PHP Fatal error:  Call to a member function execute() on a non-object in /home/stu/quadcore/public_html/sarahbeth/Forum/discussion.php on line 44
+[28-Feb-2016 19:51:27 America/Los_Angeles] PHP Fatal error:  Call to a member function execute() on a non-object in /home/stu/quadcore/public_html/sarahbeth/Forum/discussion.php on line 44
+[28-Feb-2016 20:19:13 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /home/stu/quadcore/public_html/sarahbeth/Forum/discussion.php on line 46
