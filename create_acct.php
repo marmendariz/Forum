@@ -30,6 +30,7 @@ $lnStat = true;
 $emStat = true;
 $unStat = true;
 $pwStat = true;
+$cpwStat = true;
 
 /********IF Form was submitted, check inputs***********/
 if(isset($_POST['submit'])){
@@ -255,16 +256,31 @@ else
         echo "<div class='large-6 columns'>";
         echo "<br class='show-for-large-up'>";
 if(!$pwStat)
-        echo "<p id='fname_stat' class='error_txt'>First name invalid";
+        echo "<p id='password_stat' class='error_txt'>First name invalid";
 else
     echo "<p id='password_stat'>Choose a password";
         echo '</p></div>';
          
 ?>
-      <!--<div class='large-6 columns'>-->
-           <!-- <p id='password_stat'>Choose a password</p>-->
        </div>
-    <!--</div>-->
+<!-------------------------------------------------------------------->
+
+<!----------------------- CONFIRM PASSWORD  -------------------------->
+    <div class='row'>
+      <div class='large-6 columns medium-6'>
+        <label for='password'><b>Confirm Password</b></label>
+        <input type="password" id = 'confirmPassword' placeholder="" name='confirmPassword' required maxlength="15"/>
+      </div> 
+<?php
+        echo "<div class='large-6 columns'>";
+        echo "<br class='show-for-large-up'>";
+if(!$cpwStat)
+        echo "<p id='confirmPassword_stat' class='error_txt'>First name invalid";
+else
+    echo "<p id='confirmPassword_stat'>Enter your password again";
+        echo '</p></div>';
+?>
+       </div>
 <!-------------------------------------------------------------------->
     <div class='row' id='message'>
         <div>
@@ -335,25 +351,49 @@ else
             });
 
             /*If username & password AJAX messages aren't good, preventDefault*/
+            /*NOT FINISHED*/
             $("#submit").on("click",function(event){
                 var usernameStat = $('#username_stat').text();
                 var passwordStat = $('#password_stat').text();
-                if(usernameStat !='Username available!'){
-                    $('#message').show();
+                
+                /*****************FIRST NAME**********************/
+                if(!$('#fname').val()){
                     $('#fname_stat').addClass('error_txt');
                     $('#fname_stat').text('*Required field');
-                    
+                    event.preventDefault();
+                }
+                else{
+                    $('#fname_stat').removeClass('error_txt');
+                    $('#fname_stat').text('');
+                }
+                /***********************************************/
+                
+                /******************LAST NAME********************/
+                if(!$('#lname').val()){
                     $('#lname_stat').addClass('error_txt');
                     $('#lname_stat').text('*Required field');
-                    
+                    event.preventDefault();
+                }
+                else{
+                    $('#lname_stat').removeClass('error_txt');
+                    $('#lname_stat').text('');
+                }
+                /*************************************************/
+
+                /******************EMAIL**************************/
+                if(!$('#email').val()){
                     $('#email_stat').addClass('error_txt');
                     $('#email_stat').text('*Required field');
-                    
-                    $('#username_stat').addClass('error_txt');
-                    $('#username_stat').text('*Required field');
-                    
-                    $('#password_stat').addClass('error_txt');
-                    $('#password_stat').text('*Required field');
+                    event.preventDefault();
+                }
+                else{
+                    $('#email_stat').removeClass('error_txt');
+                    $('#email_stat').text('');
+                }
+                /************************************************/
+
+                if(usernameStat !='Username available!'){
+                    $('#message').show();
                     event.preventDefault();
                 }
                 if(passwordStat != 'Great!'){
