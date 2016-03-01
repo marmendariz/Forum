@@ -27,7 +27,7 @@ include_once 'lib.php';
 ?>
 <!---------------------- DISCUSSION PAGE------------------------------>
 <div class='row'>
-<div class='large-7 large-centered columns panel medium-7 medium-centered small-10 small-centered'>
+<div class='large-7 large-centered columns medium-7 medium-centered small-10 small-centered'>
   <!-------------------------------------------->
 <?php
 if(!($db = db_connect())){
@@ -54,13 +54,42 @@ $dis_stmt->execute();
 $dis_stmt->store_result();
 $dis_stmt->bind_result($dis_name, $dis_text);
 $dis_stmt->fetch();
-   echo "<h1>$dis_name<h1><hr>";  
-   echo "<h3>$dis_text<h3><hr>";  
-   echo "<h4>Comments<h4><hr>";  
+
+echo "<h1>$dis_name<h1><hr>";  
+echo "<h3>$dis_text<h3><hr>";
+
+echo "<h4>Comments<h4><hr>"; 
 while($stmt->fetch()){
-    echo "<h5 style='color:#008cbb;'>$com_name<h5>";
-    echo "<p>&nbsp &nbsp &nbsp &nbsp$com_text</p>"; 
-    echo '<hr>';
+    echo "<div class='row panel'>";
+    echo "<div class='columns'>";
+    //echo "<h5 style='color:#008cbb;'>$com_name<h5>";
+    echo "<p>&nbsp &nbsp &nbsp &nbsp$com_text</p>";
+    echo "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>";
+    echo "</div>";
+    echo "</div>";
+
+    echo "<div class='comment_reply'>";
+    echo "<div class='row'>";
+    echo "<div class='large-12 columns'>";
+    echo "<hr>";
+    echo "<p>Enter your reply:";
+    echo "<textarea rows='5'></textarea>";
+    echo "</p>";
+    echo "</div>";
+    echo "</div>";
+   
+    echo "<div class='row'>";
+    echo "<div class='large-6 columns'>";
+    echo "<input type='button' class='button expand' value='Submit'>";
+    echo "</div>";
+    
+    echo "<div class='large-6 columns'>";
+    echo "<input type='button' class='button expand alert' value='Cancel'>";
+    echo "</div>";
+    echo "</div>";
+    
+    echo "</div>";
+    echo "<hr>";
 }
 
 $dis_stmt->close();
@@ -77,7 +106,23 @@ $db->close();
     <script src="js/foundation.min.js"></script>
     <script>
         $(document).foundation();
-        $(document).ready(function(){
+$(document).ready(function(){
+
+    $('.comment_reply_link').on('click',function(e){
+        e.preventDefault();
+        var $area = $(this).parent().parent().parent().next();
+        $area.css("display","inline");
+        $area.css("visibility","visible");
+        $('html, body').animate({scrollTop: $area.offset().top});
+        $area.find('textarea').focus();
+    });
+
+
+
+
+
+
+
         });
     </script>
   </body>

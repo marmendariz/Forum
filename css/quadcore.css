@@ -8,6 +8,19 @@
     color: green !important;
 }
 
+textarea{
+    resize: none;
+    height: auto;
+}
+
+.comment_reply{
+    
+    display: none;
+    visibility: hidden;
+    
+}
+
+
 
 .button:hover {
     /*background-color: #00cc66;*/
