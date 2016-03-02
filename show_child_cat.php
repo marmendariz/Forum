@@ -27,7 +27,7 @@ include_once 'lib.php';
 ?>
 <!---------------------- SHOW PARENT CATEGORIES------------------------------>
 <div class='row'>
-<div class='large-9 large-centered columns panel medium-9 medium-centered small-10 small-centered'>
+<div class='large-12 large-centered columns panel medium-9 medium-centered small-10 small-centered'>
   <!-------------------------------------------->
 <?php
 if(!($db = db_connect())){

@@ -68,14 +68,16 @@ while($stmt->fetch()){
     $logged_in = false;
     if(isset($_SESSION['valid_user']))
         $logged_in = true;
-
+    $user = $_SESSION['valid_user'];
+    echo "<input id='username' type='hidden' value='$user'>";
 
     echo "<div class='row'>";
-    echo "<div class='columns large-2 panel'>";
-    echo "<h6>Username Here</h6>";
-    echo "</div>";
-    echo "<div class='columns large-10 panel'>";
+    echo "<div class='columns large-12 panel'>";
     //echo "<h5 style='color:#008cbb;'>$com_name<h5>";
+
+    echo "<h6>Username</h6>";
+    echo "<hr>";
+
     echo "<p>&nbsp &nbsp &nbsp &nbsp$com_text</p>";
     if($logged_in)
         echo "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>";
@@ -87,9 +89,7 @@ while($stmt->fetch()){
     if($logged_in){
     echo "<div class='comment_reply'>";
         echo "<div class='row'>";
-            echo "<div class='columns large-2'>";
-            echo "</div>";
-            echo "<div class='large-10 columns'>";
+            echo "<div class='large-12 columns'>";
                     echo "<hr>";
                     echo "<p>Enter your reply:";
                     echo "<textarea rows='5'></textarea>";
@@ -98,20 +98,18 @@ while($stmt->fetch()){
         echo "</div>";
    
         echo "<div class='row'>";
-            echo "<div class='columns large-2'>";
-            echo "<h6></h6>";
-            echo "</div>";
-            echo "<div class='large-5 columns'>";
-                echo "<input type='button' class='button expand' value='Submit'>";
+            echo "<div class='large-6 columns'>";
+                echo "<input type='button' class='button expand comment_submit' value='Submit'>";
             echo "</div>";
     
-            echo "<div class='large-5 columns'>";
-                echo "<input type='button' class='button expand alert' value='Cancel'>";
+            echo "<div class='large-6 columns'>";
+                echo "<input type='button' class='button expand alert comment_cancel' value='Cancel'>";
             echo "</div>";
-        echo "</div>";
+            echo "</div>";
+
+    echo "<hr>";
     echo "</div>";
     }
-    echo "<hr>";
 }
 
 $dis_stmt->close();
@@ -137,10 +135,33 @@ $(document).ready(function(){
         var $area = $(this).parent().parent().parent().next();
         $area.css("display","inline");
         $area.css("visibility","visible");
-        $('html, body').animate({scrollTop: $area.offset().top-300});
+
+        var width = $(window).width();
+        var height = $(window).height();
+        if((width <= 1023) && (height<=768))
+            $('html, body').animate({scrollTop: $area.offset().top});
+        else
+            $('html, body').animate({scrollTop: $area.offset().top-300});
         $area.find('textarea').focus();
     });
 
+    $('.comment_submit').on('click', function(e){
+        var $newComment = $(this).parent().parent().prev().find('textarea');
+        var username = $('#username').val();
+        var $post = $("<div class='row'><div class='panel large-12 columns innerdiv'><h6 class='username'></h6><hr><p></p><h6><a href='#' class='comment_reply_link'>Reply</a></h6></div></div>");
+        $post.find('.username').text(username);
+        $post.find('.innerdiv').find('p').text($newComment.val());
+        $(this).parent().parent().parent().after($post);
+        $('.comment_reply').css("display","none");
+        $('.comment_reply').css("visibility","hidden");
+        $newComment.val('');
+    });
+
+    $('.comment_cancel').on('click', function(e){
+        $('.comment_reply').css("display","none");
+        $('.comment_reply').css("visibility","hidden");
+        $newComment.val('');
+    });
 
 
 
