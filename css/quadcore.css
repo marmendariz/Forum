@@ -20,6 +20,10 @@ textarea{
     
 }
 
+a.comment_reply_link{
+    line-height: 0px;
+}
+
 
 
 .button:hover {

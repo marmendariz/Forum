@@ -1,2 +1,6 @@
 [01-Mar-2016 13:24:11 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '50' (T_LNUMBER), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/discussion.php on line 74
 [01-Mar-2016 14:19:05 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/discussion.php on line 78
+[01-Mar-2016 16:45:37 America/Los_Angeles] PHP Warning:  session_start(): open(/var/lib/php5/sess_4p3uol1jj7s0r8fg6dlgba89a1, O_RDWR) failed: Permission denied (13) in /home/stu/quadcore/public_html/Forum/discussion.php on line 24
+[01-Mar-2016 16:45:37 America/Los_Angeles] PHP Warning:  Unknown: open(/var/lib/php5/sess_4p3uol1jj7s0r8fg6dlgba89a1, O_RDWR) failed: Permission denied (13) in Unknown on line 0
+[01-Mar-2016 16:45:37 America/Los_Angeles] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/lib/php5) in Unknown on line 0
+[02-Mar-2016 11:51:59 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ')' in /home/stu/quadcore/public_html/Forum/discussion.php on line 80
