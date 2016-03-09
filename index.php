@@ -7,6 +7,8 @@
     <title>Quadcore Forum| Home </title>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/quadcore.css" />
+    <link rel="stylesheet" type="text/css" href="slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
     <script src="js/vendor/modernizr.js"></script>
   </head>
   <body>
@@ -17,15 +19,32 @@
 ?>
     <div class="row">
         <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
-            <img src="img/Logo.png">
-            <h1><a href='show_parent_cat.php'>Click here to start the fun!</a></h1>
+            <div class='slick_class'>
+                <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
+                <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
+            </div>
         </div>
-      </div>
+    </div>
     
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
-    <script>
-      $(document).foundation();
+    <!---<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>-->
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="slick/slick.min.js"></script>
+    <script type="text/javascript">
+        $(document).foundation();
+        $(document).ready(function(){
+            $('.slick_class').slick({
+                dots: true,
+                arrows:false,
+                autoplay:true,
+                autoplaySpeed: 3000,
+                infinite: true,
+                speed: 400,
+                slidesToShow: 1,
+                adaptiveHeight: true 
+            });
+        });
     </script>
   </body>
 </html>
