@@ -22,6 +22,9 @@
             <div class='slick_class'>
                 <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
                 <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
+                <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
+                <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
+                <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
             </div>
         </div>
     </div>
@@ -36,13 +39,14 @@
         $(document).ready(function(){
             $('.slick_class').slick({
                 dots: true,
+                swipeToSlide: true,
                 arrows:false,
                 autoplay:true,
                 autoplaySpeed: 3000,
                 infinite: true,
-                speed: 400,
+                speed: 600,
                 slidesToShow: 1,
-                adaptiveHeight: true 
+                adaptiveHeight: true
             });
         });
     </script>
