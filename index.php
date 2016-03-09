@@ -37,17 +37,37 @@
     <script type="text/javascript">
         $(document).foundation();
         $(document).ready(function(){
-            $('.slick_class').slick({
-                dots: true,
-                swipeToSlide: true,
-                arrows:false,
-                autoplay:true,
-                autoplaySpeed: 3000,
-                infinite: true,
-                speed: 600,
-                slidesToShow: 1,
-                adaptiveHeight: true
-            });
+
+            var width = $(window).width();
+            var height = $(window).height();
+            
+            if(width <= 2000 && height <= 1000){
+                $('.slick_class').slick({
+                    dots: false,
+                    swipeToSlide: true,
+                    arrows:false,
+                    autoplay:true,
+                    autoplaySpeed: 3000,
+                    infinite: true,
+                    speed: 600,
+                    slidesToShow: 1,
+                    adaptiveHeight: true
+                });
+            }
+            else{
+                $('.slick_class').slick({
+                    dots: true,
+                    swipeToSlide: false,
+                    arrows:false,
+                    autoplay:true,
+                    autoplaySpeed: 3000,
+                    infinite: true,
+                    speed: 600,
+                    slidesToShow: 1,
+                    adaptiveHeight: true
+                });
+
+            }
         });
     </script>
   </body>
