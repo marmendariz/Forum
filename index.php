@@ -21,10 +21,8 @@
         <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
             <div class='slick_class'>
                 <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
-                <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
-                <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
-                <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
-                <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
+                <center><a href='show_child_cat.php?cat_id=2'><h1><img src="img/Math.png"></h1></a></center>
+                <center><a href='show_child_cat.php?cat_id=6'><h1><img src="img/Computer Science.png"></h1></a></center>
             </div>
         </div>
     </div>
@@ -41,7 +39,7 @@
             var width = $(window).width();
             var height = $(window).height();
             
-            if(width <= 2000 && height <= 1000){
+            if(width <= 1023 && height <= 768){
                 $('.slick_class').slick({
                     dots: false,
                     swipeToSlide: true,
@@ -51,7 +49,7 @@
                     infinite: true,
                     speed: 600,
                     slidesToShow: 1,
-                    adaptiveHeight: true
+                    adaptiveHeight: false
                 });
             }
             else{
@@ -64,7 +62,7 @@
                     infinite: true,
                     speed: 600,
                     slidesToShow: 1,
-                    adaptiveHeight: true
+                    adaptiveHeight: false
                 });
 
             }
