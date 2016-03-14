@@ -1,3 +1,10 @@
+<?
+include_once 'lib.php';
+set_path();
+force_ssl();
+session_start();
+?>
+
 <!doctype html>
 <html class="no-js" lang="en">
   <head>
@@ -12,18 +19,8 @@
 <body>
 
 <?php
-include_once 'lib.php';
-session_start();
-set_path();
 include_once 'header.php';
 $login_failed = false;
-
-/*********************FORCE SSL SECURED CONNECTION********************************/
-if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
-    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-    exit();
-}
-/*********************************************************************************/
 
 /****************QUERY DB FOR LOGIN************************/
 if(isset($_POST['username']) && isset($_POST['password'])){

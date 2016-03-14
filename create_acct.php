@@ -1,8 +1,8 @@
-<?php
-if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
-    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-    exit();
-}
+<?
+include_once 'lib.php';
+set_path();
+force_ssl();
+session_start();
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -19,9 +19,6 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
   <body>
 
 <?php
-include_once 'lib.php';
-session_start();
-set_path();
 include_once 'header.php'; 
 
 $fnStat = true;

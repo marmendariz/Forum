@@ -1,9 +1,8 @@
-<?php
-/*show_parent_cat.php*/
-if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
-    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-    exit();
-}
+<?
+include_once 'lib.php';
+set_path();
+force_ssl();
+session_start();
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -19,12 +18,7 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
   </head>
   <body>
 
-<?php 
-include_once 'lib.php';
-session_start();
-set_path();
-include_once 'header.php'; 
-?>
+<? include_once 'header.php'; ?>
 <!---------------------- DISCUSSION PAGE------------------------------>
 <div class='row'>
 <div class='large-12 large-centered columns medium-7 medium-centered small-10 small-centered'>
