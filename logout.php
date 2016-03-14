@@ -13,8 +13,9 @@
 <body>
 
 <?php
-ini_set('session.save_path','/tmp');
+include_once 'lib.php';
 session_start();
+set_path();
 include_once 'header.php';
 
 /*********************FORCE SSL SECURED CONNECTION********************************/

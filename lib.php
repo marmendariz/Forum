@@ -18,4 +18,24 @@ function db_connect()
 }
 /*****************************************************************/
 
+/*********************Sets up session path************************/
+function set_path(){
+    ini_set('session.save_path','/tmp');
+    ini_set('session.gc_probability',1);
+    ini_set('session.cookie_httponly',1);
+}
+/**************************************************************/
+
+/********************Redirects to home page********************/
+function redirect_home(){
+    header("Location: index.php");
+}
+/****************************************************************/
+
+/********************Redirects to login page********************/
+function redirect_login(){
+    header("Location: login.php");
+}
+/****************************************************************/
+
 ?>

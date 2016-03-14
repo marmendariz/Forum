@@ -12,10 +12,10 @@
 <body>
 
 <?php
-ini_set('session.save_path','/tmp');
-session_start();
-include_once 'header.php';
 include_once 'lib.php';
+session_start();
+set_path();
+include_once 'header.php';
 $login_failed = false;
 
 /*********************FORCE SSL SECURED CONNECTION********************************/
