@@ -89,7 +89,7 @@ if(isset($_SESSION['valid_user'])){
     echo "</div>";
     echo "<div class='columns panel text-center large-8 large-centered medium-8 medium-centered small-10 small-centered '>";
     echo "  <h6> Want to change something? No worries.</h6>";
-    echo "  <hr> <a href='#'><input type='button' class='button' value='Edit Account'></a>";
+    echo "  <hr> <a href='profile_edit.php'><input type='button' class='button' value='Edit Account'></a>";
 
 ?>
 
