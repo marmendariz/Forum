@@ -20,16 +20,14 @@ session_start();
 
 <?php
 include_once 'header.php';
-
-
 $login_failed = false;
 
 /**********************************************/
-/*IF VALID LOGIN STILL ACTIVE, DISPLAY MESSAGE*/
+/*If valid login still active, allow */
 if(isset($_SESSION['valid_user'])){
 
 /*****************If a form was submitted, we are going to check before updating********/
-    if(isset($_post['submit'])){
+    if(isset($_POST['submit'])){
 
 
 
@@ -38,25 +36,32 @@ if(isset($_SESSION['valid_user'])){
 
 
 
-
+        unset($_POST['submit']);
 
     }
 
 
 /*********************************DISPLAY FORM***********************/
-
 if(!($db = db_connect())){
         echo "Database error<br>";
         exit;
     }
 
     $username = input_clean($_SESSION['valid_user']);
-    $query = 'select user_type, ban_flag, f_name, m_name, l_name, bio, email, date_joined, com_count, dis_count, upvote_count, downvote_count from user where user_name=?';
+    $query = 'select user_type, ban_flag, f_name, m_name, 
+                l_name, bio, email, date_joined, com_count, 
+                dis_count, upvote_count, downvote_count 
+                from user where user_name=?';
     $stmt = $db->prepare($query);
     $stmt->bind_param('s', $username);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($user_type, $ban_flag, $f_name, $m_name, $l_name, $bio, $email, $date_joined, $com_count, $dis_count, $up_count, $down_count);
+    $stmt->bind_result($user_type, 
+                        $ban_flag, 
+                        $f_name, $m_name, $l_name, 
+                        $bio, $email, $date_joined, 
+                        $com_count, $dis_count, 
+                        $up_count, $down_count);
     $stmt->fetch();
 
     echo "<div class ='row'>";
@@ -126,6 +131,7 @@ if(!($db = db_connect())){
     exit;
 }
 else{
+    /*Else user is not logged in, message given**/
 ?>
 <div class='row'>
     <div class='large-7 columns panel large-centered text-center'>

@@ -20,7 +20,7 @@ function db_connect()
 
 /*********************Sets up session path************************/
 function set_path(){
-    ini_set('session.save_path','/tmp');
+    ini_set('session.save_path','tmp');
     ini_set('session.gc_probability',1);
     ini_set('session.cookie_httponly',1);
 }
