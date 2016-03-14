@@ -12,21 +12,86 @@
     <script src="js/vendor/modernizr.js"></script>
   </head>
   <body>
+
 <?php
+
     ini_set('session.save_path','/tmp');
     session_start();
     include_once 'header.php';
+    include_once 'lib.php';
+
+    $login_failed = false;
+
+    /*********************FORCE SSL SECURED CONNECTION********************************/
+    if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
+    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+    exit();
+    }
+    /*********************************************************************************/
+
+
+/*
+    $query = 'select user_id, ann_id, ann_date from admin_create_ann';
+    $stmt = $db->prepare($query);
+    $stmt -> execute();
+    $stmt -> store_result();
+    $stmt -> bind_result($user_id, $ann_id, $ann_date);
+    $stmt -> fetch();
+ */
+
 ?>
-    <div class="row">
+
+<div class="row">
         <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
             <div class='slick_class'>
                 <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
                 <center><a href='show_child_cat.php?cat_id=2'><h1><img src="img/Math.png"></h1></a></center>
                 <center><a href='show_child_cat.php?cat_id=6'><h1><img src="img/Computer Science.png"></h1></a></center>
             </div>
+        
         </div>
-    </div>
+</div>
+
+<div class="row">
+        <div class="large-11 large-centered columns panel text-center medium-11 medium-centered small-11 small-centered">
+                <h3 class='text-center'>Welcome to Quadcore Forum! </h3>
+                <h4 class='text-center'>Some Interesting Information for all to see! </h4>
+        </div>
+</div>
+<div class = "row">
+     <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
+
+<?php 
     
+    if(!($db = db_connect())){
+        echo "Database error<br>";
+        exit;
+    }
+
+    $username = input_clean($_SESSION['valid_user']);
+    $query = 'select ann_id, ann_name, ann_text from announcement ORDER BY ann_id desc';
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($ann_id, $ann_name, $ann_text);
+    
+    echo "<h3 style='color: #008cbb' >Announcements: </h3>";
+        
+    for ($i = 0; $i < 5; $i++) {
+        if($stmt->fetch()) { 
+        echo " <div class='text-left'> ";
+        echo "<hr>";
+        echo " <h4> $ann_name </h4>";
+        echo " <h5> &nbsp &nbsp &nbsp &nbsp $ann_text </h5> ";
+        echo "</div> ";
+        }
+    }
+
+?>
+    </div>
+</div>
+
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <!---<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>-->
@@ -47,7 +112,7 @@
                     autoplay:true,
                     autoplaySpeed: 3000,
                     infinite: true,
-                    speed: 600,
+                    speed: 800,
                     slidesToShow: 1,
                     adaptiveHeight: false
                 });
@@ -60,7 +125,7 @@
                     autoplay:true,
                     autoplaySpeed: 3000,
                     infinite: true,
-                    speed: 600,
+                    speed: 800,
                     slidesToShow: 1,
                     adaptiveHeight: false
                 });
