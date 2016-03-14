@@ -19,6 +19,7 @@ session_start();
   <body>
 
 <? include_once 'header.php'; ?>
+
 <!---------------------- DISCUSSION PAGE------------------------------>
 <div class='row'>
 <div class='large-12 large-centered columns medium-7 medium-centered small-10 small-centered'>
@@ -142,10 +143,18 @@ $(document).ready(function(){
     $('.comment_submit').on('click', function(e){
         var $newComment = $(this).parent().parent().prev().find('textarea');
         var username = $('#username').val();
-        var $post = $("<div class='row'><div class='panel large-12 columns innerdiv'><h6 class='username'></h6><hr><p></p><h6><a href='#' class='comment_reply_link'>Reply</a></h6></div></div>");
+        var replyArea = "<div class='comment_reply'><div class='row'><div class='large-12 columns'>"+
+                        "<hr><p>Enter your reply:<textarea rows='5'></textarea></p>"+
+                        "</div></div>";
+        var commentPost = "<div class='row'><div class='panel large-12 columns innerdiv'>"+
+                            "<h6 class='username'></h6><hr><p></p><h6>"+
+                            "<a href='#' class='comment_reply_link'>Reply</a></h6></div></div>";
+        var $post = $(commentPost);
+        //var $reply = $(replyArea);
         $post.find('.username').text(username);
         $post.find('.innerdiv').find('p').text($newComment.val());
         $(this).parent().parent().parent().after($post);
+        //$(this).parent().parent().parent().next().after($reply);
         $('.comment_reply').css("display","none");
         $('.comment_reply').css("visibility","hidden");
         $newComment.val('');
