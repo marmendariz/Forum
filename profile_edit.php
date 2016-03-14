@@ -29,6 +29,13 @@ if(isset($_SESSION['valid_user'])){
     if(isset($_POST['submit'])){
         $fname = true;
 
+
+        $fname = $_POST['firstname'];
+        $mname = $_POST['middlename'];
+        $lname = $_POST['lastname'];
+        $bio = $_POST['bio'];
+        $email = $_POST['email'];
+        
         if($fname){
             //Update
             header("Location: profile.php");
@@ -152,4 +159,3 @@ else{
 }
 /**************************************************************************************/
 ?>
-
