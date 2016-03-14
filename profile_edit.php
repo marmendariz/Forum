@@ -22,19 +22,17 @@ session_start();
 include_once 'header.php';
 $login_failed = false;
 
-/*****************************************************************************************************************/
-/*If valid login still active, allow */
+/*************************************IF USER IS LOGGED IN*************************************************/
 if(isset($_SESSION['valid_user'])){
 
 /*****************If a form was submitted, we are going to check before updating********/
     if(isset($_POST['submit'])){
+        $fname = true;
 
-
-
-
-
-
-
+        if($fname){
+            //Update
+            header("Location: profile.php");
+        }
     }
 
 
@@ -60,63 +58,67 @@ if(!($db = db_connect())){
                         $com_count, $dis_count, 
                         $up_count, $down_count);
     $stmt->fetch();
-
-    echo "<div class ='row'>";
-    echo "  <div class='columns panel text-center large-8 large-centered medium-8 medium-centered  small-10 small-centered '>";
-    echo "      <h2 style='color: #008cbb'>Editing $username's Profile</h2>";
-    echo "  </div>";
-    echo "</div>";
-
-
-    echo "<form method='post' action='profile_edit.php'>";
-    
-    echo "  <div class ='row'>";
-    
-/*********************************DISPLAY NAME***********************/
-    
-    echo "      <div class='columns panel text-left large-8 large-centered medium-8 medium-centered  small-10 small-centered '>";
-    echo "          <h3 style='color: #008cbb'> Name: </h3><br>";
-    echo "          <div class='large-6 medium-6 small-10 columns>";
-    echo "              <label for='firstname'><b>First Name</b></label>";
-    echo "              <input type ='text' id='firstname' name='firstname' value='$f_name' required maxlength='12'/>";
-    echo "              <label for='middlename'><b>Middle Name</b></label>";
-    echo "              <input type ='text' id='middlename' name='middlename' value='$m_name' required maxlength='12'/>";
-    echo "              <label for='lastname'><b>Last Name</b></label>";
-    echo "              <input type ='text' id='lastname' name='lastname' value='$l_name' required maxlength='12'/>";
-    echo "          </div>";
-    echo "      </div>";
-
-/*********************************DISPLAY BIO***********************/
-
-    echo "      <div class='columns panel text-left large-8 large-centered medium-8 medium-centered  small-10 small-centered '>";
-    echo "          <h3 style='color: #008cbb'> Bio: </h3><br>";
-    echo "          <div class='large-12 medium-12 small-12 columns>";
-    echo "              <label for='bio'><b> </b></label>";
-    echo "              <textarea maxlength='1000' style='height: 200px' name='bio' id='bio'> $bio </textarea>";
-    echo "          </div>";
-    echo "      </div>";
-
-/*********************************DISPLAY EMAIL***********************/
-    echo "      <div class='columns panel text-left large-8 large-centered medium-8 medium-centered  small-10 small-centered '>";
-    echo "          <h3 style='color: #008cbb'> Email: </h3><br>";
-    echo "          <div class='large-12 medium-12 small-10 columns>";
-    echo "              <label for='email'><b> </b></label>";
-    echo "              <input type ='text' id='email' name='email' value='$email' required maxlength='100'/>";
-    echo "          </div>";
-    echo "      </div>";
-    
-/*********************************SUBMIT BUTTON***********************/
-
-    echo "      <div class='columns panel text-center large-8 large-centered medium-8 medium-centered  small-10 small-centered '>";
-    echo "          <div class='large-12 medium-12 small-10 columns/>";
-    echo "              <label for='submit'><b> </b></label>";
-    echo "              <br><input type='submit' id='submit' name='submit' class='button' value='Save Changes'/>";
-    echo "          </div>";
-    echo "      </div>";
-    echo "  </div>";
-    echo "</form>";
-
 ?>
+    <div class ='row'>
+        <div class='columns panel text-center large-8 large-centered medium-8 medium-centered  small-10 small-centered '>
+            <h2 style='color: #008cbb'>Editing <?echo $username?>'s Profile</h2>
+        </div>
+    </div>
+
+    <form method='post' action='profile_edit.php'>
+<!------------------------------DISPLAY NAME-------------------------->
+    <div class ='row'>
+    <div class='columns panel text-left large-8 medium-8 small-10 small-centered '>
+        <h3 style='color: #008cbb'> Name: </h3><br>
+            <div class='row'>
+            <div class='large-6 medium-6 small-10 columns small-centered'>
+                  <label for='firstname'><b>First Name</b></label>
+                  <input type ='text' id='firstname' name='firstname' value='<?echo $f_name?>' required maxlength='12'/>
+                  <label for='middlename'><b>Middle Name</b></label>
+                  <input type ='text' id='middlename' name='middlename' value='<?echo $m_name?>' required maxlength='12'/>
+                  <label for='lastname'><b>Last Name</b></label>
+                  <input type ='text' id='lastname' name='lastname' value='<?echo $l_name?>' required maxlength='12'/>
+            </div>
+            </div>
+    </div>
+    </div>
+<!------------------------------DISPLAY BIO------------------------------>
+    <div class='row'>
+    <div class='columns panel text-left large-8 medium-8 small-10 small-centered '>
+        <h3 style='color: #008cbb'> Bio: </h3><br>
+        <div class='row'>
+        <div class='large-12 medium-12 small-12 columns'>
+            <label for='bio'><b> </b></label>
+            <textarea maxlength='1000' style='height: 200px' name='bio' id='bio'><? echo $bio ?></textarea>
+        </div>
+        </div>
+    </div>
+    </div>
+<!-------------------------------DISPLAY EMAIL---------------------------------->
+    <div class='row'>
+    <div class='columns panel text-left large-8 medium-8 small-10 small-centered '>
+        <h3 style='color: #008cbb'> Email: </h3><br>
+        <div class='row'>
+        <div class='large-12 medium-12 small-10 columns'>
+            <label for='email'><b> </b></label>
+            <input type ='text' id='email' name='email' value='$email' required maxlength='100'/>
+        </div>
+        </div>
+    </div>
+    </div>
+<!-------------------------------SUBMIT BUTTON---------------------------------->
+        <div class='row'>
+         <div class='columns panel text-center large-8 medium-8 small-10 small-centered '>
+             <div class='row'>
+             <div class='large-12 medium-12 small-10 columns'>
+                  <label for='submit'><b> </b></label>
+                  <br><input type='submit' id='submit' name='submit' class='button' value='Save Changes'/>
+            </div>
+            </div>
+      </div>
+      </div>
+    </form>
+
   <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
