@@ -11,7 +11,7 @@ session_start();
     <link rel='icon' type='image/x-icon' href='img/Q.png' /> 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quadcore Forum | Profile</title>
+    <title>Quadcore Forum | Edit Profile</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/quadcore.css" />
     <script src="js/vendor/modernizr.js"></script>
@@ -22,7 +22,7 @@ session_start();
 include_once 'header.php';
 $login_failed = false;
 
-/**********************************************/
+/*****************************************************************************************************************/
 /*If valid login still active, allow */
 if(isset($_SESSION['valid_user'])){
 
@@ -34,9 +34,6 @@ if(isset($_SESSION['valid_user'])){
 
 
 
-
-
-        unset($_POST['submit']);
 
     }
 
@@ -130,8 +127,9 @@ if(!($db = db_connect())){
 <?php
     exit;
 }
+/**********************************************************************************************************/
+/**********ELSE USER NOT LOGGED IN, SHOW MESSAGE INSTEAD******************************/
 else{
-    /*Else user is not logged in, message given**/
 ?>
 <div class='row'>
     <div class='large-7 columns panel large-centered text-center'>
@@ -150,5 +148,6 @@ else{
 <?php
     exit;
 }
+/**************************************************************************************/
 ?>
 
