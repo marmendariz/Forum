@@ -145,20 +145,27 @@ $(document).ready(function(){
         var username = $('#username').val();
         
         /*Generate new comment area and a textarea to reply to this new comment*/        
-       var replyArea = "<div class='comment_reply'><div class='row'><div class='large-12 columns'>"+
-                      "<hr><p>Enter your reply:<textarea rows='5'></textarea></p>"+
-                     "</div></div></div>";
+       var replyArea = "<div class='comment_reply'><div class='row'>"+
+    "<div class='large-12 columns'><hr><p>Enter your reply:<textarea rows='5'></textarea>"+
+                    "</p></div></div>"+
+                    "<div class='row'><div class='large-6 columns'>"+
+                    "<input type='button' class='button expand comment_submit' value='Submit'></div>"+
+                    "<div class='large-6 columns'>"+
+                    "<input type='button' class='button expand alert comment_cancel' value='Cancel'></div></div><hr></div>";
+
+
         var commentPost = "<div class='row'><div class='panel large-12 columns innerdiv'>"+
                             "<h6 class='username'></h6><hr><p></p><h6>"+
                             "<a href='#' class='comment_reply_link'>Reply</a></h6></div></div>";
         var $post = $(commentPost);
+        var $replyArea = $(replyArea);
 
         /*Append comment to page*/
         /*NOT CURRENTLY WORKING*/
         $post.find('.username').text(username);
         $post.find('.innerdiv').find('p').text($newComment.val());
         $(this).parent().parent().parent().after($post);
-        $(this).parent().parent().parent().next().after(replyArea);
+        //$(this).parent().parent().parent().next().after($replyArea);
 
         $('.comment_reply').css("display","none");
         $('.comment_reply').css("visibility","hidden");
