@@ -108,7 +108,7 @@ if(!($db = db_connect())){
         <div class='row'>
         <div class='large-12 medium-12 small-10 columns'>
             <label for='email'><b> </b></label>
-            <input type ='text' id='email' name='email' value='$email' required maxlength='100'/>
+            <input type ='text' id='email' name='email' value='<? echo $email ?>' required maxlength='100'/>
         </div>
         </div>
     </div>
