@@ -3,3 +3,6 @@
 [14-Mar-2016 13:25:23 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/index.php on line 68
 [14-Mar-2016 14:19:41 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/index.php on line 68
 [14-Mar-2016 14:28:56 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/index.php on line 68
+[14-Mar-2016 17:20:46 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/mark/Forum/index.php on line 68
+[14-Mar-2016 17:20:59 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/mark/Forum/index.php on line 68
+[14-Mar-2016 17:21:14 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/mark/Forum/index.php on line 68

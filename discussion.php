@@ -59,7 +59,6 @@ echo "</div>";
 
 echo "<h4>Comments<h4><hr>"; 
 while($stmt->fetch()){
-
     $logged_in = false;
     if(isset($_SESSION['valid_user']))
         $logged_in = true;
@@ -68,11 +67,8 @@ while($stmt->fetch()){
 
     echo "<div class='row'>";
     echo "<div class='columns large-12 panel'>";
-    //echo "<h5 style='color:#008cbb;'>$com_name<h5>";
-
     echo "<h6>Username</h6>";
     echo "<hr>";
-
     echo "<p>&nbsp &nbsp &nbsp &nbsp$com_text</p>";
     if($logged_in)
         echo "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>";
@@ -80,37 +76,10 @@ while($stmt->fetch()){
         echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
     echo "</div>";
     echo "</div>";
-
-    if($logged_in){
-    echo "<div class='comment_reply'>";
-        echo "<div class='row'>";
-            echo "<div class='large-12 columns'>";
-                    echo "<hr>";
-                    echo "<p>Enter your reply:";
-                    echo "<textarea rows='5'></textarea>";
-                    echo "</p>";
-            echo "</div>";
-        echo "</div>";
-   
-        echo "<div class='row'>";
-            echo "<div class='large-6 columns'>";
-                echo "<input type='button' class='button expand comment_submit' value='Submit'>";
-            echo "</div>";
-    
-            echo "<div class='large-6 columns'>";
-                echo "<input type='button' class='button expand alert comment_cancel' value='Cancel'>";
-            echo "</div>";
-            echo "</div>";
-
-    echo "<hr>";
-    echo "</div>";
-    }
 }
-
 $dis_stmt->close();
 $stmt->close();
 $db->close();
-
 ?>
   <!-------------------------------------------->
   </div>
@@ -120,65 +89,75 @@ $db->close();
     <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="js/foundation.min.js"></script>
     <script>
-        $(document).foundation();
+$(document).foundation();
+
 $(document).ready(function(){
 
-    $('.comment_reply_link').on('click',function(e){
+    /*****************************************/
+    $('body').on('click','.comment_reply_link',function(e){
         e.preventDefault();
         $('.comment_reply').css("display","none");
         $('.comment_reply').css("visibility","hidden");
-        var $area = $(this).parent().parent().parent().next();
-        $area.css("display","inline");
-        $area.css("visibility","visible");
+        
+       var replyArea = "<div class='comment_reply'>"+
+                         "<div class='row'><div class='large-12 columns'>"+
+                         "<hr><p>Enter your reply:<textarea rows='5'></textarea>"+
+                         "</p></div></div>"+
+                         "<div class='row'>"+
+                         "<div class='large-6 columns'>"+
+                         "<input type='button' class='button expand comment_submit' value='Submit'>"+
+                         "</div>"+
+                         "<div class='large-6 columns'>"+
+                         "<input type='button' class='button expand alert comment_cancel' value='Cancel'>"+
+                         "</div></div><hr></div>";
+        
+        var $reply = $(replyArea);
+        
+        $(this).parent().parent().parent().after($reply);
+        $reply.css("display","inline");
+        $reply.css("visibility","visible");
 
         var width = $(window).width();
         var height = $(window).height();
         if((width <= 1023) && (height<=768))
-            $('html, body').animate({scrollTop: $area.offset().top});
+            $('html, body').animate({scrollTop: $reply.offset().top});
         else
-            $('html, body').animate({scrollTop: $area.offset().top-300});
-        $area.find('textarea').focus();
+            $('html, body').animate({scrollTop: $reply.offset().top-300});
+        $reply.find('textarea').focus();
     });
-
-    $('.comment_submit').on('click', function(e){
+    
+    /*********************************/
+    
+    $('body').on('click','.comment_submit' ,function(e){
         var $newComment = $(this).parent().parent().prev().find('textarea');
         var username = $('#username').val();
         
-        /*Generate new comment area and a textarea to reply to this new comment*/        
-       var replyArea = "<div class='comment_reply'><div class='row'>"+
-    "<div class='large-12 columns'><hr><p>Enter your reply:<textarea rows='5'></textarea>"+
-                    "</p></div></div>"+
-                    "<div class='row'><div class='large-6 columns'>"+
-                    "<input type='button' class='button expand comment_submit' value='Submit'></div>"+
-                    "<div class='large-6 columns'>"+
-                    "<input type='button' class='button expand alert comment_cancel' value='Cancel'></div></div><hr></div>";
-
-
-        var commentPost = "<div class='row'><div class='panel large-12 columns innerdiv'>"+
-                            "<h6 class='username'></h6><hr><p></p><h6>"+
-                            "<a href='#' class='comment_reply_link'>Reply</a></h6></div></div>";
+        var commentPost = "<div class='row'>"+
+                          "<div class='panel large-12 columns innerdiv'>"+
+                          "<h6 class='username'></h6><hr>"+
+                          "<p></p>"+
+                          "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>"+
+                          "</div></div>";
         var $post = $(commentPost);
-        var $replyArea = $(replyArea);
+         
 
         /*Append comment to page*/
-        /*NOT CURRENTLY WORKING*/
         $post.find('.username').text(username);
         $post.find('.innerdiv').find('p').text($newComment.val());
         $(this).parent().parent().parent().after($post);
-        //$(this).parent().parent().parent().next().after($replyArea);
 
         $('.comment_reply').css("display","none");
         $('.comment_reply').css("visibility","hidden");
         $newComment.val('');
     });
 
+    /***********************************************/
+    
     $('.comment_cancel').on('click', function(e){
         $('.comment_reply').css("display","none");
         $('.comment_reply').css("visibility","hidden");
         $newComment.val('');
     });
-
-
 
         });
     </script>
