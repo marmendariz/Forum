@@ -153,7 +153,7 @@ $(document).ready(function(){
 
     /***********************************************/
     
-    $('.comment_cancel').on('click', function(e){
+    $('body').on('click','.comment_cancel', function(e){
         $('.comment_reply').css("display","none");
         $('.comment_reply').css("visibility","hidden");
         $newComment.val('');
