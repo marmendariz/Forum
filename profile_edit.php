@@ -27,19 +27,76 @@ if(isset($_SESSION['valid_user'])){
 
 /*****************If a form was submitted, we are going to check before updating********/
     if(isset($_POST['submit'])){
-        $fname = true;
+        $fnStat = true;
+        $mnStat = true;
+        $lnStat = true;
+        $bioStat = true;
+        $emStat = true;
 
+        /*************************** FIRST NAME ******************************/
+        if(!isset($_POST['firstname']) || empty($_POST['firstname']))
+            $fnStat = false;
+        else{
+            $fname = input_clean($_POST['firstname']);
+            if(!preg_match('/^[a-zA-Z-]+$/',$fname))
+                $fnStat = false;
+        }
+        /******************************************************************/
 
-        $fname = $_POST['firstname'];
-        $mname = $_POST['middlename'];
-        $lname = $_POST['lastname'];
-        $bio = $_POST['bio'];
-        $email = $_POST['email'];
+        /************************* MIDDLE NAME *****************************/
+        if(!isset($_POST['middlename']) || empty($_POST['middlename'])){
+            $mnStat = false;
+        }
+        else{
+            $mname = input_clean($_POST['middlename']);
+            if(!preg_match('/^[a-zA-Z-]+$/',$mname))
+                $mnStat = false;
+        }
+        /******************************************************************/
+       
+        /*************************** LAST NAME ******************************/
+        if(!isset($_POST['lastname']) || empty($_POST['lastname'])){
+            $lnStat = false;
+        }
+        else{
+            $lname = input_clean($_POST['lastname']);
+            if(!preg_match('/^[a-zA-Z-]+$/',$lname))
+                $lnStat = false;
+        }
+        /******************************************************************/
+
+        /*************************** BIO ******************************/
+        if(!isset($_POST['bio']) || empty($_POST['bio'])){
+            $bioStat = false;
+        }
+        else{
+            $bio = input_clean($_POST['bio']);
+        }
+        /******************************************************************/
         
-        if($fname){
-            //Update
+        /*************************** EMAIL ******************************/
+        if(!isset($_POST['email']) || empty($_POST['email'])){
+            $emStat = false;
+        }
+        else{
+            $email = input_clean($_POST['email']);
+            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+            if(filter_var($email, FILTER_VALIDATE_EMAIL)===false)
+                $emStat = false;
+        }
+        /******************************************************************/
+
+        if($fnStat && $mnStat && $lnStat && $bioStat && $emStat){
+            /*Do update stuff here*/
+
+            /*Kevin, make sure you call
+                mysqli_real_escape_string($db, var)
+             for each variable after you make connection to db*/
+            
+            /*Redirects to profile page*/
             header("Location: profile.php");
         }
+
     }
 
 
