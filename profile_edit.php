@@ -105,12 +105,10 @@ if(isset($_SESSION['valid_user'])){
         mysqli_real_escape_string($db, $bio);
         mysqli_real_escape_string($db, $email);
 
-        $query = 'UPDATE user SET f_name=?, m_name=?, l_name=?, bio=?, email=?';
+        $query = 'UPDATE user SET f_name=?, m_name=?, l_name=?, bio=?, email=? where user_name=?';
         $stmt = $db->prepare($query);
-        $stmt->bind_param('sssss', $fname, $mname, $lname, $bio, $email);
+        $stmt->bind_param('ssssss', $fname, $mname, $lname, $bio, $email, $_SESSION['valid_user']);
         $stmt->execute();
-
-
             /*Redirects to profile page*/
             header("Location: profile.php");
         }
