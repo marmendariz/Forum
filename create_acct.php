@@ -149,7 +149,7 @@ if($fnStat && $mnStat && $lnStat && $emStat && $unStat && $pwStat){
 
 <!---------------------- FIRST NAME ------------------------------>
     <div class='row'>
-        <div class='large-6 columns medium-6'>
+        <div class='large-6 columns'>
             <label for='fname'><b>First Name</b></label>
             <input type='text' id='fname' name='fname' required maxlength="12"/>
         </div>
@@ -167,7 +167,7 @@ else
 
 <!-------------------------- MIDDLE NAME ---------------------------------->
     <div class='row'>
-        <div class='large-6 columns medium-6'>
+        <div class='large-6 columns'>
             <label for='mname'><b>Middle Name (Optional)</b></label>
             <input type='text' id='mname' name='mname' maxlength="12">
         </div>
@@ -185,7 +185,7 @@ else
 
 <!-------------------------- LAST NAME  ---------------------------------->
     <div class='row'>
-        <div class='large-6 columns medium-6'>
+        <div class='large-6 columns'>
             <label for='lname'><b>Last Name</b></label>
             <input type='text' id='lname' name='lname' required maxlength="20">
         </div>
@@ -203,7 +203,7 @@ else
 
 <!------------------------------ EMAIL  ---------------------------------->
     <div class='row'>
-        <div class='large-6 columns medium-6'>
+        <div class='large-6 columns'>
             <label for='email'><b>Email</b></label>
             <input type='email' id='email' name='email' required maxlength="30">
         </div>
@@ -221,7 +221,7 @@ else
 
 <!-------------------------- USERNAME ---------------------------------->
     <div class='row'>
-        <div class='large-6 columns medium-6'>
+        <div class='large-6 columns'>
             <label for='username'><b>Username</b></label>
             <input type="text" id = 'username' placeholder="" name='username' required maxlength="20"/>
         </div>
@@ -244,7 +244,7 @@ else
 
 <!------------------------------ PASSWORD  ------------------------------>
     <div class='row'>
-      <div class='large-6 columns medium-6'>
+      <div class='large-6 columns'>
         <label for='password'><b>Password</b></label>
         <input type="password" id = 'password' placeholder="Enter at least 5 characters" name='password' required maxlength="15"/>
       </div> 
@@ -264,7 +264,7 @@ else
 
 <!----------------------- CONFIRM PASSWORD  -------------------------->
     <div class='row'>
-      <div class='large-6 columns medium-6'>
+      <div class='large-6 columns'>
         <label for='password'><b>Confirm Password</b></label>
         <input type="password" id = 'confirmPassword' placeholder="" name='confirmPassword' required maxlength="15"/>
       </div> 
