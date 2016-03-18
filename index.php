@@ -65,7 +65,7 @@
     $username = input_clean($_SESSION['valid_user']);
     $query = 'select ann_id, ann_name, ann_text from announcement ORDER BY ann_id desc';
     $stmt = $db->prepare($query);
-    $stmt->bind_param('s', $username);
+    //$stmt->bind_param('s', $username);
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($ann_id, $ann_name, $ann_text);

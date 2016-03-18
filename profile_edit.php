@@ -93,6 +93,24 @@ if(isset($_SESSION['valid_user'])){
                 mysqli_real_escape_string($db, var)
              for each variable after you make connection to db*/
             
+        if(!($db = db_connect())){
+            echo "Database error<br>";
+            exit;
+        }
+
+
+        mysqli_real_escape_string($db, $fname);
+        mysqli_real_escape_string($db, $mname);
+        mysqli_real_escape_string($db, $lname);
+        mysqli_real_escape_string($db, $bio);
+        mysqli_real_escape_string($db, $email);
+
+        $query = 'UPDATE user SET f_name=?, m_name=?, l_name=?, bio=?, email=?';
+        $stmt = $db->prepare($query);
+        $stmt->bind_param('sssss', $fname, $mname, $lname, $bio, $email);
+        $stmt->execute();
+
+
             /*Redirects to profile page*/
             header("Location: profile.php");
         }
