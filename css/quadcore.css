@@ -14,10 +14,13 @@ textarea{
 }
 
 .comment_reply{
-    
     display: none;
     visibility: hidden;
-    
+}
+
+.discussion_reply{
+    display: none;
+    visibility: hidden;
 }
 
 a.comment_reply_link{

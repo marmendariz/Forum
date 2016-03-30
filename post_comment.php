@@ -1,11 +1,14 @@
 <?php
 include_once 'lib.php';
 
+
+
 if(isset($_POST['username'])){
     if(!($db = db_connect())){
         echo "Database error";
         exit;
     }
+
    /* 
         $username = mysqli_real_escape_string($db,input_clean($_POST['username']));
         $query = 'select * from user where user_name=?';
@@ -21,7 +24,10 @@ if(isset($_POST['username'])){
         $stmt->close();
         $db->close();
     */
+
+    $commentText = input_clean($_POST['commentText']);
+    echo "Comment saved! ";
+
+
 }
-if(empty($_POST['username']))
-    echo 'Choose a username';
 ?>
