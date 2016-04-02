@@ -6,33 +6,7 @@ include_once 'lib.php';
 set_path();
 force_ssl();
 session_start();
-?>
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <link rel='icon' type='image/x-icon' href='img/Q.png'>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quadcore Forum | Discussion</title>
-    <link rel="stylesheet" href="css/foundation.css" />
-    <link rel="stylesheet" href="css/quadcore.css" />
-    <script src="js/vendor/modernizr.js"></script>
-    <script src='js/jquery-1.12.0.min.js' type='text/javascript'></script>
-    <style>
-        li{
-            display: inline;
-        }
-    </style>
-  </head>
-  <body>
 
-<? include_once 'header.php'; ?>
-
-<!---------------------- DISCUSSION PAGE ------------------------------>
-<div class='row'>
-<div class='large-12 large-centered columns medium-7 medium-centered small-10 small-centered'>
-  <!-------------------------------------------->
-<?php
 if(!($db = db_connect())){
     echo "Database error<br>";
     exit;
@@ -56,6 +30,26 @@ $dis_stmt->execute();
 $dis_stmt->store_result();
 $dis_stmt->bind_result($dis_name, $dis_text);
 $dis_stmt->fetch();
+
+?>
+<!------------------------------ DISCUSSION PAGE  -------------------------------------->
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <link rel='icon' type='image/x-icon' href='img/Q.png'>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <? echo "<title>Quadcore Forum | $dis_name</title>"; ?>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/quadcore.css" />
+    <script src="js/vendor/modernizr.js"></script>
+    <script src='js/jquery-1.12.0.min.js' type='text/javascript'></script>
+  </head>
+  <body>
+<? include_once 'header.php';
+
+echo "<div class='row'>";
+echo "<div class='large-12 large-centered columns medium-7 medium-centered small-10 small-centered'>";
 
 echo "<div class='row'>";
 echo "<div class='panel large-12 columns'>";
@@ -159,7 +153,7 @@ $db->close();
     <script src="js/foundation.min.js"></script>
     <script>
 /***********************************************************************************/
-/******************************** SCRIPTS ******************************************/
+/********************************** SCRIPTS ****************************************/
 /***********************************************************************************/
 $(document).foundation();
 /***/
