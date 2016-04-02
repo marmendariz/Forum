@@ -1,2 +1,18 @@
 [29-Mar-2016 14:29:44 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/Forum/discussion.php on line 47
 [29-Mar-2016 14:30:31 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/Forum/discussion.php on line 47
+[30-Mar-2016 11:33:04 America/Los_Angeles] PHP Warning:  mysqli_real_escape_string() expects exactly 2 parameters, 1 given in /home/stu/quadcore/public_html/Forum/post_comment.php on line 12
+[30-Mar-2016 11:33:04 America/Los_Angeles] PHP Warning:  mysql_insert_id(): Access denied for user 'quadcore'@'localhost' (using password: NO) in /home/stu/quadcore/public_html/Forum/post_comment.php on line 19
+[30-Mar-2016 11:33:04 America/Los_Angeles] PHP Warning:  mysql_insert_id(): A link to the server could not be established in /home/stu/quadcore/public_html/Forum/post_comment.php on line 19
+[30-Mar-2016 11:33:45 America/Los_Angeles] PHP Warning:  mysqli_real_escape_string() expects exactly 2 parameters, 1 given in /home/stu/quadcore/public_html/Forum/post_comment.php on line 12
+[30-Mar-2016 11:33:45 America/Los_Angeles] PHP Warning:  mysqli_insert_id() expects exactly 1 parameter, 0 given in /home/stu/quadcore/public_html/Forum/post_comment.php on line 19
+[30-Mar-2016 11:36:00 America/Los_Angeles] PHP Warning:  mysqli_real_escape_string() expects exactly 2 parameters, 1 given in /home/stu/quadcore/public_html/Forum/post_comment.php on line 12
+[30-Mar-2016 11:36:04 America/Los_Angeles] PHP Warning:  mysqli_real_escape_string() expects exactly 2 parameters, 1 given in /home/stu/quadcore/public_html/Forum/post_comment.php on line 12
+[30-Mar-2016 13:53:54 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_results() on a non-object in /home/stu/quadcore/public_html/Forum/login.php on line 50
+[30-Mar-2016 13:54:06 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_results() on a non-object in /home/stu/quadcore/public_html/Forum/login.php on line 50
+[30-Mar-2016 13:54:35 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_result() on a non-object in /home/stu/quadcore/public_html/Forum/login.php on line 50
+[30-Mar-2016 13:55:27 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_result() on a non-object in /home/stu/quadcore/public_html/Forum/login.php on line 52
+[30-Mar-2016 13:55:40 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_result() on a non-object in /home/stu/quadcore/public_html/Forum/login.php on line 52
+[31-Mar-2016 22:21:50 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/post_comment.php on line 28
+[31-Mar-2016 22:21:50 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/post_comment.php on line 33
+[01-Apr-2016 16:19:53 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ':', expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/discussion.php on line 121
+[01-Apr-2016 16:21:19 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ':', expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/discussion.php on line 121

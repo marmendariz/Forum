@@ -13,11 +13,16 @@ session_start();
     <link rel='icon' type='image/x-icon' href='img/Q.png'>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quadcore Forum | Account Creation</title>
+    <title>Quadcore Forum | Discussion</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/quadcore.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script src='js/jquery-1.12.0.min.js' type='text/javascript'></script>
+    <style>
+        li{
+            display: inline;
+        }
+    </style>
   </head>
   <body>
 
@@ -41,8 +46,9 @@ $logged_in = false;
 if(isset($_SESSION['valid_user']))
     $logged_in = true;
 $parent_dis = intval(input_clean($_GET['dis_id']));
+$dis_id = $parent_dis;
 
-/********************* PRINT OUT DISCUSSION TOP SECTION ******************/
+/************************ PRINT OUT DISCUSSION TOP SECTION *****************************/
 $dis_query = 'select dis_name, dis_text from discussion where dis_id = ?';
 $dis_stmt = $db->prepare($dis_query);
 $dis_stmt->bind_param('i',$parent_dis);
@@ -55,13 +61,14 @@ echo "<div class='row'>";
 echo "<div class='panel large-12 columns'>";
 echo "<h1>$dis_name<h1><hr>";  
 echo "<h3>$dis_text<h3><hr>";
+echo "<input type='hidden' id='dis_id' value='$dis_id'>";
 if($logged_in)
     echo "<h6><a href='#' class='discussion_reply_link'>Reply</a></h6>";
 else
     echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
 echo "</div>";
 echo "</div>";
-/**************************************************************************/
+/*************************************************************************************/
 
 /********************** PRINT OUT COMMENTS *******************/
 $comment_query = 'select * from dis_cont_com AS d, com AS c WHERE d.dis_id=? AND d.com_id=c.com_id';
@@ -88,19 +95,50 @@ echo "<div class='discussion_reply'>
      <input type='button' class='button expand alert dis_comment_cancel' value='Cancel'>
      </div></div><hr></div>";
 
+if($logged_in){
+    $id = $_SESSION['user_id'];
+    echo "<input id='username' type='hidden' value='".$_SESSION['valid_user']."'>";
+    echo "<input id='user_id' type='hidden' value='$id'>";
+}
+/**/
 while($stmt->fetch()){
-    $user = $_SESSION['valid_user'];
     echo "<div class='row comment'>";
     echo "<div class='columns large-12 panel'>";
 
-    echo "<h6>Username</h6>";
-    echo "<input id='username' type='hidden' value='$user'>";
+    $usernameQuery = "select user_name from user natural join user_edit_com natural join com where com_id = $com_id1";
+    $ustmt = $db->prepare($usernameQuery);
+    $ustmt->execute();
+    $ustmt->store_result();
+    $ustmt->bind_result($username);
+    $ustmt->fetch();
+
+    echo "<input id='com_level' type='hidden' value='$com_level'>";
+    echo "<h6>$username</h6>";
     echo "<hr>";
     echo "<p>$com_text</p>";
+    echo "<hr>";
+
+    /******* Comment links  *********/
+    echo "<div class='row com_links'>"; 
+
+    echo "<div class='columns large-4 medium-4 small-4'>";
     if($logged_in)
         echo "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>";
     else
         echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
+    echo "</div>";
+
+    if($username === $_SESSION['valid_user']){
+        echo "<div class='columns large-4 medium-4 small-4'>";
+            echo "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>";
+        echo "</div>";
+        
+        echo "<div class='columns large-4 medium-4 small-4'>";
+            echo "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>";
+        echo "</div>";
+    }
+    echo "</div>";
+    /*****************************/
 
     echo "</div>";
     echo "</div>";
@@ -145,7 +183,7 @@ $(document).ready(function(){
                          "<input type='button' class='button expand alert comment_cancel' value='Cancel'>"+
                          "</div></div><hr></div>";
         var $reply = $(replyArea);
-        $(this).parent().parent().parent().after($reply);
+        $(this).parent().parent().parent().parent().parent().after($reply);
         $reply.css("display","inline");
         $reply.css("visibility","visible");
 
@@ -163,12 +201,25 @@ $(document).ready(function(){
     $('body').on('click','.comment_submit' ,function(e){
         var $newComment = $(this).parent().parent().prev().find('textarea');
         var username = $('#username').val();
+        var userId = $('#user_id').val();
+        var disId = $('#dis_id').val();
+        
         var commentPost = "<div class='row'>"+
                           "<div class='panel large-12 columns innerdiv'>"+
                           "<h6 class='username'></h6><hr>"+
-                          "<p></p>"+
+                          "<p></p><hr>"+
+                          "<div class='row com_links'>"+
+                          "<div class='columns large-4 medium-4 small-4'>"+
                           "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>"+
+                          "</div>"+
+                          "<div class='columns large-4 medium-4 small-4'>"+
+                          "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>"+
+                          "</div>"+
+                          "<div class='columns large-4 medium-4 small-4'>"+
+                          "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>"+
+                          "</div>"+
                           "</div></div>";
+        
         var $post = $(commentPost); 
         var commentText = $newComment.val();
         
@@ -182,7 +233,7 @@ $(document).ready(function(){
         $newComment.val('');
 
         /*AJAX for posting comment to page*/
-        $.post('post_comment.php', {username: username, commentText: commentText }, function(result){
+        $.post('post_comment.php', {username: username, commentText: commentText, user_id: userId, dis_id: disId }, function(result){
             //alert(result);
         });
     });
@@ -211,13 +262,22 @@ $(document).ready(function(){
         $('.discussion_reply').css('display', 'none');
         
         var $newComment = $('#dis_reply_area');
-        
         var username = $('#username').val();
+
         var commentPost = "<div class='row'>"+
                           "<div class='panel large-12 columns innerdiv'>"+
                           "<h6 class='username'></h6><hr>"+
-                          "<p></p>"+
+                          "<p></p><hr>"+
+                          "<div class='row com_links'>"+
+                          "<div class='columns large-4 medium-4 small-4'>"+
                           "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>"+
+                          "</div>"+
+                          "<div class='columns large-4 medium-4 small-4'>"+
+                          "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>"+
+                          "</div>"+
+                          "<div class='columns large-4 medium-4 small-4'>"+
+                          "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>"+
+                          "</div>"+
                           "</div></div>";
         var $post = $(commentPost); 
         var commentText = $newComment.val();
@@ -226,7 +286,6 @@ $(document).ready(function(){
         $post.find('.username').text(username);
         $post.find('.innerdiv').find('p').text($newComment.val());
         $(this).parent().parent().parent().after($post);
-
         $('#dis_reply_area').val('');
     });
     /*********************************************************/

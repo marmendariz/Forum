@@ -42,14 +42,18 @@ if(isset($_POST['username']) && isset($_POST['password'])){
         //$salt = stripslashes($salt);
         $hashed=crypt($pwd,'$6$'.$salt);
 
-        $query = 'select * from user where user_name=? and hashed_pwd=?';
+        $query = 'select user_id from user where user_name=? and hashed_pwd=?';
         $stmt = $db->prepare($query);
         $stmt->bind_param('ss',$username, $hashed);
         $stmt->execute();
         $stmt->store_result();
         $num_rows = $stmt->num_rows;
-        if($num_rows>0)
+        if($num_rows>0){
+            $stmt->bind_result($user_id);
+            $stmt->fetch();
             $_SESSION['valid_user'] = $username;
+            $_SESSION['user_id'] = $user_id; 
+        }
         else
             $login_failed = true;
         $stmt->close();
