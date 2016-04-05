@@ -23,7 +23,7 @@ if(isset($_SESSION['valid_user']))
 $parent_dis = intval(input_clean($_GET['dis_id']));
 $dis_id = $parent_dis;
 
-/************************ PRINT OUT DISCUSSION TOP SECTION *****************************/
+/********** Discussion Query ****************/
 $dis_query = 'select dis_name, dis_text from discussion where dis_id = ?';
 $dis_stmt = $db->prepare($dis_query);
 $dis_stmt->bind_param('i',$parent_dis);
@@ -31,6 +31,7 @@ $dis_stmt->execute();
 $dis_stmt->store_result();
 $dis_stmt->bind_result($dis_name, $dis_text);
 $dis_stmt->fetch();
+/*******************************************/
 
 ?>
 <!------------------------------ DISCUSSION PAGE  -------------------------------------->
@@ -49,23 +50,23 @@ $dis_stmt->fetch();
   <body>
 <? include_once 'header.php';
 
+/************************** PRINT DISCUSSION TOP-SECTION ****************************/
 echo "<div class='row'>";
-echo "<div class='large-12 large-centered columns medium-7 medium-centered small-10 small-centered'>";
-
-echo "<div class='row'>";
-echo "<div class='panel large-12 columns'>";
-echo "<h1>$dis_name<h1><hr>";  
-echo "<h3>$dis_text<h3><hr>";
-echo "<input type='hidden' id='dis_id' value='$dis_id'>";
-if($logged_in)
-    echo "<h6><a href='#' class='discussion_reply_link'>Reply</a></h6>";
-else
-    echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
-echo "</div>";
-echo "</div>";
+    echo "<div class='large-12 large-centered columns medium-12 medium-centered small-12 small-centered'>";
+        echo "<div class='row'>";
+            echo "<div class='panel large-12 columns'>";
+                echo "<h1>$dis_name<h1><hr>";  
+                    echo "<h3>$dis_text<h3><hr>";
+                    echo "<input type='hidden' id='dis_id' value='$dis_id'>";
+                    if($logged_in)
+                        echo "<h6><a href='#' class='discussion_reply_link'>Reply</a></h6>";
+                    else
+                        echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
+            echo "</div>";
+        echo "</div>";
 /*************************************************************************************/
 
-/********************** PRINT OUT COMMENTS *******************/
+/********************************* PRINT OUT COMMENTS ********************************/
 $comment_query = 'select * from dis_cont_com AS d, com AS c WHERE d.dis_id=? AND d.com_id=c.com_id';
 $stmt = $db->prepare($comment_query);
 $stmt->bind_param('i', $parent_dis);
@@ -97,57 +98,88 @@ if($logged_in){
 }
 /**/
 while($stmt->fetch()){
-    echo "<div class='row comment'>";
-    if($com_level == 2)
-        echo "<div class='columns large-10 panel right'>";
+   $usernameQuery = "select user_name from user natural join user_edit_com natural join com where com_id = $com_id1";
+   $ustmt = $db->prepare($usernameQuery);
+   $ustmt->execute();
+   $ustmt->store_result();
+   $ustmt->bind_result($username);
+   $ustmt->fetch();
+
+   $level2 = false;
+
+   echo "<div class='row comment'>"; /*********************/
+   if($com_level == 2){
+       $level2 = true;
+        echo "<div class='columns large-10 medium-10 small-10 panel right'>";
+    }
     else
-        echo "<div class='columns large-12 panel'>";
+        echo "<div class='columns large-10 medium-12 small-12 panel small-centered'>";
 
-    $usernameQuery = "select user_name from user natural join user_edit_com natural join com where com_id = $com_id1";
-    $ustmt = $db->prepare($usernameQuery);
-    $ustmt->execute();
-    $ustmt->store_result();
-    $ustmt->bind_result($username);
-    $ustmt->fetch();
-
-    echo "<input class='com_level' type='hidden' value='$com_level'>";
-    echo "<input class='parent_com_id' type='hidden' value='$parent_com_id'>";
-    echo "<input class='com_id' type='hidden' value='$com_id1'>";
-    echo "<h6>$username</h6>";
-    echo "<hr>";
-    echo "<p>$com_text</p>";
-    echo "<hr>";
+   echo "<div class='row'>";
+   /*****/
+   echo "<div class='columns large-2 medium-2 small-3 small-centered large-uncentered medium-uncentered text-center'>";
+                echo "<div class='row'>";
+                    echo "<div class='large-12 medium-12 small-12 columns text-center large-uncentered medium-uncentered small-centered'>";
+                        echo "<h6 class='text-center'><b>$username</b></h6>";
+                    echo "</div>";
+                echo "</div>";
+                echo "<div class='row'>";
+                    echo "<div class='large-12 medium-12 show-for-medium-up columns'>";
+                        echo "<img class='user_comment_info' src='img/bleh.gif'>";
+                    echo "</div>";
+                echo "</div>";
+    echo "</div>";
+    /*****/
+            
+    echo "<div class='columns large-9 medium-8 small-9'>";
+        echo "<input class='com_level' type='hidden' value='$com_level'>";
+        echo "<input class='parent_com_id' type='hidden' value='$parent_com_id'>";
+        echo "<input class='com_id' type='hidden' value='$com_id1'>";
+        echo "<hr>";
+        echo "<p>$com_text</p>";
+        echo "<hr>";
 
     /******* Comment links  *********/
     echo "<div class='row com_links text-center'>"; 
-
-    echo "<div class='columns large-4 medium-4 small-4'>";
-    if($logged_in)
-        echo "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>";
-    else
-        echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
-    echo "</div>";
-
-    if($username === $_SESSION['valid_user']){
         echo "<div class='columns large-4 medium-4 small-4'>";
-            echo "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>";
+            if($logged_in)
+                echo "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>";
+            else
+                echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
         echo "</div>";
+
+        if($username === $_SESSION['valid_user']){
+            echo "<div class='columns large-4 medium-4 small-4'>";
+                echo "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>";
+            echo "</div>";
         
-        echo "<div class='columns large-4 medium-4 small-4'>";
-            echo "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>";
+            echo "<div class='columns large-4 medium-4 small-4'>";
+                echo "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>";
+            echo "</div>";
+        }
         echo "</div>";
-    }
+    echo "</div>";
+    /****** End Comment Links  *****/
+
+    /** UP/DOWN VOTE SECTION **/ 
+    echo "<div class='large-1 medium-2 small-3 columns'>";
+        echo "<h6><a>UP</a></h6>";
+        echo "<h6><a>DOWN</a></h6>";
+    echo "</div>";
+     
+    echo "</div>";
     echo "</div>";
     /*****************************/
 
     echo "</div>";
-    echo "</div>";
+    //echo "</div>";
 }
-echo "</div>";
+echo "</div>"; /*********************************/
 /****************************************************************/
 
 $dis_stmt->close();
 $stmt->close();
+$ustmt->close();
 $db->close();
 ?>
   <!-------------------------------------------->
@@ -186,7 +218,9 @@ $(document).ready(function(){
                          "<input type='button' class='button expand alert comment_cancel' value='Cancel'>"+
                          "</div></div><hr></div>";
         var $reply = $(replyArea);
-        $(this).parent().parent().parent().parent().parent().after($reply);
+
+        var $temp  = $(this).parent().parent().parent().parent().parent();
+        $temp.after($reply);
         $reply.css("display","inline");
         $reply.css("visibility","visible");
 
@@ -198,7 +232,6 @@ $(document).ready(function(){
             $('html, body').animate({scrollTop: $reply.offset().top-300});
         $reply.find('textarea').focus();
 
-        var $temp  = $(this).parent().parent().parent().parent().parent();
         parent_com_id = $temp.find('.parent_com_id').val();
         com_id = $temp.find('.com_id').val();
     });
@@ -238,7 +271,7 @@ $(document).ready(function(){
             $text = result;
             $post.find('.innerdiv').find('p').text($text);
         });
-            $(this).parent().parent().parent().after($post);
+            $(this).parent().parent().parent().parent().after($post);
             $('.comment_reply').css("display","none");
             $('.comment_reply').css("visibility","hidden");
             $newComment.val('');

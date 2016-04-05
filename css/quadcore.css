@@ -27,6 +27,14 @@ a.comment_reply_link{
     line-height: 0px;
 }
 
+.user_comment_info{
+    border: 1px solid gray;
+}
+
+.smaller-text{
+    font-size: 0.5em;
+}
+
 .button:hover {
     /*background-color: #00cc66;*/
     background-color: #007095; 
