@@ -11,7 +11,7 @@ session_start();
     <link rel='icon' type='image/x-icon' href='img/Q.png'>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quadcore Forum | Account Creation</title>
+    <title>Quadcore Forum | Discussion Categories</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/quadcore.css" />
     <script src="js/vendor/modernizr.js"></script>

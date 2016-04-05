@@ -11,7 +11,7 @@
     <link rel='icon' type='image/x-icon' href='img/Q.png'>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quadcore Forum| Home </title>
+    <title>Quadcore Forum | Home </title>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/quadcore.css" />
     <link rel="stylesheet" type="text/css" href="slick/slick.css" />

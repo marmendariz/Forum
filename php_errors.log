@@ -16,3 +16,6 @@
 [31-Mar-2016 22:21:50 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/post_comment.php on line 33
 [01-Apr-2016 16:19:53 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ':', expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/discussion.php on line 121
 [01-Apr-2016 16:21:19 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ':', expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/discussion.php on line 121
+[04-Apr-2016 12:52:12 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/Forum/post_comment.php on line 22
+[04-Apr-2016 12:52:27 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/Forum/post_comment.php on line 22
+[04-Apr-2016 12:53:39 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/Forum/post_comment.php on line 22

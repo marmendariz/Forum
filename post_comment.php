@@ -11,7 +11,13 @@ if(isset($_POST['username'])){
     $user_id = input_clean($_POST['user_id']);
     $dis_id = input_clean($_POST['dis_id']);
 
-    $comInsert = "Insert into com (com_level, com_text,parent_com_id) values (2,?,1)";
+    $parent_parent_com_id = input_clean($_POST['parent_com_id']);
+    $parent_com_id = input_clean($_POST['com_id']);
+
+    if($parent_com_id == 1)
+        $comInsert = "Insert into com (com_level, com_text ,parent_com_id) values (1,?,1)";
+    else
+        $comInsert = "Insert into com (com_level, com_text ,parent_com_id) values (2,?,$parent_com_id)";
     $stmt = $db->prepare($comInsert);
     $stmt->bind_param('s',$commentText);
     //$stmt->execute();
@@ -27,5 +33,7 @@ if(isset($_POST['username'])){
     $stmt = $db->prepare($comInsert);
     $stmt->bind_param('ii',$dis_id,$com_id);
     //$stmt->execute();
+
+    echo $parent_com_id.$commentText;
 }
 ?>

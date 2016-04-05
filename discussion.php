@@ -14,6 +14,7 @@ if(!($db = db_connect())){
 
 if (null == ($parent_dis = filter_input(INPUT_GET, dis_id, FILTER_VALIDATE_INT,FILTER_NULL_ON_FAILURE) ) || $_GET['dis_id'] == '0') {
     echo 'Error. Invalid Discussion ID<br>';
+    exit;
 }
 
 $logged_in = false;
@@ -97,7 +98,10 @@ if($logged_in){
 /**/
 while($stmt->fetch()){
     echo "<div class='row comment'>";
-    echo "<div class='columns large-12 panel'>";
+    if($com_level == 2)
+        echo "<div class='columns large-10 panel right'>";
+    else
+        echo "<div class='columns large-12 panel'>";
 
     $usernameQuery = "select user_name from user natural join user_edit_com natural join com where com_id = $com_id1";
     $ustmt = $db->prepare($usernameQuery);
@@ -106,14 +110,16 @@ while($stmt->fetch()){
     $ustmt->bind_result($username);
     $ustmt->fetch();
 
-    echo "<input id='com_level' type='hidden' value='$com_level'>";
+    echo "<input class='com_level' type='hidden' value='$com_level'>";
+    echo "<input class='parent_com_id' type='hidden' value='$parent_com_id'>";
+    echo "<input class='com_id' type='hidden' value='$com_id1'>";
     echo "<h6>$username</h6>";
     echo "<hr>";
     echo "<p>$com_text</p>";
     echo "<hr>";
 
     /******* Comment links  *********/
-    echo "<div class='row com_links'>"; 
+    echo "<div class='row com_links text-center'>"; 
 
     echo "<div class='columns large-4 medium-4 small-4'>";
     if($logged_in)
@@ -157,6 +163,9 @@ $db->close();
 /***********************************************************************************/
 $(document).foundation();
 /***/
+
+var parent_com_id = 0;
+var com_id = 0;
 $(document).ready(function(){
 
     /******************** CREATE TEXTAREA FOR COMMENTING  **********************/
@@ -188,6 +197,10 @@ $(document).ready(function(){
         else
             $('html, body').animate({scrollTop: $reply.offset().top-300});
         $reply.find('textarea').focus();
+
+        var $temp  = $(this).parent().parent().parent().parent().parent();
+        parent_com_id = $temp.find('.parent_com_id').val();
+        com_id = $temp.find('.com_id').val();
     });
     /***************************************************************************/ 
 
@@ -202,7 +215,7 @@ $(document).ready(function(){
                           "<div class='panel large-12 columns innerdiv'>"+
                           "<h6 class='username'></h6><hr>"+
                           "<p></p><hr>"+
-                          "<div class='row com_links'>"+
+                          "<div class='row com_links text-center'>"+
                           "<div class='columns large-4 medium-4 small-4'>"+
                           "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>"+
                           "</div>"+
@@ -216,20 +229,21 @@ $(document).ready(function(){
         
         var $post = $(commentPost); 
         var commentText = $newComment.val();
-        
         /*Append comment to page*/
         $post.find('.username').text(username);
-        $post.find('.innerdiv').find('p').text($newComment.val());
-        $(this).parent().parent().parent().after($post);
-
-        $('.comment_reply').css("display","none");
-        $('.comment_reply').css("visibility","hidden");
-        $newComment.val('');
-
+        var $text = '';
+        
         /*AJAX for posting comment to page*/
-        $.post('post_comment.php', {username: username, commentText: commentText, user_id: userId, dis_id: disId }, function(result){
-            //alert(result);
+        $.post('post_comment.php', {username: username, commentText: commentText, user_id: userId, dis_id: disId, com_id: com_id, parent_com_id: parent_com_id }, function(result){
+            $text = result;
+            $post.find('.innerdiv').find('p').text($text);
         });
+            $(this).parent().parent().parent().after($post);
+            $('.comment_reply').css("display","none");
+            $('.comment_reply').css("visibility","hidden");
+            $newComment.val('');
+            parent_com_id = 0;
+            com_id = 0;
     });
     /************************************************************************/
 
@@ -239,6 +253,8 @@ $(document).ready(function(){
         $('.comment_reply').css("visibility","hidden");
         $newComment.val('');
         this.remove();
+        parent_com_id = 0;
+        com_id = 0;
     });
     /**************************************************/
 
@@ -264,13 +280,13 @@ $(document).ready(function(){
                           "<p></p><hr>"+
                           "<div class='row com_links'>"+
                           "<div class='columns large-4 medium-4 small-4'>"+
-                          "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>"+
+                          "<h6><a href='#' class='comment_reply_link text-center'>Reply</a></h6>"+
                           "</div>"+
                           "<div class='columns large-4 medium-4 small-4'>"+
-                          "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>"+
+                          "<h6><a href='#' class='comment_edit_link text-center'>Edit</a></h6>"+
                           "</div>"+
                           "<div class='columns large-4 medium-4 small-4'>"+
-                          "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>"+
+                          "<h6><a href='#' class='comment_delete_link text-center'>Delete</a></h6>"+
                           "</div>"+
                           "</div></div>";
         var $post = $(commentPost); 
