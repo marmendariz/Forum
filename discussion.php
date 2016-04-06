@@ -12,7 +12,9 @@ if(!($db = db_connect())){
     exit;
 }
 
-if (null == ($parent_dis = filter_input(INPUT_GET, dis_id, FILTER_VALIDATE_INT,FILTER_NULL_ON_FAILURE) ) || $_GET['dis_id'] == '0') {
+if (null == ($parent_dis = filter_input(INPUT_GET, 
+                                        dis_id, 
+                                        FILTER_VALIDATE_INT,FILTER_NULL_ON_FAILURE) ) || $_GET['dis_id'] == '0') {
     echo 'Error. Invalid Discussion ID<br>';
     exit;
 }
@@ -132,7 +134,7 @@ while($stmt->fetch()){
     /*****/
             
     echo "<div class='columns large-9 medium-8 small-9'>";
-        echo "<input class='com_level' type='hidden' value='$com_level'>";
+        echo "<input class='com_level' id='$com_id1' type='hidden' value='$com_level'>"; /*COM LEVEL*/
         echo "<input class='parent_com_id' type='hidden' value='$parent_com_id'>";
         echo "<input class='com_id' type='hidden' value='$com_id1'>";
         echo "<hr>";
@@ -161,7 +163,7 @@ while($stmt->fetch()){
     echo "</div>";
     /****** End Comment Links  *****/
 
-    /** UP/DOWN VOTE SECTION **/ 
+    /************* UP/DOWN VOTE SECTION *******************/ 
     echo "<div class='large-1 medium-2 small-3 columns'>";
         echo "<h6><a>UP</a></h6>";
         echo "<h6><a>DOWN</a></h6>";
@@ -169,7 +171,7 @@ while($stmt->fetch()){
      
     echo "</div>";
     echo "</div>";
-    /*****************************/
+    /*******************************************************/
 
     echo "</div>";
     //echo "</div>";
@@ -244,34 +246,69 @@ $(document).ready(function(){
         var userId = $('#user_id').val();
         var disId = $('#dis_id').val();
         
-        var commentPost = "<div class='row'>"+
-                          "<div class='panel large-12 columns innerdiv'>"+
-                          "<h6 class='username'></h6><hr>"+
-                          "<p></p><hr>"+
-                          "<div class='row com_links text-center'>"+
-                          "<div class='columns large-4 medium-4 small-4'>"+
-                          "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>"+
-                          "</div>"+
-                          "<div class='columns large-4 medium-4 small-4'>"+
-                          "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>"+
-                          "</div>"+
-                          "<div class='columns large-4 medium-4 small-4'>"+
-                          "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>"+
-                          "</div>"+
-                          "</div></div>";
+        var commentPost = "<div class='row comment'>"+ //1
+                            "<div class='panel large-10 columns innerdiv small-centered right'>"+ //2
+                            "<div class='row'>"+ //3
+                            "<div class='columns large-2 medium-2 small-3 text-center small-centered large-uncentered'>"+ //4
+                                "<div class='row'>"+ //5
+                                    "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncenterd'>"+ //6
+                                        "<h6 class='username'><b></b></h6>"+
+                                    "</div>"+ //6
+                                    "</div>"+ //5
+                                "<div class='row'>"+ //7
+                                "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncenterd'>"+ //8
+                                    "<img class='user_comment_info' src='img/bleh.gif'>"+
+                                "</div>"+ //8
+                                "</div>"+ //7
+                                "</div>"+ //4
+                                "<div class='columns large-9 medium-8 small-9'>"+ //9
+                                "<input type='hidden' class='com_level' value='2'>"+
+                                "<input type='hidden' class='parent_com_id' value='38'>"+
+                                "<input type='hidden' class='com_id' value='39'><hr>"+
+                                "<p></p><hr>"+
+                                "<div class='row com_links text-center'>"+ //10
+                                    "<div class='columns large-4 medium-4 small-4'>"+ //11
+                                        "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>"+
+                                    "</div>"+ //11
+                                    "<div class='columns large-4 medium-4 small-4'>"+ //12
+                                        "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>"+
+                                    "</div>"+ //12
+                                    "<div class='columns large-4 medium-4 small-4'>"+ //13
+                                        "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>"+
+                                    "</div>"+//13
+                                    "</div>"+//10
+                                    "</div>"+//9
+                                    "<div class='large-1 medium-2 small-3 columns'>"+ //14
+                                        "<h6><a>UP</a></h6>"+
+                                        "<h6><a>DOWN</a></h6>"+
+                                    "</div>"+ //14
+                                    "</div>"+//3
+                                "</div>"+//2
+                            "</div>"; //1
         
-        var $post = $(commentPost); 
+        var $post = $(commentPost);
+
+        var level  = $('#'+com_id).val();
+        if(level==2){
+           // $post.children().first().addClass('right');
+        }
+
         var commentText = $newComment.val();
         /*Append comment to page*/
-        $post.find('.username').text(username);
+        $post.find('.username').find('b').text(username);
         var $text = '';
         
         /*AJAX for posting comment to page*/
-        $.post('post_comment.php', {username: username, commentText: commentText, user_id: userId, dis_id: disId, com_id: com_id, parent_com_id: parent_com_id }, function(result){
-            $text = result;
-            $post.find('.innerdiv').find('p').text($text);
-        });
-            $(this).parent().parent().parent().parent().after($post);
+        $.post('post_comment.php', {username: username, commentText: commentText, 
+                                    user_id: userId, dis_id: disId, com_id: com_id, 
+                                    parent_com_id: parent_com_id }, 
+            function(result){
+                $text = result;
+                $post.find('.innerdiv').find('p').text($text);
+            }
+        );
+        /*********************************/
+            $(this).parent().parent().parent().parent().parent().after($post);
             $('.comment_reply').css("display","none");
             $('.comment_reply').css("visibility","hidden");
             $newComment.val('');
@@ -308,7 +345,7 @@ $(document).ready(function(){
         var username = $('#username').val();
 
         var commentPost = "<div class='row'>"+
-                          "<div class='panel large-12 columns innerdiv'>"+
+                          "<div class='panel large-10 columns innerdiv'>"+
                           "<h6 class='username'></h6><hr>"+
                           "<p></p><hr>"+
                           "<div class='row com_links'>"+

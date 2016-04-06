@@ -19,3 +19,17 @@
 [04-Apr-2016 12:52:12 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/Forum/post_comment.php on line 22
 [04-Apr-2016 12:52:27 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/Forum/post_comment.php on line 22
 [04-Apr-2016 12:53:39 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/Forum/post_comment.php on line 22
+[05-Apr-2016 15:41:32 America/Los_Angeles] PHP Warning:  session_start(): The session id is too long or contains illegal characters, valid characters are a-z, A-Z, 0-9 and '-,' in /home/stu/quadcore/public_html/mark/Forum/show_parent_cat.php on line 5
+[06-Apr-2016 11:00:46 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 11:01:44 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 11:04:05 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 11:44:53 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 12:00:33 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 12:00:40 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 12:01:11 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 12:01:52 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 12:03:53 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 12:03:55 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 12:06:24 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 12:12:46 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[06-Apr-2016 12:16:41 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
