@@ -27,6 +27,7 @@ include_once 'header.php';
 if(isset($_SESSION['valid_user'])){
     $old_user = $_SESSION['valid_user'];
     unset($_SESSION['valid_user']);
+    //unset($_COOKIE['active']);
     session_destroy();
     /************SHOW LOGGED-OUT MESSAGE******************/
 ?>

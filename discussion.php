@@ -98,7 +98,8 @@ if($logged_in){
     echo "<input id='username' type='hidden' value='".$_SESSION['valid_user']."'>";
     echo "<input id='user_id' type='hidden' value='$id'>";
 }
-/**/
+
+/***************************************** PRINT COMMENTS LOOP *********************************/
 while($stmt->fetch()){
    $usernameQuery = "select user_name from user natural join user_edit_com natural join com where com_id = $com_id1";
    $ustmt = $db->prepare($usernameQuery);
@@ -176,7 +177,8 @@ while($stmt->fetch()){
     echo "</div>";
     //echo "</div>";
 }
-echo "</div>"; /*********************************/
+/*********** END COMMENT PRINT LOOP  *********************/
+echo "</div>";
 /****************************************************************/
 
 $dis_stmt->close();
@@ -263,8 +265,8 @@ $(document).ready(function(){
                                 "</div>"+ //4
                                 "<div class='columns large-9 medium-8 small-9'>"+ //9
                                 "<input type='hidden' class='com_level' value='2'>"+
-                                "<input type='hidden' class='parent_com_id' value='38'>"+
-                                "<input type='hidden' class='com_id' value='39'><hr>"+
+                                "<input type='hidden' class='parent_com_id' value='"+com_id+"'>"+ /*Parent com id needs to be set*/
+                                "<input type='hidden' class='com_id'><hr>"+ /*Com id needs to be set*/
                                 "<p></p><hr>"+
                                 "<div class='row com_links text-center'>"+ //10
                                     "<div class='columns large-4 medium-4 small-4'>"+ //11
@@ -296,18 +298,17 @@ $(document).ready(function(){
         var commentText = $newComment.val();
         /*Append comment to page*/
         $post.find('.username').find('b').text(username);
-        var $text = '';
         
-        /*AJAX for posting comment to page*/
+        //AJAX for posting comment to page
         $.post('post_comment.php', {username: username, commentText: commentText, 
                                     user_id: userId, dis_id: disId, com_id: com_id, 
                                     parent_com_id: parent_com_id }, 
             function(result){
-                $text = result;
-                $post.find('.innerdiv').find('p').text($text);
-            }
-        );
-        /*********************************/
+                result = JSON.parse(result);
+                $post.find('.innerdiv').find('p').text(result.commentText);
+                $post.find('.com_id').val(result.com_id);
+            });
+
             $(this).parent().parent().parent().parent().parent().after($post);
             $('.comment_reply').css("display","none");
             $('.comment_reply').css("visibility","hidden");

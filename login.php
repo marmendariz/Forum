@@ -39,7 +39,6 @@ if(isset($_POST['username']) && isset($_POST['password'])){
         $stmt->store_result();
         $stmt->bind_result($salt);
         $stmt->fetch();
-        //$salt = stripslashes($salt);
         $hashed=crypt($pwd,'$6$'.$salt);
 
         $query = 'select user_id from user where user_name=? and hashed_pwd=?';
@@ -52,7 +51,16 @@ if(isset($_POST['username']) && isset($_POST['password'])){
             $stmt->bind_result($user_id);
             $stmt->fetch();
             $_SESSION['valid_user'] = $username;
-            $_SESSION['user_id'] = $user_id; 
+            $_SESSION['user_id'] = $user_id;
+
+            /** COOKIE STUFF  **/
+            /*
+            if($_POST['rememberMe']=='yes'){
+                setcookie("active", true, time()+(86400*30));
+                setcookie("valid_user", $username, time()+(86400*30));
+                setcookie("user_id", $username, time()+(86400*30));
+            }
+            */
         }
         else
             $login_failed = true;
@@ -108,6 +116,15 @@ if(isset($_SESSION['valid_user'])){
       </div>         
     </div>
         
+    <div class='row'>
+      <div class='large-8 columns large-centered medium-8 medium-centered'>
+        <input type="checkbox" checked id = 'rememberMe' name='rememberMe'/>
+        <label for='password'><b>Stay signed in</b></label>
+      </div>         
+    </div>
+        
+
+
     <div class='row'>
       <div class='columns large-6 large-centered medium-6 medium-centered small-12 small-centered'>
       <input type='submit' class='button expand' value='Submit'>    
