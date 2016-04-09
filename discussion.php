@@ -1,6 +1,6 @@
 <?
 /*
-    disussion.php
+    discussion.php
  */
 include_once 'lib.php';
 set_path();
@@ -13,11 +13,11 @@ if(!($db = db_connect())){
 }
 
 if (null == ($parent_dis = filter_input(INPUT_GET, 
-                                        dis_id, 
-                                        FILTER_VALIDATE_INT,FILTER_NULL_ON_FAILURE) ) || $_GET['dis_id'] == '0') {
-    echo 'Error. Invalid Discussion ID<br>';
-    exit;
-}
+    dis_id, 
+    FILTER_VALIDATE_INT,FILTER_NULL_ON_FAILURE) ) || $_GET['dis_id'] == '0') {
+        echo 'Error. Invalid Discussion ID<br>';
+        exit;
+    }
 
 $logged_in = false;
 if(isset($_SESSION['valid_user']))
@@ -26,7 +26,9 @@ $parent_dis = intval(input_clean($_GET['dis_id']));
 $dis_id = $parent_dis;
 
 /********** Discussion Query ****************/
-$dis_query = 'select dis_name, dis_text from discussion where dis_id = ?';
+$dis_query = 'select dis_name, dis_text 
+              from discussion 
+              where dis_id = ?';
 $dis_stmt = $db->prepare($dis_query);
 $dis_stmt->bind_param('i',$parent_dis);
 $dis_stmt->execute();
@@ -86,12 +88,13 @@ echo "<div class='discussion_reply'>
      <textarea rows='5' id='dis_reply_area'></textarea>
      </p></div></div>
      <div class='row'>
-     <div class='large-6 columns'>
+     <div class='large-6 medium-6 small-12 columns'>
      <input type='button' class='button expand dis_comment_submit' value='Submit'>
      </div>
-     <div class='large-6 columns'>
+     <div class='large-6 medium-6 small-12 columns'>
      <input type='button' class='button expand alert dis_comment_cancel' value='Cancel'>
      </div></div><hr></div>";
+/*********************************************************/
 
 if($logged_in){
     $id = $_SESSION['user_id'];
@@ -210,19 +213,23 @@ $(document).ready(function(){
         $('.comment_reply').css("display","none");
         $('.comment_reply').css("visibility","hidden");
         
-       var replyArea = "<div class='comment_reply'>"+
+        $('.discussion_reply').css('visibility', 'hidden');
+        $('.discussion_reply').css('display', 'none');
+        $('.discussion_reply').val('');
+        
+        var replyArea = "<div class='comment_reply'>"+
                          "<div class='row'><div class='large-12 columns'>"+
                          "<hr><p>Enter your reply:<textarea rows='5'></textarea>"+
                          "</p></div></div>"+
                          "<div class='row'>"+
-                         "<div class='large-6 columns'>"+
+                         "<div class='large-6 small-12 medium-6 columns'>"+
                          "<input type='button' class='button expand comment_submit' value='Submit'>"+
                          "</div>"+
-                         "<div class='large-6 columns'>"+
+                         "<div class='large-6 medium-6 small-12 columns'>"+
                          "<input type='button' class='button expand alert comment_cancel' value='Cancel'>"+
                          "</div></div><hr></div>";
-        var $reply = $(replyArea);
 
+        var $reply = $(replyArea);
         var $temp  = $(this).parent().parent().parent().parent().parent();
         $temp.after($reply);
         $reply.css("display","inline");
@@ -310,9 +317,7 @@ $(document).ready(function(){
             });
 
             $(this).parent().parent().parent().parent().parent().after($post);
-            $('.comment_reply').css("display","none");
-            $('.comment_reply').css("visibility","hidden");
-            $newComment.val('');
+            $('.comment_reply').remove();
             parent_com_id = 0;
             com_id = 0;
     });
@@ -322,6 +327,11 @@ $(document).ready(function(){
     $('body').on('click','.comment_cancel', function(e){
         $('.comment_reply').css("display","none");
         $('.comment_reply').css("visibility","hidden");
+        
+        $('.discussion_reply').css('visibility', 'hidden');
+        $('.discussion_reply').css('display', 'none');
+        $('.discussion_reply').val('');
+        
         $newComment.val('');
         this.remove();
         parent_com_id = 0;
@@ -334,6 +344,7 @@ $(document).ready(function(){
         $('.discussion_reply').css('visibility', 'visible');
         $('.discussion_reply').css('display', 'inline');
         $('#dis_reply_area').focus();
+        $('.comment_reply').remove();
     });
     /*********************************************************/
 
@@ -341,25 +352,52 @@ $(document).ready(function(){
     $('body').on('click','.dis_comment_submit', function(e){
         $('.discussion_reply').css('visibility', 'hidden');
         $('.discussion_reply').css('display', 'none');
+
         
         var $newComment = $('#dis_reply_area');
         var username = $('#username').val();
 
-        var commentPost = "<div class='row'>"+
-                          "<div class='panel large-10 columns innerdiv'>"+
-                          "<h6 class='username'></h6><hr>"+
-                          "<p></p><hr>"+
-                          "<div class='row com_links'>"+
-                          "<div class='columns large-4 medium-4 small-4'>"+
-                          "<h6><a href='#' class='comment_reply_link text-center'>Reply</a></h6>"+
-                          "</div>"+
-                          "<div class='columns large-4 medium-4 small-4'>"+
-                          "<h6><a href='#' class='comment_edit_link text-center'>Edit</a></h6>"+
-                          "</div>"+
-                          "<div class='columns large-4 medium-4 small-4'>"+
-                          "<h6><a href='#' class='comment_delete_link text-center'>Delete</a></h6>"+
-                          "</div>"+
-                          "</div></div>";
+        
+        var commentPost = "<div class='row comment'>"+ //1
+                            "<div class='panel large-10 columns innerdiv small-centered right'>"+ //2
+                            "<div class='row'>"+ //3
+                            "<div class='columns large-2 medium-2 small-3 text-center small-centered large-uncentered'>"+ //4
+                                "<div class='row'>"+ //5
+                                    "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncenterd'>"+ //6
+                                        "<h6 class='username'><b></b></h6>"+
+                                    "</div>"+ //6
+                                    "</div>"+ //5
+                                "<div class='row'>"+ //7
+                                "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncenterd'>"+ //8
+                                    "<img class='user_comment_info' src='img/bleh.gif'>"+
+                                "</div>"+ //8
+                                "</div>"+ //7
+                                "</div>"+ //4
+                                "<div class='columns large-9 medium-8 small-9'>"+ //9
+                                "<input type='hidden' class='com_level' value='2'>"+
+                                "<input type='hidden' class='parent_com_id' value='"+com_id+"'>"+ /*Parent com id needs to be set*/
+                                "<input type='hidden' class='com_id'><hr>"+ /*Com id needs to be set*/
+                                "<p></p><hr>"+
+                                "<div class='row com_links text-center'>"+ //10
+                                    "<div class='columns large-4 medium-4 small-4'>"+ //11
+                                        "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>"+
+                                    "</div>"+ //11
+                                    "<div class='columns large-4 medium-4 small-4'>"+ //12
+                                        "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>"+
+                                    "</div>"+ //12
+                                    "<div class='columns large-4 medium-4 small-4'>"+ //13
+                                        "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>"+
+                                    "</div>"+//13
+                                    "</div>"+//10
+                                    "</div>"+//9
+                                    "<div class='large-1 medium-2 small-3 columns'>"+ //14
+                                        "<h6><a>UP</a></h6>"+
+                                        "<h6><a>DOWN</a></h6>"+
+                                    "</div>"+ //14
+                                    "</div>"+//3
+                                "</div>"+//2
+                            "</div>"; //1
+
         var $post = $(commentPost); 
         var commentText = $newComment.val();
         
