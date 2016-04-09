@@ -71,7 +71,10 @@ echo "<div class='row'>";
 /*************************************************************************************/
 
 /********************************* PRINT OUT COMMENTS ********************************/
-$comment_query = 'select * from dis_cont_com AS d, com AS c WHERE d.dis_id=? AND d.com_id=c.com_id';
+$comment_query = 'select * 
+                  from dis_cont_com AS d, 
+                  com AS c WHERE d.dis_id=? 
+                  AND d.com_id=c.com_id';
 $stmt = $db->prepare($comment_query);
 $stmt->bind_param('i', $parent_dis);
 $stmt->execute();
@@ -79,7 +82,8 @@ $stmt->store_result();
 $stmt->bind_result($dis_id, $com_id1, $com_id2,$com_name, $com_level, $com_text, $com_flag, $parent_com_id, $upvote_count, $downvote_count);
 
 echo "<div id='commentArea'>";
-echo "<h4>Comments<h4><hr id='commentHeading'>";
+    echo "<h4>Comments<h4>";
+    echo "<hr id='commentHeading'>";
 
 /* AREA FOR REPLYING DIRECTLY TO DISCUSSION TOP-SECTION */
 echo "<div class='discussion_reply'>
@@ -104,14 +108,17 @@ if($logged_in){
 
 /***************************************** PRINT COMMENTS LOOP *********************************/
 while($stmt->fetch()){
-   $usernameQuery = "select user_name from user natural join user_edit_com natural join com where com_id = $com_id1";
-   $ustmt = $db->prepare($usernameQuery);
-   $ustmt->execute();
-   $ustmt->store_result();
-   $ustmt->bind_result($username);
-   $ustmt->fetch();
-
-   $level2 = false;
+    $usernameQuery = "select user_name 
+                    from user 
+                    natural join user_edit_com 
+                    natural join com 
+                    where com_id = $com_id1";
+    $ustmt = $db->prepare($usernameQuery);
+    $ustmt->execute();
+    $ustmt->store_result();
+    $ustmt->bind_result($username);
+    $ustmt->fetch();
+    $level2 = false;
 
    echo "<div class='row comment'>"; /*********************/
    if($com_level == 2){
@@ -176,9 +183,7 @@ while($stmt->fetch()){
     echo "</div>";
     echo "</div>";
     /*******************************************************/
-
     echo "</div>";
-    //echo "</div>";
 }
 /*********** END COMMENT PRINT LOOP  *********************/
 echo "</div>";
@@ -260,12 +265,12 @@ $(document).ready(function(){
                             "<div class='row'>"+ //3
                             "<div class='columns large-2 medium-2 small-3 text-center small-centered large-uncentered'>"+ //4
                                 "<div class='row'>"+ //5
-                                    "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncenterd'>"+ //6
+                                    "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncentered'>"+ //6
                                         "<h6 class='username'><b></b></h6>"+
                                     "</div>"+ //6
                                     "</div>"+ //5
                                 "<div class='row'>"+ //7
-                                "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncenterd'>"+ //8
+                                "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncentered show-for-medium-up'>"+ //8
                                     "<img class='user_comment_info' src='img/bleh.gif'>"+
                                 "</div>"+ //8
                                 "</div>"+ //7
@@ -359,16 +364,16 @@ $(document).ready(function(){
 
         
         var commentPost = "<div class='row comment'>"+ //1
-                            "<div class='panel large-10 columns innerdiv small-centered right'>"+ //2
+                            "<div class='panel large-10 medium-12 small-12 columns innerdiv small-centered'>"+ //2
                             "<div class='row'>"+ //3
-                            "<div class='columns large-2 medium-2 small-3 text-center small-centered large-uncentered'>"+ //4
+                            "<div class='columns large-2 medium-2 small-3 text-center small-centered large-uncentered medium-uncentered'>"+ //4
                                 "<div class='row'>"+ //5
-                                    "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncenterd'>"+ //6
+                                    "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncentered'>"+ //6
                                         "<h6 class='username'><b></b></h6>"+
                                     "</div>"+ //6
                                     "</div>"+ //5
                                 "<div class='row'>"+ //7
-                                "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncenterd'>"+ //8
+                                "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncentered show-for-medium-up'>"+ //8
                                     "<img class='user_comment_info' src='img/bleh.gif'>"+
                                 "</div>"+ //8
                                 "</div>"+ //7
@@ -402,7 +407,7 @@ $(document).ready(function(){
         var commentText = $newComment.val();
         
         /*Append comment to page*/
-        $post.find('.username').text(username);
+        $post.find('.username').find('b').text(username);
         $post.find('.innerdiv').find('p').text($newComment.val());
         $(this).parent().parent().parent().after($post);
         $('#dis_reply_area').val('');
