@@ -24,6 +24,8 @@
     include_once 'header.php';
     $login_failed = false;
 
+
+
 ?>
 
 <div class="row">
@@ -45,24 +47,76 @@
 </div>
 
 <?php
-    $user_type = 0;
 
     if(isset($_SESSION['valid_user'])){
     
+        $user_type = 0;
+
         if(!($db = db_connect())){
             echo "Database error<br>";
             exit;
         } 
         
+        
         $username = input_clean($_SESSION['valid_user']);
-        $query = 'select user_type from user where user_name=?';
+        $query = 'select user_id, user_type from user where user_name=?';
         $stmt = $db->prepare($query);
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($user_type);
+        $stmt->bind_result($userid, $user_type);
         $stmt->fetch();
-        $stmt->close();   
+        $stmt->close();
+        
+        if(isset($_POST['submit'])){
+            $anamestat = true;
+            $atextstat = true;
+            $aradstat = true;
+
+            if(!isset($_POST['aname']) || empty($_POST['aname']))
+                $anamestat = false;
+            else{
+                $aname = input_clean($_POST['aname']);
+            }
+            
+            if(!isset($_POST['atext']) || empty($_POST['atext']))
+                $atextstat = false;
+            else{
+                $atext = input_clean($_POST['atext']);
+            }
+
+            if($anamestat && $atextstat && $aradstat){
+                
+                if(!($db = db_connect())){
+                    echo "Database error<br>";
+                    exit;
+                }
+
+                $arad = input_clean($_POST['arad']);
+
+                mysqli_real_escape_string($db, $aname);
+                mysqli_real_escape_string($db, $atext);
+                mysqli_real_escape_string($db, $arad);
+                
+                $query = 'insert into announcement (ann_name, ann_text, viewer) values (?, ?, ?)';
+                $stmt = $db->prepare($query);
+                $stmt->bind_param('ssi', $aname, $atext, $arad);
+                $stmt->execute();
+                $stmt->close();
+
+                $ann_id = mysqli_insert_id($db);
+                $user_an_Insert = "insert into admin_create_ann (user_id, ann_id, ann_date) values (?, ?, '".date('Y-m-d H:i:s')."')";
+                $stmt = $db->prepare($user_an_Insert);
+                $stmt->bind_param('ii', $userid, $ann_id);
+                $stmt->execute();
+                $stmt->close();
+                $db->close();  
+
+
+            } 
+        }
+
+    
     }
 
     if($user_type == 2){
@@ -74,16 +128,16 @@
 
         <form method='post' action='index.php'>
         <div class='large-6  medium-6 small-10 columns small-centered'>
-            <input type='text' id='aname' name='aname' required maxlength='20' value="<?echo 'Announcment Title'?>"/>
+            <input type='text' id='aname' name='aname' required maxlength='20' value="<?echo 'Announcement Title'?>"/>
         </div>
         <div class='large-6  medium-6 small-10 columns small-centered'>
             <textarea maxlength='1000' style='height: 200px' name='atext' id='atext'><? echo 'Announcement Text'?></textarea>
         </div>
         <div class='large-6  medium-6 small-10 columns small-centered'>
             <h5 style='color: #008cbb'>Who can see it?</h5> <hr> 
-        <h6><input type='radio' name='utype' value='0' checked/> Everyone</h6> <hr> 
-        <h6><input type='radio' name='utype' value='1' /> Administrators and Moderators</h6> <hr> 
-        <h6><input type='radio' name='utype' value='2' /> Administrators Only </h6> <hr>
+        <h6><input type='radio' name='arad' id='arad' value='0' checked/> Everyone</h6> <hr> 
+        <h6><input type='radio' name='arad' id='arad' value='1' /> Administrators and Moderators</h6> <hr> 
+        <h6><input type='radio' name='arad' id='arad' value='2' /> Administrators Only </h6> <hr>
         </div>
         <div class='large-6  medium-6 small-10 columns small-centered'>
            <input type='submit' id='submit' name='submit' class='button' value='Submit'/>  
@@ -106,21 +160,23 @@
         exit;
     }
 
-    $query = 'select ann_id, ann_name, ann_text from announcement ORDER BY ann_id desc';
+    $query = 'select ann_id, ann_name, ann_text, viewer from announcement ORDER BY ann_id desc';
     $stmt = $db->prepare($query);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($ann_id, $ann_name, $ann_text);
+    $stmt->bind_result($ann_id, $ann_name, $ann_text, $viewer);
     
     echo "<h3 style='color: #008cbb' >Announcements: </h3>";
         
     for ($i = 0; $i < 5; $i++) {
         if($stmt->fetch()) { 
-        echo " <div class='text-left'> ";
-        echo "<hr>";
-        echo " <h4> $ann_name </h4>";
-        echo " <h5> &nbsp &nbsp &nbsp &nbsp $ann_text </h5> ";
-        echo "</div> ";
+            if($user_type >= $viewer){
+                echo " <div class='text-left'> ";
+                echo "<hr>";
+                echo " <h4> $ann_name </h4>";
+                echo " <h5> &nbsp &nbsp &nbsp &nbsp $ann_text </h5> ";
+                echo "</div> ";
+            }
         }
     }
 
