@@ -167,8 +167,9 @@
     $stmt->bind_result($ann_id, $ann_name, $ann_text, $viewer);
     
     echo "<h3 style='color: #008cbb' >Announcements: </h3>";
-        
-    for ($i = 0; $i < 5; $i++) {
+    $i = 0;    
+    
+    while($i < 5) {
         if($stmt->fetch()) { 
             if($user_type >= $viewer){
                 echo " <div class='text-left'> ";
@@ -176,6 +177,7 @@
                 echo " <h4> $ann_name </h4>";
                 echo " <h5> &nbsp &nbsp &nbsp &nbsp $ann_text </h5> ";
                 echo "</div> ";
+                $i++;
             }
         }
     }
