@@ -261,16 +261,16 @@ $(document).ready(function(){
         var disId = $('#dis_id').val();
         
         var commentPost = "<div class='row comment'>"+ //1
-                            "<div class='panel large-10 columns innerdiv small-centered right'>"+ //2
+                            "<div class='panel large-10 medium-10 small-10 columns innerdiv small-centered right'>"+ //2
                             "<div class='row'>"+ //3
-                            "<div class='columns large-2 medium-2 small-3 text-center small-centered large-uncentered'>"+ //4
+                            "<div class='columns large-2 medium-2 small-3 text-center small-centered large-uncentered medium-uncentered'>"+ //4
                                 "<div class='row'>"+ //5
-                                    "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncentered'>"+ //6
+                                    "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncentered medium-uncentered'>"+ //6
                                         "<h6 class='username'><b></b></h6>"+
                                     "</div>"+ //6
                                     "</div>"+ //5
                                 "<div class='row'>"+ //7
-                                "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncentered show-for-medium-up'>"+ //8
+                                "<div class='large-12 medium-12 small-12 text-center columns show-for-medium-up'>"+ //8
                                     "<img class='user_comment_info' src='img/bleh.gif'>"+
                                 "</div>"+ //8
                                 "</div>"+ //7
