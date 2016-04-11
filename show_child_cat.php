@@ -20,6 +20,9 @@ session_start();
 
 <?php
 include_once 'header.php'; 
+$discussion_flag = false;
+
+
 ?>
 <!---------------------- SHOW PARENT CATEGORIES------------------------------>
 <div class='row'>
@@ -37,6 +40,10 @@ if(null == ($parent_cat = filter_input(INPUT_GET, cat_id, FILTER_VALIDATE_INT, F
     exit;
 }
 
+$parent_cat_backup = $parent_cat;
+
+/********** Query **********/
+
 $parent_cat = input_clean($_GET['cat_id']);
 $query = 'select * from category where parent_cat_id=?';
 $stmt = $db->prepare($query);
@@ -53,6 +60,7 @@ if($rows){
     }
 }
 else{
+    $discussion_flag = true;
     $parent_cat = input_clean($_GET['cat_id']);
     $query2 = 'select * from cat_cont_dis AS c, discussion AS d where c.cat_id = ? AND c.dis_id = d.dis_id';
     $stmt = $db->prepare($query2);
@@ -75,11 +83,31 @@ else{
     }
 }
 
-$stmt->close();
+$stmt->close(); 
+
+/********** Query info about discussion level ********/
+
+/*
+//    $dis_parent = input_clean($_GET['cat_id']);
+    $dis_info_query = 'select * from category where cat_id=?';
+    $stmt = $db->prepare($dis_info_query);
+    $stmt->bind_param('i',$parent_cat);
+    $stmt->store_result();
+    $stmt->bind_result($dis_parent_id, $dis_parent_name, $dis_parent_level, $dis_parent_text, $dis_parent_parent_cat_id);
+    $stmt->fetch();
+    $stmt->close();
+ */
+
 $db->close();
 
+if (!($discussion_flag)) {
 
+    echo "<a href='create_new.php?cat_level=$cat_level&parent_cat_id=$parent_cat_id'class='small round button'>Create New Category</a><br/>";
+} 
+if ($discussion_flag) 
+    echo"<a href='create_new_discussion.php?cat_id=$parent_cat_backup'class='small round button'>Create New Discussion</a><br/>";
 ?>
+
   <!-------------------------------------------->
   </div>
 </div>
