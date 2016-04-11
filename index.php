@@ -123,9 +123,10 @@
 ?>
 <div class = "row">
      <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
-
         <h3 style='color: #008cbb'>Add Announcement</h3> 
+        <input type='button' id='addAnc' value='Expand' class='button'>
 
+        <div id='addAncSection'>
         <form method='post' action='index.php'>
         <div class='large-6  medium-6 small-10 columns small-centered'>
             <input type='text' id='aname' name='aname' required maxlength='20' value="<?echo 'Announcement Title'?>"/>
@@ -143,6 +144,7 @@
            <input type='submit' id='submit' name='submit' class='button' value='Submit'/>  
         </div>
     </form>
+</div>
 </div>
 </div>
 
@@ -196,7 +198,26 @@
     <script type="text/javascript" src="slick/slick.min.js"></script>
     <script type="text/javascript">
         $(document).foundation();
+        
+        var addAncHide = true;
         $(document).ready(function(){
+
+            $('#addAncSection').hide();
+
+            $('#addAnc').on('click', function(){
+                var button = $('#addAnc');
+                if(addAncHide){
+                    $('#addAncSection').show();
+                    addAncHide = false;
+                    button.val('Collapse');
+                }
+                else{
+                    $('#addAncSection').hide();
+                    addAncHide = true;
+                    button.val('Expand');
+                }
+            });
+
 
             var width = $(window).width();
             var height = $(window).height();
