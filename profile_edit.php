@@ -162,6 +162,25 @@ if(!($db = db_connect())){
             </div>
     </div>
     </div>
+
+<!---------------------------PROFILE PICTURE------------------------------>
+    <div class='row'>
+    <div class='columns panel text-left large-8 medium-8 small-10 small-centered '>
+        <h3 style='color: #008cbb'> Profile Picture: </h3><br>
+        <div class='row'>
+        <div class='large-12 medium-12 small-12 columns text-center'>
+            <img src='img/bleh.gif'>
+        </div>
+        </div>
+        <div class='row'>
+        <div class='large-12 medium-12 small-12 columns large-centered text-center'>
+            <input type='button' value='Upload New Image'>
+        </div>
+        </div>
+        
+    </div>
+    </div>
+
 <!------------------------------DISPLAY BIO------------------------------>
     <div class='row'>
     <div class='columns panel text-left large-8 medium-8 small-10 small-centered '>
