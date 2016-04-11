@@ -33,6 +33,56 @@ if(isset($_SESSION['valid_user'])){
         $bioStat = true;
         $emStat = true;
 
+
+        if(!isset($_FILES['fileToUpload']) || $_FILES['fileToUpload']['error']==UPLOAD_ERR_NO_FILE){
+        echo "<br><br><br>Error<br>";
+        }
+        else{
+
+            echo "<br><br><br>IMAGE RECIEVED<br>";
+        
+        $dir="uploads/";
+        $uploadOk=1;
+        $imageFileType=pathinfo($file,PATHINFO_EXTENSION);
+
+       // if(isset($_POST["submit"])){
+            $check = getimagesize($_FILES["fileToUpload"]['tmp_name']);
+            
+            if($check!==false){
+                $filename = strtolower($_FILES["fileToUpload"]['name']);
+                $whitelist = array('jpg','png','gif','jpeg');
+                $blacklist = array('php','php3','php4','phtml','exe');
+                
+                if(!in_array(end(explode('.', $filename)), $whitelist))
+                {
+                    echo 'Invalid file type';
+                    exit(0);
+                }
+                if(in_array(end(explode('.', $filename)), $blacklist))
+                {
+                    echo 'Invalid file type';
+                    exit(0);
+                }
+
+                $uploadOk = 1;
+
+                echo "<br><br><br>BLAH<br>";
+            }else{
+                $uploadOk=0;
+            }
+            if($uploadOk==0){
+               //$sorry="sorry";
+               //echo "<script type='text/javascript'>alert('$sorry');</script>"; 
+            }
+            else{
+                move_uploaded_file($_FILES["fileToUpload"]['tmp_name'],$dir.$filename);
+               // header("Location: index.php");
+               //$worked="worked";
+               //echo "<script type='text/javascript'>alert('$worked');</script>"; 
+           // }
+        }
+        }
+
         /*************************** FIRST NAME ******************************/
         if(!isset($_POST['firstname']) || empty($_POST['firstname']))
             $fnStat = false;
@@ -145,7 +195,7 @@ if(!($db = db_connect())){
         </div>
     </div>
 
-    <form method='post' action='profile_edit.php'>
+    <form method='post' action='profile_edit.php' enctype='multipart/form-data'>
 <!------------------------------DISPLAY NAME-------------------------->
     <div class ='row'>
     <div class='columns panel text-left large-8 medium-8 small-10 small-centered '>
@@ -173,8 +223,10 @@ if(!($db = db_connect())){
         </div>
         </div>
         <div class='row'>
-        <div class='large-12 medium-12 small-12 columns large-centered text-center'>
-            <input type='button' value='Upload New Image'>
+        <div class='large-12 medium-12 small-12 columns text-center'>
+          <!-- <input type='button' value='Upload New Image'>-->
+          <input type="file" name="fileToUpload" id="fileToUpload">
+         <!-- <input type="submit" value="Upload Image" name="submit">-->
         </div>
         </div>
         
