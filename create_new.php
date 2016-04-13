@@ -138,7 +138,7 @@ if(isset($_SESSION['valid_user'])){
             
             /************** Insert in Database -- Category **************/
             
-            $insert_pid = input_clean($_POST['parent_cat_id']);
+            $insert_pid = input_clean($_POST['parent_cat_id_post']);
 //            $insert_pid = mysqli_real_escape_string(trim($insert_pid));
          
             $query = 'Insert into category (cat_name,cat_level,cat_text,parent_cat_id) values (?,?,?,?)';
@@ -189,7 +189,7 @@ if(isset($_SESSION['valid_user'])){
 
     //echo "<input type='hidden' id='parent_cat_id_post' name='parent_cat_id_post' value ='$parent_cat_id_backup' />";  
     echo "<input type='hidden' id='cat_level' name='cat_level' value ='$pcat_level' />";  
-    echo "<input type='hidden' id='parent_cat_id' name='parent_cat_id' value ='$parent_cat_id' />";  
+    echo "<input type='hidden' id='parent_cat_id' name='parent_cat_id_post' value ='$parent_cat_id_backup' />";  
 ?>
 <!------------------------------display new category name text box -------------------------->
     <div class ='row'>
