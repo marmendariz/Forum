@@ -57,3 +57,7 @@
 [16-Apr-2016 19:48:16 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/lib.php on line 65
 [16-Apr-2016 19:48:18 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/lib.php on line 65
 [16-Apr-2016 20:57:29 America/Los_Angeles] PHP Fatal error:  Call to undefined function hash_equals() in /home/stu/quadcore/public_html/Forum/lib.php on line 79
+[17-Apr-2016 10:53:11 America/Los_Angeles] PHP Fatal error:  Call to a member function close() on a non-object in /home/stu/quadcore/public_html/sarahbeth/Forum/discussion.php on line 195
+[17-Apr-2016 13:17:45 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '$parent_cat_id_backup' (T_VARIABLE), expecting ',' or ';' in /home/stu/quadcore/public_html/sarahbeth/Forum/create_new_discussion.php on line 41
+[17-Apr-2016 13:41:19 America/Los_Angeles] PHP Fatal error:  Call to a member function close() on a non-object in /home/stu/quadcore/public_html/sarahbeth/Forum/discussion.php on line 195
+[17-Apr-2016 13:42:38 America/Los_Angeles] PHP Fatal error:  Call to a member function close() on a non-object in /home/stu/quadcore/public_html/sarahbeth/Forum/discussion.php on line 195

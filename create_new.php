@@ -209,9 +209,9 @@ if(isset($_SESSION['valid_user'])){
 
     /********** Get information about the existing categories ***********/
 
-    $query = 'select * from category where cat_level=? AND parent_cat_id=?';
+    $query = 'select * from category where parent_cat_id=?';
     $stmt = $db->prepare($query);
-    $stmt->bind_param('ii',$cat_level_backup, $parent_cat_id_backup);
+    $stmt->bind_param('i',$parent_cat_backup);
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($cat_id2, $cat_name2, $cat_level2, $cat_text2, $parent_cat_id2);    
