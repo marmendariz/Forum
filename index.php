@@ -3,6 +3,7 @@
     set_path();
     force_ssl();
     session_start();
+    auto_login();
 ?>
 
 <!doctype html>

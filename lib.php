@@ -55,9 +55,53 @@ function gen_token($length = 20){
 
 /************** CHECK COOKIES FOR AUTOMATIC LOGIN ***************/
 function auto_login(){
-
+    if(!isset($_SESSION['valid_user']) && isset($_COOKIE['active'])
+        && $_COOKIE['active']==1){
+            $token = input_clean($_COOKIE['token']);
+            $selector = input_clean($_COOKIE['selector']);
+            if(!($db = db_connect())){
+                echo "<br><br><br>Database Error";
+                exit;
+            }
+            else{
+                $selector = mysqli_real_escape_string($db, $selector);
+                $hToken = crypt($token, "$5$");
+                $query = "select user_id, user_name,token from user
+                    where selector=?";
+                $stmt=$db->prepare($query);
+                $stmt->bind_param('s',$selector);
+                $stmt->execute();
+                $stmt->store_result();
+                if($stmt->num_rows>0){
+                    $stmt->bind_result($user_id, $user_name, $token);
+                    $stmt->fetch();
+                    if(hash_equals($hToken, $token)){
+                        $_SESSION['valid_user'] = $user_name;
+                        $_SESSION['user_id'] = $user_name;
+                    }
+                    else{
+                        setcookie('active', null, time()-3600);
+                        setcookie('token', null, time()-3600);
+                        setcookie('selector', null, time()-3600);
+                    }
+                }
+            }
+    }
 }
 /****************************************************************/
 
+if(!function_exists('hash_equals')){
+    function hash_equals($str1, $str2){
+        if(strlen($str1) != strlen($str2))
+            return false;
+        else{
+            $res = $str1 ^ $str2;
+            $ret = 0;
+            for($i=strlen($res)-1; $i>=0; $i--)
+                $ret |= ord($res[$i]);
+            return !$ret;
+        }
+    }
+}
 
 ?>

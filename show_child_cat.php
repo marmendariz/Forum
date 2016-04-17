@@ -3,6 +3,7 @@ include_once 'lib.php';
 set_path();
 force_ssl();
 session_start();
+auto_login();
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
