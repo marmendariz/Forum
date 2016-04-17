@@ -46,4 +46,17 @@ if(empty($_SERVER["HTTPS"]) ||  $_SERVER["HTTPS"] != "on"){
 }
 }
 /****************************************************************/
+
+/************ GENERATE RANDOM STRING FOR COOKIE TOKEN ***********/
+function gen_token($length = 20){
+    return bin2hex(openssl_random_pseudo_bytes($length));
+}
+/****************************************************************/
+
+/************** CHECK COOKIES FOR AUTOMATIC LOGIN ***************/
+function auto_login(){
+}
+/****************************************************************/
+
+
 ?>

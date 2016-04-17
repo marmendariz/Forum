@@ -33,3 +33,21 @@
 [06-Apr-2016 12:06:24 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
 [06-Apr-2016 12:12:46 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
 [06-Apr-2016 12:16:41 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/mark/Forum/post_comment.php on line 22
+[16-Apr-2016 16:42:36 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 19
+[16-Apr-2016 16:42:36 America/Los_Angeles] PHP Fatal error:  Call to undefined function random_bytes() in /home/stu/quadcore/public_html/Forum/lib.php on line 52
+[16-Apr-2016 16:43:02 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 18
+[16-Apr-2016 16:43:02 America/Los_Angeles] PHP Fatal error:  Call to undefined function random_bytes() in /home/stu/quadcore/public_html/Forum/lib.php on line 52
+[16-Apr-2016 16:47:48 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 18
+[16-Apr-2016 16:49:03 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 18
+[16-Apr-2016 16:49:04 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 18
+[16-Apr-2016 16:51:16 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 18
+[16-Apr-2016 16:54:21 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 18
+[16-Apr-2016 16:56:33 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 18
+[16-Apr-2016 16:56:33 America/Los_Angeles] PHP Fatal error:  Call to a member function execute() on a non-object in /home/stu/quadcore/public_html/Forum/temp.php on line 30
+[16-Apr-2016 16:58:13 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 18
+[16-Apr-2016 16:58:13 America/Los_Angeles] PHP Fatal error:  Call to a member function execute() on a non-object in /home/stu/quadcore/public_html/Forum/temp.php on line 31
+[16-Apr-2016 17:05:19 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 18
+[16-Apr-2016 17:05:19 America/Los_Angeles] PHP Fatal error:  Call to a member function execute() on a non-object in /home/stu/quadcore/public_html/Forum/temp.php on line 31
+[16-Apr-2016 17:06:43 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 18
+[16-Apr-2016 17:25:19 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of elements in type definition string doesn't match number of bind variables in /home/stu/quadcore/public_html/Forum/create_acct.php on line 137
+[16-Apr-2016 17:32:18 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/Forum/create_acct.php on line 136
