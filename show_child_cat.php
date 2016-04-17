@@ -21,7 +21,7 @@ session_start();
 <?php
 include_once 'header.php'; 
 $discussion_flag = false;
-
+$category_verified = false;
 
 ?>
 <!---------------------- SHOW PARENT CATEGORIES------------------------------>
@@ -36,11 +36,27 @@ if(!($db = db_connect())){
 
 
 if(null == ($parent_cat = filter_input(INPUT_GET, cat_id, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) ) || $_GET['cat_id']=='1'){
-    echo 'Error. Invalid category ID<br>';
+    echo '<br><br><h4>Error. Invalid category ID</h4>';
     exit;
 }
 
 $parent_cat_backup = $parent_cat;
+
+$query = 'select * from category where cat_id=?';
+$stmt = $db->prepare($query);
+$stmt->bind_param('i', $parent_cat);
+$stmt->execute();
+$stmt->store_result();
+$rows = $stmt->num_rows();
+$stmt->bind_result($cat_id_verified, $cat_name_verified, $cat_level_verified, $cat_text_verified, $parent_cat_id_verified);
+if ($rows) {
+    $stmt->fetch();
+    $category_verified = true;
+} else {
+    echo "<br><<br>h4>Error! Category Does Not Exist!</h4>";
+    exit;
+}
+ 
 
 /********** Query **********/
 
@@ -49,9 +65,12 @@ $query = 'select * from category where parent_cat_id=?';
 $stmt = $db->prepare($query);
 $stmt->bind_param('i',$parent_cat);
 $stmt->execute();
+
 $stmt->store_result();
 $rows = $stmt->num_rows();
 $stmt->bind_result($cat_id, $cat_name, $cat_level, $cat_text, $parent_cat_id);
+
+
 if($rows){
     while($stmt->fetch()){
         echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name</h3>";
