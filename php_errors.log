@@ -52,3 +52,8 @@
 [16-Apr-2016 17:25:19 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of elements in type definition string doesn't match number of bind variables in /home/stu/quadcore/public_html/Forum/create_acct.php on line 137
 [16-Apr-2016 17:32:18 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/Forum/create_acct.php on line 136
 [16-Apr-2016 17:48:50 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '$rememberMe' (T_VARIABLE), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/login.php on line 59
+[16-Apr-2016 18:09:50 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ')' in /home/stu/quadcore/public_html/Forum/logout.php on line 33
+[16-Apr-2016 19:47:29 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '&&' (T_BOOLEAN_AND), expecting ',' or ')' in /home/stu/quadcore/public_html/Forum/lib.php on line 59
+[16-Apr-2016 19:48:16 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/lib.php on line 65
+[16-Apr-2016 19:48:18 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/lib.php on line 65
+[16-Apr-2016 20:57:29 America/Los_Angeles] PHP Fatal error:  Call to undefined function hash_equals() in /home/stu/quadcore/public_html/Forum/lib.php on line 79

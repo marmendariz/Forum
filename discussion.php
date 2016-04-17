@@ -6,6 +6,7 @@ include_once 'lib.php';
 set_path();
 force_ssl();
 session_start();
+auto_login();
 
 if(!($db = db_connect())){
     echo "Database error<br>";

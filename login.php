@@ -3,6 +3,7 @@ include_once 'lib.php';
 set_path();
 force_ssl();
 session_start();
+auto_login();
 ?>
 
 <!doctype html>
@@ -59,8 +60,11 @@ if(isset($_POST['username']) && isset($_POST['password'])){
                 if(input_clean($_POST['rememberMe'])=='yes'){
                     $exp = time()+(86400*30);
                     $token = gen_token();
+                    /**/
                     setcookie("selector", $selector, $exp);
                     setcookie("token", $token, $exp);
+                    setcookie("active", true, $exp);
+                    /**/
                     $hToken = crypt($token,"$5$");
                     $updateToken = "Update user set token='$hToken' where user_id=$user_id";
                     $st = $db->prepare($updateToken);
