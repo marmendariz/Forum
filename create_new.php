@@ -173,7 +173,7 @@ if(isset($_SESSION['valid_user'])){
 <?php
      
     echo " <form method= 'post' action= 'create_new.php?parent_cat_id=$parent_cat_backup'>";
-    
+  $cat_level_backup++;  
     echo "<input type='hidden' id='cat_level' name='cat_level_post' value ='$cat_level_backup' />";  
     echo "<input type='hidden' id='parent_cat_id' name='parent_cat_id_post' value ='$parent_cat_backup' />";  
 ?>
@@ -211,7 +211,7 @@ if(isset($_SESSION['valid_user'])){
 
     $query = 'select * from category where cat_level=? AND parent_cat_id=?';
     $stmt = $db->prepare($query);
-    $stmt->bind_param('ii',$cat_level_backup, $parent_cat_id_verified);
+    $stmt->bind_param('ii',$cat_level_backup, $parent_cat_id_backup);
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($cat_id2, $cat_name2, $cat_level2, $cat_text2, $parent_cat_id2);    

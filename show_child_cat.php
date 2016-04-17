@@ -106,19 +106,6 @@ else{
 
 $stmt->close(); 
 
-/********** Query info about discussion level ********/
-
-/*
-//    $dis_parent = input_clean($_GET['cat_id']);
-    $dis_info_query = 'select * from category where cat_id=?';
-    $stmt = $db->prepare($dis_info_query);
-    $stmt->bind_param('i',$parent_cat);
-    $stmt->store_result();
-    $stmt->bind_result($dis_parent_id, $dis_parent_name, $dis_parent_level, $dis_parent_text, $dis_parent_parent_cat_id);
-    $stmt->fetch();
-    $stmt->close();
- */
-
 $db->close();
 
 if (!($discussion_flag)) {
