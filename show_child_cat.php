@@ -36,11 +36,14 @@ if(!($db = db_connect())){
 
 
 if(null == ($parent_cat = filter_input(INPUT_GET, cat_id, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) ) || $_GET['cat_id']=='1'){
-    echo '<br><br><h4>Error. Invalid category ID</h4>';
+    echo '<br><br><h4>Error! Invalid category ID - Must be Numeric!</h4>';
     exit;
 }
 
+// This is a $_GET variable
 $parent_cat_backup = $parent_cat;
+
+/************ Make sure that the Category Exists ************/
 
 $query = 'select * from category where cat_id=?';
 $stmt = $db->prepare($query);
@@ -53,14 +56,13 @@ if ($rows) {
     $stmt->fetch();
     $category_verified = true;
 } else {
-    echo "<br><<br>h4>Error! Category Does Not Exist!</h4>";
+    echo "<br><br><h4>Error! Category Does Not Exist!</h4>";
     exit;
 }
  
 
 /********** Query **********/
 
-$parent_cat = input_clean($_GET['cat_id']);
 $query = 'select * from category where parent_cat_id=?';
 $stmt = $db->prepare($query);
 $stmt->bind_param('i',$parent_cat);
@@ -80,7 +82,6 @@ if($rows){
 }
 else{
     $discussion_flag = true;
-    $parent_cat = input_clean($_GET['cat_id']);
     $query2 = 'select * from cat_cont_dis AS c, discussion AS d where c.cat_id = ? AND c.dis_id = d.dis_id';
     $stmt = $db->prepare($query2);
     if($stmt){
@@ -120,10 +121,12 @@ $stmt->close();
 $db->close();
 
 if (!($discussion_flag)) {
-
-    echo "<a href='create_new.php?cat_level=$cat_level&parent_cat_id=$parent_cat_id'class='small round button'>Create New Category</a><br/>";
+// These are all variables that have been retrieved from the database 
+    echo "<a href='create_new.php?parent_cat_id=$parent_cat_id'class='small round button'>Create New Category</a><br/>";
 } 
 if ($discussion_flag) 
+    // parent_cat_id was not set because there wasn't a category who had the passed in value as a parent
+    // that's why we have to use the passed in value (stored a backup so if it's tampered with, it still passes original)
     echo"<a href='create_new_discussion.php?cat_id=$parent_cat_backup'class='small round button'>Create New Discussion</a><br/>";
 ?>
 

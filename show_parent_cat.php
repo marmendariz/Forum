@@ -48,7 +48,7 @@ while($stmt->fetch()){
 $stmt->close();
 $db->close();
 
-      echo"<a href='create_new.php?cat_level=$cat_level&parent_cat_id=$parent_cat_id'class='small round button'>Create New Category</a><br/>";
+      echo"<a href='create_new.php?parent_cat_id=1'class='small round button'>Create New Category</a><br/>";
 ?>
   <!-------------------------------------------->
   </div>
