@@ -51,3 +51,4 @@
 [16-Apr-2016 17:06:43 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/Forum/temp.php on line 18
 [16-Apr-2016 17:25:19 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of elements in type definition string doesn't match number of bind variables in /home/stu/quadcore/public_html/Forum/create_acct.php on line 137
 [16-Apr-2016 17:32:18 America/Los_Angeles] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/stu/quadcore/public_html/Forum/create_acct.php on line 136
+[16-Apr-2016 17:48:50 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '$rememberMe' (T_VARIABLE), expecting ',' or ';' in /home/stu/quadcore/public_html/Forum/login.php on line 59

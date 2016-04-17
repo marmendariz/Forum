@@ -55,6 +55,7 @@ function gen_token($length = 20){
 
 /************** CHECK COOKIES FOR AUTOMATIC LOGIN ***************/
 function auto_login(){
+
 }
 /****************************************************************/
 

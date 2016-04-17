@@ -41,26 +41,37 @@ if(isset($_POST['username']) && isset($_POST['password'])){
         $stmt->fetch();
         $hashed=crypt($pwd,'$6$'.$salt);
 
-        $query = 'select user_id from user where user_name=? and hashed_pwd=?';
+        $query = 'select user_id, selector from user where user_name=? and hashed_pwd=?';
         $stmt = $db->prepare($query);
         $stmt->bind_param('ss',$username, $hashed);
         $stmt->execute();
         $stmt->store_result();
         $num_rows = $stmt->num_rows;
         if($num_rows>0){
-            $stmt->bind_result($user_id);
+            $stmt->bind_result($user_id, $selector);
             $stmt->fetch();
             $_SESSION['valid_user'] = $username;
             $_SESSION['user_id'] = $user_id;
 
-            /** COOKIE STUFF  **/
-            /*
-            if($_POST['rememberMe']=='yes'){
-                setcookie("active", true, time()+(86400*30));
-                setcookie("valid_user", $username, time()+(86400*30));
-                setcookie("user_id", $username, time()+(86400*30));
+            /******* COOKIE STUFF *********/
+            if(isset($_POST['rememberMe'])){
+                $rememberMe = input_clean($_POST['rememberMe']);
+                if(input_clean($_POST['rememberMe'])=='yes'){
+                    $exp = time()+(86400*30);
+                    $token = gen_token();
+                    setcookie("selector", $selector, $exp);
+                    setcookie("token", $token, $exp);
+                    $hToken = crypt($token,"$5$");
+                    $updateToken = "Update user set token='$hToken' where user_id=$user_id";
+                    $st = $db->prepare($updateToken);
+                    if(!$st->execute()){
+                        echo "<br><br><br>Error";
+                        exit;
+                    }
+                    $st->close();
+                }
             }
-            */
+            /******************************/
         }
         else
             $login_failed = true;
@@ -118,7 +129,7 @@ if(isset($_SESSION['valid_user'])){
         
     <div class='row'>
       <div class='large-8 columns large-centered medium-8 medium-centered'>
-        <input type="checkbox" checked id = 'rememberMe' name='rememberMe'/>
+        <input type="checkbox" checked id='rememberMe' name='rememberMe' value='yes'/>
         <label for='password'><b>Stay signed in</b></label>
       </div>         
     </div>
