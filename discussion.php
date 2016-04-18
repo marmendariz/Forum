@@ -69,6 +69,8 @@ echo "<div class='row'>";
                         echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
             echo "</div>";
         echo "</div>";
+
+
 /*************************************************************************************/
 
 /********************************* PRINT OUT COMMENTS ********************************/
@@ -179,19 +181,19 @@ while($stmt->fetch()){
         echo "<div class='large-1 medium-2 small-3 columns text-center'>";
         //echo '<br>';
         echo "<div class='row'>";
-            echo "<div class='large-12 medium-12 small-12 columns'>";
+            echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
                 echo "<a><img src='img/up.png'></a>";
             echo "</div>";
         echo "</div>";
 
       echo "<div class='row'>";
-            echo "<div class='large-12 medium-12 small-12 columns'>";
+            echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
                 echo "<h6>0</h6>";
             echo "</div>";
       echo "</div>";
 
         echo "<div class='row'>";
-            echo "<div class='large-12 medium-12 small-12 columns'>";
+            echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
                 echo "<a><img src='img/down.png'></a>";
             echo "</div>";
         echo "</div>";
