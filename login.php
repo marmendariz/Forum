@@ -134,7 +134,7 @@ if(isset($_SESSION['valid_user'])){
     <div class='row'>
       <div class='large-8 columns large-centered medium-8 medium-centered'>
         <input type="checkbox" checked id='rememberMe' name='rememberMe' value='yes'/>
-        <label for='password'><b>Stay signed in</b></label>
+        <label for='password' id='rememberMeLabel'><b>Stay signed in</b></label>
       </div>         
     </div>
         
@@ -178,7 +178,18 @@ if($login_failed){
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
-      $(document).foundation();
+    $(document).foundation();
+
+    $('#rememberMeLabel').on('click', function(){
+        var checkBox = $('#rememberMe');
+        var isChecked = checkBox.is(':checked'); 
+        if(isChecked)
+            checkBox.prop('checked', false);
+        else
+            checkBox.prop('checked', true);
+    });
+
+
     </script>
   </body>
 </html>
