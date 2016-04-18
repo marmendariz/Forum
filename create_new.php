@@ -1,4 +1,7 @@
 <?
+
+//*********** Create New *************/
+
 include_once 'lib.php';
 set_path();
 force_ssl();
@@ -29,22 +32,16 @@ $login_failed = false;
 
 $category_flag = true;
 $categorytext_flag = true;
-
-//********** Pass the current cat_level in *********/
-if(null == ($cat_level = filter_input(INPUT_GET, cat_level, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) )){
-    echo 'Error. Invalid category level<br>';
-    exit;
-}
+$category_verified = false;
 
 
 //********** Pass the Parent Cat ID in ********* /
-if(null == ($parent_cat_id = filter_input(INPUT_GET, parent_cat_id, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) )){
-    echo 'Error. Invalid category ID<br>';
+if(null == ($parent_cat_passed = filter_input(INPUT_GET, parent_cat_id, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE)) ) {
+    echo '<br><br><h4>Error! Invalid category ID - Must be Numeric! </h4>';
     exit;
 }
-$parent_cat_id_backup = $parent_cat_id;
-$parent_cat_id_backup2 = $parent_cat_id;
 
+$parent_cat_backup = $parent_cat_passed;
 
 /********** Connect to the Database ************/
 if(!($db = db_connect())){
@@ -52,21 +49,26 @@ if(!($db = db_connect())){
     exit;
 }
 
-/****** Query info about parent cat level ******/
-    $current_cat_level = input_clean($_GET['cat_level']);
-    $pcat_level = $current_cat_level - 1;
-    //$pcat_level = $cat_level - 1;
-    $query = 'select * from category where cat_level=?';
-    $stmt = $db->prepare($query);
-    $stmt->bind_param('i',$pcat_level);
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->bind_result($cat_id, $cat_name, $cat_level, $cat_text, $parent_cat_id);    
+/************ Make sure that the Category Exists ************/
+
+$query = 'select * from category where cat_id=?';
+$stmt = $db->prepare($query);
+$stmt->bind_param('i', $parent_cat_passed);
+$stmt->execute();
+$stmt->store_result();
+$rows = $stmt->num_rows();
+$stmt->bind_result($cat_id_verified, $cat_name_verified, $cat_level_verified, $cat_text_verified, $parent_cat_id_verified);
+if ($rows) {
     $stmt->fetch();
+    $category_verified = true;
+} else {
+    echo "<br><br><h4>Error! Category Does Not Exist!</h4>";
+    exit;
+}
+
+$cat_level_backup = $cat_level_verified;
+
 /***********************************************/
-
-
-
 
 /******************* If user is logged In ************************/
 
@@ -93,19 +95,6 @@ if(isset($_SESSION['valid_user'])){
     $stmt->fetch();
     $stmt->close();
 
-/**** Query information about parent category **********/
-
-    $passed_in_parent_id = $parent_cat_id_backup;
-    $query = 'SELECT * FROM category WHERE cat_id=?';
-    $stmt = $db->prepare($query);
-    $stmt->bind_param('i', $passed_in_parent_id);
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->bind_result($parent_actual_id, $parent_actual_category_name, $parent_actual_cat_level, $parent_actual_cat_text, $parent_actual_parent_cat_id);
-    $stmt->fetch();
-    $stmt->close(); 
-    
-    
 
     /********** Check if a form was submitted ********/
     if(isset($_POST['submit'])){
@@ -129,18 +118,15 @@ if(isset($_SESSION['valid_user'])){
         if($category_flag && $categorytext_flag){
 
             if(!($db = db_connect())){
-                echo "database error<br>";
+                echo "<h4>Database Error!!<br>";
                 exit;
             }
             
             
-            $cat_level = input_clean($_POST['cat_level']);
-            //$parent_cat_id = input_clean($_POST['parent_cat_id']);
-            
             /************** Insert in Database -- Category **************/
             
             $insert_pid = input_clean($_POST['parent_cat_id_post']);
-//            $insert_pid = mysqli_real_escape_string(trim($insert_pid));
+            $insert_level = input_clean($_POST['cat_level_post']);
          
             $query = 'Insert into category (cat_name,cat_level,cat_text,parent_cat_id) values (?,?,?,?)';
             $stmt = $db->prepare($query);
@@ -149,15 +135,16 @@ if(isset($_SESSION['valid_user'])){
             $categorytext = mysqli_real_escape_string($db, $categorytext);
 
 
-            $stmt->bind_param('sisi', $categoryname,$cat_level,$categorytext,$insert_pid);
+            $stmt->bind_param('sisi', $categoryname,$insert_level,$categorytext,$insert_pid);
             if (!$stmt->execute()) {
-                echo '<br><br><br>Error!!<br>';
+                echo '<br><br><br>Error with Insertion!!<br>';
                 $stmt->close();
                 $db->close();
                 exit;
             }
             $stmt->close();
-            
+
+
             /************** Insert in Database -- Category **************/
           /* 
             $cat_id2 = mysqli_insert_id($db);
@@ -180,17 +167,15 @@ if(isset($_SESSION['valid_user'])){
 ?>
     <div class ='row'>
         <div class='columns panel text-center large-8 large-centered medium-8 medium-centered  small-10 small-centered '>
-        <h2 style='color: #008cbb'>Create New Category in <?echo $parent_actual_category_name?></h2>
+        <h2 style='color: #008cbb'>Create New Category in <?echo $cat_name_verified?></h2>
         </div>
     </div>
 <?php
-   $pcat_level++; 
-    echo " <form method= 'post' action= 'create_new.php?cat_level=$pcat_level&parent_cat_id=$parent_cat_id_backup'>";
-    //echo " <form method= 'post' action= 'create_new.php'>";
-
-    //echo "<input type='hidden' id='parent_cat_id_post' name='parent_cat_id_post' value ='$parent_cat_id_backup' />";  
-    echo "<input type='hidden' id='cat_level' name='cat_level' value ='$pcat_level' />";  
-    echo "<input type='hidden' id='parent_cat_id' name='parent_cat_id_post' value ='$parent_cat_id_backup' />";  
+     
+    echo " <form method= 'post' action= 'create_new.php?parent_cat_id=$parent_cat_backup'>";
+  $cat_level_backup++;  
+    echo "<input type='hidden' id='cat_level' name='cat_level_post' value ='$cat_level_backup' />";  
+    echo "<input type='hidden' id='parent_cat_id' name='parent_cat_id_post' value ='$parent_cat_backup' />";  
 ?>
 <!------------------------------display new category name text box -------------------------->
     <div class ='row'>
@@ -224,10 +209,9 @@ if(isset($_SESSION['valid_user'])){
 
     /********** Get information about the existing categories ***********/
 
-    $passed_cat_level = input_clean($_GET['cat_level']);
-    $query = 'select * from category where cat_level=? AND parent_cat_id=?';
+    $query = 'select * from category where parent_cat_id=?';
     $stmt = $db->prepare($query);
-    $stmt->bind_param('ii',$passed_cat_level, $parent_cat_id_backup);
+    $stmt->bind_param('i',$parent_cat_backup);
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($cat_id2, $cat_name2, $cat_level2, $cat_text2, $parent_cat_id2);    

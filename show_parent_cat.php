@@ -40,7 +40,6 @@ $stmt->execute();
 $stmt->store_result();
 $stmt->bind_result($cat_id, $cat_name, $cat_level, $cat_text, $parent_cat_id);
 while($stmt->fetch()){
-    //$text = wordwrap($cat_text, 70, "<br>");
     echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name<h3></a>";
     echo "<p>&nbsp &nbsp &nbsp &nbsp$cat_text</p>"; 
     echo '<hr>';
@@ -49,7 +48,7 @@ while($stmt->fetch()){
 $stmt->close();
 $db->close();
 
-      echo"<a href='create_new.php?cat_level=$cat_level&parent_cat_id=$parent_cat_id'class='small round button'>Create New Category</a><br/>";
+      echo"<a href='create_new.php?parent_cat_id=1'class='small round button'>Create New Category</a><br/>";
 ?>
   <!-------------------------------------------->
   </div>
