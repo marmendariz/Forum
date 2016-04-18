@@ -176,11 +176,28 @@ while($stmt->fetch()){
     /****** End Comment Links  *****/
 
     /************* UP/DOWN VOTE SECTION *******************/ 
-    echo "<div class='large-1 medium-2 small-3 columns'>";
-        echo "<h6><a>UP</a></h6>";
-        echo "<h6><a>DOWN</a></h6>";
+        echo "<div class='large-1 medium-2 small-3 columns text-center'>";
+        //echo '<br>';
+        echo "<div class='row'>";
+            echo "<div class='large-12 medium-12 small-12 columns'>";
+                echo "<a><img src='img/up.png'></a>";
+            echo "</div>";
+        echo "</div>";
+
+      echo "<div class='row'>";
+            echo "<div class='large-12 medium-12 small-12 columns'>";
+                echo "<h6>0</h6>";
+            echo "</div>";
+      echo "</div>";
+
+        echo "<div class='row'>";
+            echo "<div class='large-12 medium-12 small-12 columns'>";
+                echo "<a><img src='img/down.png'></a>";
+            echo "</div>";
+        echo "</div>";
     echo "</div>";
-     
+    /********************************************************/
+
     echo "</div>";
     echo "</div>";
     /*******************************************************/
