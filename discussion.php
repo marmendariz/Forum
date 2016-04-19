@@ -58,17 +58,37 @@ $dis_stmt->fetch();
 /************************** PRINT DISCUSSION TOP-SECTION ****************************/
 echo "<div class='row'>";
     echo "<div class='large-12 large-centered columns medium-12 medium-centered small-12 small-centered'>";
+
+        /*********************************************************************************/
         echo "<div class='row'>";
             echo "<div class='panel large-12 columns'>";
-                echo "<h1>$dis_name<h1><hr>";  
-                    echo "<h3>$dis_text<h3><hr>";
-                    echo "<input type='hidden' id='dis_id' value='$dis_id'>";
-                    if($logged_in)
-                        echo "<h6><a href='#' class='discussion_reply_link'>Reply</a></h6>";
-                    else
-                        echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
+                echo "<div class='row'>";
+
+
+                    echo "<div class='large-2 columns text-center'>";
+                        echo "<h6>USERNAME</h6>";
+                    echo "</div>";
+
+
+                echo "<div class='large-9 columns'>";
+                    echo "<h1>$dis_name<h1><hr>";  
+                        echo "<h3>$dis_text<h3><hr>";
+                        echo "<input type='hidden' id='dis_id' value='$dis_id'>";
+                        if($logged_in)
+                            echo "<h6><a href='#' class='discussion_reply_link'>Reply</a></h6>";
+                        else
+                            echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
+                        echo "</div>";
+
+                        /*******************************************/
+                        echo "<div class='large-1 columns'>";
+                            echo "<h1>UP</h1>";
+                        echo "</div>";
+                        /******************************************/
+                echo "</div>";
             echo "</div>";
         echo "</div>";
+        /*********************************************************************************/
 
 
 /*************************************************************************************/
