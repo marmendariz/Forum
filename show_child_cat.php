@@ -78,6 +78,9 @@ if($rows){
     while($stmt->fetch()){
         echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name</h3>";
         echo "<p>&nbsp &nbsp &nbsp &nbsp$cat_text</p>";
+            echo "<div class = 'small-12 medium-12 large-12 columns text-right'>"; 
+            echo "<a href='create_new.php?parent_cat_id=$cat_id'class='small round button'>Create New SubCategory</a><br/>";
+            echo "</div>"; 
         echo '<hr>';
     }
 }
@@ -109,13 +112,13 @@ $stmt->close();
 $db->close();
 
 if (!($discussion_flag)) {
-// These are all variables that have been retrieved from the database 
-    echo "<a href='create_new.php?parent_cat_id=$parent_cat_id'class='small round button'>Create New Category</a><br/>";
+// This variable has been retrieved from the database 
+    echo "<a href='create_new.php?parent_cat_id=$parent_cat_id'class='medium round button'>Create New Category Here!</a><br/>";
 } 
 if ($discussion_flag) 
     // parent_cat_id was not set because there wasn't a category who had the passed in value as a parent
     // that's why we have to use the passed in value (stored a backup so if it's tampered with, it still passes original)
-    echo"<a href='create_new_discussion.php?cat_id=$parent_cat_backup'class='small round button'>Create New Discussion</a><br/>";
+    echo"<a href='create_new_discussion.php?cat_id=$parent_cat_backup'class='medium round button'>Create New Discussion</a><br/>";
 ?>
 
   <!-------------------------------------------->
