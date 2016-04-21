@@ -49,7 +49,15 @@ $cat_search_executed = false;
                 echo 'Database error<br>';
                 exit;
             }   
-         
+
+/*********** What type of Search *************/
+
+    $search_type = $_POST['search_type'];
+                
+/*************** Category ******************/
+
+    if ($search_type == "CategoriesOption" || $search_type == "AllOption") {
+
     $query = "SELECT * FROM category WHERE cat_name LIKE '%" . $cat_input_search . "%' OR cat_text LIKE '%" . $cat_input_search . "%'";
     
     $stmt = $db->prepare($query);
@@ -71,7 +79,41 @@ $cat_search_executed = false;
         exit;
     } 
 
-}
+    }
+
+
+/*************** Discussion ******************/
+
+    if ($search_type == "DiscussionsOption" || $search_type == "AllOption") {
+
+    $query = "SELECT * FROM discussion WHERE dis_name LIKE '%" . $cat_input_search . "%' OR dis_text LIKE '%" . $cat_input_search . "%'";
+    
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('s', $cat_input_search);
+    $stmt->execute();
+    $stmt->store_result();
+    $rows = $stmt->num_rows();
+    $stmt->bind_result($dis_id_verified, $dis_name_verified, $dis_text_verified, $dis_flag_verified, $dis_upvote_count, $dis_downvote_count);
+    if ($rows) {
+        echo "<h3>The Following Discussions Were Found:<br><br>";
+        while ($stmt->fetch()) {
+            echo "<a href='discussion.php?dis_id=$dis_id_verified'><h3 style='color:#008cbb;'>$dis_name_verified</h3>";
+        echo "<p>&nbsp &nbsp &nbsp &nbsp$dis_text_verified</p>";
+        echo "<hr>";
+        }
+    } else {
+        echo "<br><br>Sorry, no results were found.";
+        exit;
+    } 
+
+    }
+
+
+
+
+
+
+    }
 
 }
 ?>

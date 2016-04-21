@@ -37,13 +37,24 @@
         </div> 
 
         <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
-            <h4> Looking For Something Specific? </h4>
-            <p> Search Category Names and Text</p>
+            <h4> &#10084  Looking For Something Specific?  &#10084 </h4>
+            <label>Enter Keywords:</label>
             <form method = 'post' action = 'search_submit.php'>
             <input type = 'text' name ='search_field'>
-            <input type = 'submit' name = 'submit2' class='button' value = 'Search'>
+            
+ <div class="row">
+            <div class="large-12 columns">
+              <label>Search in:</label>
+              <select name=search_type>
+                <option value="CategoriesOption">Categories</option>
+                <option value="DiscussionsOption">Discussions</option>
+                <option value="CommentsOption">Comments</option>
+                <option value="AllOption">All</option>
+              </select>
+            </div>
+          </div>
+<input type = 'submit' name = 'submit2' class='button' value = 'Search'>
             </form>
-
         </div>
 </div>
 
