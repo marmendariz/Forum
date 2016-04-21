@@ -25,8 +25,6 @@
     include_once 'header.php';
     $login_failed = false;
 
-
-
 ?>
 
 <div class="row">
@@ -36,7 +34,16 @@
                 <center><a href='show_child_cat.php?cat_id=2'><h1><img src="img/Math.png"></h1></a></center>
                 <center><a href='show_child_cat.php?cat_id=6'><h1><img src="img/Computer Science.png"></h1></a></center>
             </div>
-        
+        </div> 
+
+        <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
+            <h4> Looking For Something Specific? </h4>
+            <p> Search Category Names and Text</p>
+            <form method = 'post' action = 'search_submit.php'>
+            <input type = 'text' name ='search_field'>
+            <input type = 'submit' name = 'submit2' class='button' value = 'Search'>
+            </form>
+
         </div>
 </div>
 
@@ -57,8 +64,7 @@
             echo "Database error<br>";
             exit;
         } 
-        
-        
+
         $username = input_clean($_SESSION['valid_user']);
         $query = 'select user_id, user_type from user where user_name=?';
         $stmt = $db->prepare($query);

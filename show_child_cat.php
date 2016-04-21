@@ -84,30 +84,12 @@ if($rows){
         echo '<hr>';
     }
 }
-else{
-    $discussion_flag = true;
-    $query2 = 'select * from cat_cont_dis AS c, discussion AS d where c.cat_id = ? AND c.dis_id = d.dis_id';
-    $stmt = $db->prepare($query2);
-    if($stmt){
-        $stmt->bind_param('i',$parent_cat);
-        $stmt->execute();
-        $stmt->store_result();
-        $stmt->bind_result($cat_id, $dis_id1, $dis_id2, $dis_name, $dis_text, $dis_flag, $upvote_count, $downvote_count);
-
-        //    echo "<h1>Discussions<h1>";
-        //while($stmt->fetch()){
-        //    echo "<hr>"; 
-        //    echo "<a href='discussion.php?dis_id=$dis_id1'><h3 style='color:#008cbb;'>$dis_name</h3>";
-        //    echo "<p>&nbsp &nbsp &nbsp &nbsp$dis_text</p>";
-        //    echo '<hr>'; 
-        //}
-    }
-    else{
-        echo "<h1>Error</h1>";
-    }
-}
 
 $stmt->close(); 
+
+
+/**** Discussion Query ******/
+
 
     $query2 = 'select * from cat_cont_dis AS c, discussion AS d where c.cat_id = ? AND c.dis_id = d.dis_id';
     $stmt = $db->prepare($query2);
@@ -117,7 +99,7 @@ $stmt->close();
         $stmt->store_result();
         $stmt->bind_result($cat_id, $dis_id1, $dis_id2, $dis_name, $dis_text, $dis_flag, $upvote_count, $downvote_count);
 
-            echo "<h1>Discussions<h1>";
+            echo "<h2>Discussions<h2>";
         while($stmt->fetch()){
             echo "<hr>"; 
             echo "<a href='discussion.php?dis_id=$dis_id1'><h3 style='color:#008cbb;'>$dis_name</h3>";
@@ -136,7 +118,7 @@ if (!($discussion_flag)) {
 if ($discussion_flag) 
     // parent_cat_id was not set because there wasn't a category who had the passed in value as a parent
     // that's why we have to use the passed in value (stored a backup so if it's tampered with, it still passes original)
-    echo"<a href='create_new_discussion.php?cat_id=$parent_cat_backup'class='medium round button'>Create New Discussion</a><br/>";
+    echo"<a href='create_new_discussion.php?cat_id=$parent_cat_backup'class='small round button'>Create New Discussion</a><br/>";
 ?>
 
   <!-------------------------------------------->
