@@ -25,7 +25,7 @@ $login_failed = false;
 /*************************************IF USER IS LOGGED IN*************************************************/
 if(isset($_SESSION['valid_user'])){
 
-/*****************If a form was submitted, we are going to check before updating********/
+    /*****************If a form was submitted, we are going to check before updating********/
     if(isset($_POST['submit'])){
         $fnStat = true;
         $mnStat = true;
@@ -35,52 +35,80 @@ if(isset($_SESSION['valid_user'])){
 
 
         if(!isset($_FILES['fileToUpload']) || $_FILES['fileToUpload']['error']==UPLOAD_ERR_NO_FILE){
-        echo "<br><br><br>Error<br>";
+            echo "<br><br><br>Error<br>";
         }
         else{
+            $dir="/home/stu/quadcore/public_html/uploads/";
+            $uploadOk=1;
+            $imageFileType=pathinfo($file,PATHINFO_EXTENSION);
 
-            echo "<br><br><br>IMAGE RECIEVED<br>";
-        
-        $dir="uploads/";
-        $uploadOk=1;
-        $imageFileType=pathinfo($file,PATHINFO_EXTENSION);
-
-       // if(isset($_POST["submit"])){
             $check = getimagesize($_FILES["fileToUpload"]['tmp_name']);
-            
+
             if($check!==false){
                 $filename = strtolower($_FILES["fileToUpload"]['name']);
-                $whitelist = array('jpg','png','gif','jpeg');
-                $blacklist = array('php','php3','php4','phtml','exe');
-                
+                $whitelist = array('jpg','jpeg');
+
                 if(!in_array(end(explode('.', $filename)), $whitelist))
                 {
                     echo 'Invalid file type';
                     exit(0);
                 }
-                if(in_array(end(explode('.', $filename)), $blacklist))
-                {
-                    echo 'Invalid file type';
-                    exit(0);
-                }
-
                 $uploadOk = 1;
 
-                echo "<br><br><br>BLAH<br>";
             }else{
                 $uploadOk=0;
             }
             if($uploadOk==0){
-               //$sorry="sorry";
-               //echo "<script type='text/javascript'>alert('$sorry');</script>"; 
+                //$sorry="sorry";
+                echo "<script type='text/javascript'>alert('$sorry');</script>"; 
             }
             else{
-                move_uploaded_file($_FILES["fileToUpload"]['tmp_name'],$dir.$filename);
-               // header("Location: index.php");
-               //$worked="worked";
-               //echo "<script type='text/javascript'>alert('$worked');</script>"; 
-           // }
-        }
+                $temp=explode(".",$filename);
+                $fp=fopen('/dev/urandom','r');
+                $truename=base64_encode(fread($fp,10));
+
+                $newfilename=$truename.'.'.end($temp);
+                $resizeim=$truename.'.jpg';
+                
+                fclose($fp);
+                if(!($db = db_connect())){
+                    echo "Database error<br>";
+                    exit;
+                }
+
+                if(move_uploaded_file($_FILES["fileToUpload"]['tmp_name'],$dir.$newfilename)){
+                    $name=$_FILES["fileToUpload"]["name"];
+                    $src="/home/stu/quadcore/public_html/uploads/".$newfilename;
+                    chmod($src,0744);
+                    
+                    $location="https://cs.csubak.edu/~quadcore/uploads/".$resizeim;
+                 
+                    $resize="/home/stu/quadcore/public_html/uploads/".$resizeim;
+                    $img_quality=100;
+
+                    $im=imagecreatefromstring(file_get_contents($src));
+                    $im_w=imagesx($im);
+                    $im_h=imagesy($im);
+                    $color=imagecreatetruecolor($im_w,$im_h);
+
+                    imagecopyresampled($color,$im,0,0,0,0,$im_w,$im_h,$im_w,$im_h);
+                    $whiteBackground=imagecolorallocate($color,255,255,255);
+                    imagefill($color,0,0,$whiteBackground);
+                    imagejpeg($color,$resize,$img_quality);
+
+                    chmod($resize,0744);
+
+                    $query="Update user set profile_image = ? where user_name = ?";
+                    $stmt = $db->prepare($query);
+                    $stmt->bind_param('ss',$location,$_SESSION['valid_user']); 
+                    if(!$stmt->execute()){
+                        echo 'Failure to save to database';
+                        $stmt->close();
+                        exit();
+                    }
+                    $stmt->close();
+                }
+            }
         }
 
         /*************************** FIRST NAME ******************************/
@@ -103,7 +131,7 @@ if(isset($_SESSION['valid_user'])){
                 $mnStat = false;
         }
         /******************************************************************/
-       
+
         /*************************** LAST NAME ******************************/
         if(!isset($_POST['lastname']) || empty($_POST['lastname'])){
             $lnStat = false;
@@ -123,7 +151,7 @@ if(isset($_SESSION['valid_user'])){
             $bio = input_clean($_POST['bio']);
         }
         /******************************************************************/
-        
+
         /*************************** EMAIL ******************************/
         if(!isset($_POST['email']) || empty($_POST['email'])){
             $emStat = false;
@@ -141,24 +169,24 @@ if(isset($_SESSION['valid_user'])){
 
             /*Kevin, make sure you call
                 mysqli_real_escape_string($db, var)
-             for each variable after you make connection to db*/
-            
-        if(!($db = db_connect())){
-            echo "Database error<br>";
-            exit;
-        }
+            for each variable after you make connection to db*/
+
+            if(!($db = db_connect())){
+                echo "Database error<br>";
+                exit;
+            }
 
 
-        mysqli_real_escape_string($db, $fname);
-        mysqli_real_escape_string($db, $mname);
-        mysqli_real_escape_string($db, $lname);
-        mysqli_real_escape_string($db, $bio);
-        mysqli_real_escape_string($db, $email);
+            mysqli_real_escape_string($db, $fname);
+            mysqli_real_escape_string($db, $mname);
+            mysqli_real_escape_string($db, $lname);
+            mysqli_real_escape_string($db, $bio);
+            mysqli_real_escape_string($db, $email);
 
-        $query = 'UPDATE user SET f_name=?, m_name=?, l_name=?, bio=?, email=? where user_name=?';
-        $stmt = $db->prepare($query);
-        $stmt->bind_param('ssssss', $fname, $mname, $lname, $bio, $email, $_SESSION['valid_user']);
-        $stmt->execute();
+            $query = 'UPDATE user SET f_name=?, m_name=?, l_name=?, bio=?, email=? where user_name=?';
+            $stmt = $db->prepare($query);
+            $stmt->bind_param('ssssss', $fname, $mname, $lname, $bio, $email, $_SESSION['valid_user']);
+            $stmt->execute();
             /*Redirects to profile page*/
             header("Location: profile.php");
         }
@@ -166,27 +194,27 @@ if(isset($_SESSION['valid_user'])){
     }
 
 
-/*********************************DISPLAY FORM***********************/
-if(!($db = db_connect())){
+    /*********************************DISPLAY FORM***********************/
+    if(!($db = db_connect())){
         echo "Database error<br>";
         exit;
     }
 
     $username = input_clean($_SESSION['valid_user']);
     $query = 'select user_type, ban_flag, f_name, m_name, 
-                l_name, bio, email, date_joined, com_count, 
-                dis_count, upvote_count, downvote_count 
-                from user where user_name=?';
+        l_name, bio, email, date_joined, com_count, 
+        dis_count, upvote_count, downvote_count 
+        from user where user_name=?';
     $stmt = $db->prepare($query);
     $stmt->bind_param('s', $username);
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($user_type, 
-                        $ban_flag, 
-                        $f_name, $m_name, $l_name, 
-                        $bio, $email, $date_joined, 
-                        $com_count, $dis_count, 
-                        $up_count, $down_count);
+        $ban_flag, 
+        $f_name, $m_name, $l_name, 
+        $bio, $email, $date_joined, 
+        $com_count, $dis_count, 
+        $up_count, $down_count);
     $stmt->fetch();
 ?>
     <div class ='row'>
@@ -219,7 +247,25 @@ if(!($db = db_connect())){
         <h3 style='color: #008cbb'> Profile Picture: </h3><br>
         <div class='row'>
         <div class='large-12 medium-12 small-12 columns text-center'>
-            <img src='img/bleh.gif'>
+<?php
+    if(!($db = db_connect())){
+        echo "Database error<br>";
+        exit;
+    }
+
+    $user2=$_SESSION['valid_user'];
+    $query1 ="Select profile_image from user where user_name = ?";
+    $stmt = $db->prepare($query1);
+    $stmt->bind_param('s',$user2);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($pimage);
+    $stmt->fetch();
+    //echo "$pimage";
+    echo "<img src='$pimage'>";
+
+?>
+       <!--<img src='<?//echo $pimage?>'>-->
         </div>
         </div>
         <div class='row'>
@@ -229,7 +275,7 @@ if(!($db = db_connect())){
          <!-- <input type="submit" value="Upload Image" name="submit">-->
         </div>
         </div>
-        
+
     </div>
     </div>
 
@@ -273,7 +319,7 @@ if(!($db = db_connect())){
   <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
-      $(document).foundation();
+    $(document).foundation();
     </script>
   </body>
 </html>
@@ -294,7 +340,7 @@ else{
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
-      $(document).foundation();
+    $(document).foundation();
     </script>
   </body>
 </html>

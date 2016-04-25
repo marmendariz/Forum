@@ -120,6 +120,15 @@ while($stmt->fetch()){
     $ustmt->fetch();
     $level2 = false;
 
+    $picquery ="Select profile_image from user where user_name = ?";
+    $pstmt=$db->prepare($picquery);
+    $pstmt->bind_param('s',$username);
+    $pstmt->execute();
+    $pstmt->store_result();
+    $pstmt->bind_result($pimg);
+    $pstmt->fetch();
+
+
    echo "<div class='row comment'>"; /*********************/
    if($com_level == 2){
        $level2 = true;
@@ -138,7 +147,7 @@ while($stmt->fetch()){
                 echo "</div>";
                 echo "<div class='row'>";
                     echo "<div class='large-12 medium-12 show-for-medium-up columns'>";
-                        echo "<img class='user_comment_info' src='img/bleh.gif'>";
+                        echo "<img class='user_comment_info' src='$pimg'>";
                     echo "</div>";
                 echo "</div>";
     echo "</div>";
