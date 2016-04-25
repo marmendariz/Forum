@@ -260,13 +260,23 @@ if($logged_in){
         echo "Database error<br>";
         exit;
     }
+        $user_name = input_clean($_SESSION['valid_user']);
 
-        $id = $_SESSION['user_id'];
+        $userQuery = "select user_id 
+                    from user
+                    where user_name=?";
+        $ustmt = $db->prepare($userQuery);
+        $ustmt->bind_param('s', $user_name);
+        $ustmt->execute();
+        $ustmt->store_result();
+        $ustmt->bind_result($user_id);
+        $ustmt->fetch();
 
         $bookmarkQ = "select user_id, dis_id 
                     from bookmarked 
-                    where user_id=$id and dis_id=$dis_id";
+                    where user_id=? and dis_id=?";
         $bstmt = $db->prepare($bookmarkQ);
+        $bstmt->bind_param('ii', $user_id, $dis_id);
         $bstmt->execute();
         $bstmt->store_result();
         $brows = $bstmt->num_rows();
@@ -279,6 +289,7 @@ if($logged_in){
 }
 
 $dis_stmt->close();
+$ustmt->close();
 $stmt->close();
 $bstmt->close();
 $db->close();
