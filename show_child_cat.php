@@ -3,6 +3,7 @@ include_once 'lib.php';
 set_path();
 force_ssl();
 session_start();
+auto_login();
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -20,12 +21,21 @@ session_start();
 
 <?php
 include_once 'header.php'; 
+$discussion_flag = false;
+$category_verified = false;
+
 ?>
 <!---------------------- SHOW PARENT CATEGORIES------------------------------>
 <div class='row'>
-<div class='large-12 large-centered columns panel medium-9 medium-centered small-10 small-centered'>
+<div class='large-12 large-centered columns medium-9 medium-centered small-10 small-centered'>
   <!-------------------------------------------->
 <?php
+
+if(isset($_SESSION['valid_user'])){
+    $logged_in = true;
+    $username = input_clean($_SESSION['valid_user']);
+}
+
 if(!($db = db_connect())){
     echo "Database error<br>";
     exit;
@@ -33,36 +43,87 @@ if(!($db = db_connect())){
 
 
 if(null == ($parent_cat = filter_input(INPUT_GET, cat_id, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) ) || $_GET['cat_id']=='1'){
-    echo 'Error. Invalid category ID<br>';
+    echo '<br><br><h4>Error! Invalid category ID - Must be Numeric!</h4>';
     exit;
 }
 
-$parent_cat = input_clean($_GET['cat_id']);
+// This is a $_GET variable
+$parent_cat_backup = $parent_cat;
+
+/************ Make sure that the Category Exists ************/
+
+$query = 'select * from category where cat_id=?';
+$stmt = $db->prepare($query);
+$stmt->bind_param('i', $parent_cat);
+$stmt->execute();
+$stmt->store_result();
+$rows = $stmt->num_rows();
+$stmt->bind_result($cat_id_verified, $cat_name_verified, $cat_level_verified, $cat_text_verified, $parent_cat_id_verified);
+if ($rows) {
+    $stmt->fetch();
+    $category_verified = true;
+} else {
+    echo "<br><br><h4>Error! Category Does Not Exist!</h4>";
+    exit;
+}
+ 
+    if(!($db = db_connect())){
+        echo "Database error<br>";
+        exit;
+    }   
+
+if($logged_in){
+    $query = 'select user_type from user where user_name=?';
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($user_type);
+    $stmt->fetch();
+}
+/********** Query **********/
+
 $query = 'select * from category where parent_cat_id=?';
 $stmt = $db->prepare($query);
 $stmt->bind_param('i',$parent_cat);
 $stmt->execute();
+
 $stmt->store_result();
 $rows = $stmt->num_rows();
 $stmt->bind_result($cat_id, $cat_name, $cat_level, $cat_text, $parent_cat_id);
+
+echo "<div class='panel'>";
+echo "<h2>Categories in $cat_name_verified</h2><hr>";
 if($rows){
     while($stmt->fetch()){
         echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name</h3>";
         echo "<p>&nbsp &nbsp &nbsp &nbsp$cat_text</p>";
+        echo "<div class='row'>";
+        echo "<div class = 'small-12 medium-12 large-12 columns text-right'>";
+        if($logged_in && $user_type == 2){         
+            echo "<a href='create_new.php?parent_cat_id=$cat_id'class='small round button'>Create New SubCategory</a><br/>";
+        }    
+        echo "</div>"; 
+        echo "</div>"; 
         echo '<hr>';
     }
 }
-else{
-    $parent_cat = input_clean($_GET['cat_id']);
+echo "</div>";
+$stmt->close(); 
+
+
+/**** Discussion Query ******/
+
+echo "<div class='panel'>";
     $query2 = 'select * from cat_cont_dis AS c, discussion AS d where c.cat_id = ? AND c.dis_id = d.dis_id';
     $stmt = $db->prepare($query2);
     if($stmt){
-        $stmt->bind_param('i',$parent_cat);
+        $stmt->bind_param('i',$parent_cat_backup);
         $stmt->execute();
         $stmt->store_result();
         $stmt->bind_result($cat_id, $dis_id1, $dis_id2, $dis_name, $dis_text, $dis_flag, $upvote_count, $downvote_count);
 
-            echo "<h1>Discussions<h1>";
+            echo "<h2>Discussions<h2>";
         while($stmt->fetch()){
             echo "<hr>"; 
             echo "<a href='discussion.php?dis_id=$dis_id1'><h3 style='color:#008cbb;'>$dis_name</h3>";
@@ -70,16 +131,32 @@ else{
             echo '<hr>'; 
         }
     }
-    else{
-        echo "<h1>Error</h1>";
-    }
-}
+    $stmt->close();
+    echo "</div>";
+$db->close();
 
+if($logged_in){
+    
+
+ if($user_type == 2){
+if (!($discussion_flag)) {
+// This variable has been retrieved from the database 
+    echo "<a href='create_new.php?parent_cat_id=$parent_cat_id'class='medium round button'>Create New Category Here!</a><br/>";
+}
+}
+}
 $stmt->close();
 $db->close();
 
 
+ 
+if ($discussion_flag){ 
+    // parent_cat_id was not set because there wasn't a category who had the passed in value as a parent
+    // that's why we have to use the passed in value (stored a backup so if it's tampered with, it still passes original)
+    echo"<a href='create_new_discussion.php?cat_id=$parent_cat_backup'class='small round button'>Create New Discussion</a><br/>";
+}
 ?>
+
   <!-------------------------------------------->
   </div>
 </div>

@@ -3,6 +3,7 @@ include_once 'lib.php';
 set_path();
 force_ssl();
 session_start();
+auto_login();
 ?>
 
 <!doctype html>
@@ -48,18 +49,20 @@ if(isset($_SESSION['valid_user'])){
                 $filename = strtolower($_FILES["fileToUpload"]['name']);
                 $whitelist = array('jpg','jpeg');
 
+
                 if(!in_array(end(explode('.', $filename)), $whitelist))
                 {
                     echo 'Invalid file type';
                     exit(0);
                 }
+
+
                 $uploadOk = 1;
 
             }else{
                 $uploadOk=0;
             }
             if($uploadOk==0){
-                //$sorry="sorry";
                 echo "<script type='text/javascript'>alert('$sorry');</script>"; 
             }
             else{
@@ -261,18 +264,14 @@ if(isset($_SESSION['valid_user'])){
     $stmt->store_result();
     $stmt->bind_result($pimage);
     $stmt->fetch();
-    //echo "$pimage";
     echo "<img src='$pimage'>";
 
 ?>
-       <!--<img src='<?//echo $pimage?>'>-->
         </div>
         </div>
         <div class='row'>
         <div class='large-12 medium-12 small-12 columns text-center'>
-          <!-- <input type='button' value='Upload New Image'>-->
           <input type="file" name="fileToUpload" id="fileToUpload">
-         <!-- <input type="submit" value="Upload Image" name="submit">-->
         </div>
         </div>
 

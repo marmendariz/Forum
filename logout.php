@@ -3,6 +3,7 @@ include_once 'lib.php';
 set_path();
 force_ssl();
 session_start();
+auto_login();
 ?>
 
 <!doctype html>
@@ -27,7 +28,10 @@ include_once 'header.php';
 if(isset($_SESSION['valid_user'])){
     $old_user = $_SESSION['valid_user'];
     unset($_SESSION['valid_user']);
-    //unset($_COOKIE['active']);
+    unset($_SESSION['user_id']);
+    setcookie('token', null, time()-3600);
+    setcookie('selector', null, time()-3600);
+    setcookie('active', null, time()-3600);
     session_destroy();
     /************SHOW LOGGED-OUT MESSAGE******************/
 ?>

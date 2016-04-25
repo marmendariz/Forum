@@ -3,6 +3,7 @@
     set_path();
     force_ssl();
     session_start();
+    auto_login();
 ?>
 
 <!doctype html>
@@ -24,8 +25,6 @@
     include_once 'header.php';
     $login_failed = false;
 
-
-
 ?>
 
 <div class="row">
@@ -35,7 +34,27 @@
                 <center><a href='show_child_cat.php?cat_id=2'><h1><img src="img/Math.png"></h1></a></center>
                 <center><a href='show_child_cat.php?cat_id=6'><h1><img src="img/Computer Science.png"></h1></a></center>
             </div>
-        
+        </div> 
+
+        <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
+            <h4> &#10084  Looking For Something Specific?  &#10084 </h4>
+            <label>Enter Keywords:</label>
+            <form method = 'post' action = 'search_submit.php'>
+            <input type = 'text' name ='search_field'>
+            
+ <div class="row">
+            <div class="large-12 columns">
+              <label>Search in:</label>
+              <select name=search_type>
+                <option value="CategoriesOption">Categories</option>
+                <option value="DiscussionsOption">Discussions</option>
+                <option value="CommentsOption">Comments</option>
+                <option value="AllOption">All</option>
+              </select>
+            </div>
+          </div>
+<input type = 'submit' name = 'submit2' class='button' value = 'Search'>
+            </form>
         </div>
 </div>
 
@@ -49,15 +68,14 @@
 <?php
 
     if(isset($_SESSION['valid_user'])){
-    
+        $loggedin = true; 
         $user_type = 0;
 
         if(!($db = db_connect())){
             echo "Database error<br>";
             exit;
         } 
-        
-        
+
         $username = input_clean($_SESSION['valid_user']);
         $query = 'select user_id, user_type from user where user_name=?';
         $stmt = $db->prepare($query);
@@ -67,6 +85,7 @@
         $stmt->bind_result($userid, $user_type);
         $stmt->fetch();
         $stmt->close();
+
         
         if(isset($_POST['submit'])){
             $anamestat = true;
@@ -123,9 +142,10 @@
 ?>
 <div class = "row">
      <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
-
         <h3 style='color: #008cbb'>Add Announcement</h3> 
+        <input type='button' id='addAnc' value='Expand' class='button'>
 
+        <div id='addAncSection'>
         <form method='post' action='index.php'>
         <div class='large-6  medium-6 small-10 columns small-centered'>
             <input type='text' id='aname' name='aname' required maxlength='20' value="<?echo 'Announcement Title'?>"/>
@@ -143,6 +163,7 @@
            <input type='submit' id='submit' name='submit' class='button' value='Submit'/>  
         </div>
     </form>
+</div>
 </div>
 </div>
 
@@ -189,6 +210,59 @@
     </div>
 </div>
 
+<?php if($loggedin){?>
+
+<div class = "row">
+     <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
+<?php
+   
+    if(!($db = db_connect())){
+        echo "Database error<br>";
+        exit;
+    }
+    
+        echo "<h3 style='color: #008cbb' >Recent Bookmarks:</h3>";
+
+        $username = input_clean($_SESSION['valid_user']);
+        $query = 'select user_id, user_type from user where user_name=?';
+        $stmt = $db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($userid, $user_type);
+        $stmt->fetch();
+        $stmt->close();
+
+        $query = 'select d.dis_id, d.dis_name, d.dis_text 
+                  from user u, bookmarked b, discussion d  
+                  where u.user_id=? and u.user_id=b.user_id 
+                  and b.dis_id=d.dis_id Order By b.date desc';
+
+        $stmt = $db->prepare($query);
+        $stmt->bind_param('i', $userid);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($b_dis_id, $b_dis_name, $b_dis_text);
+
+        $i = 0;
+
+        while($i < 5 && $stmt->fetch()){ 
+                echo " <div class='text-left'> ";
+                echo "<hr>";
+                echo "<a href='discussion.php?dis_id=$b_dis_id'> <h4 style='color: #008cbb'> $b_dis_name </h4></a>";
+                echo " <h5> &nbsp &nbsp &nbsp &nbsp $b_dis_text </h5> ";
+                echo "</div> ";
+                $i++;
+        }
+
+
+
+?>
+    </div>
+</div>
+
+<?php } ?>
+
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <!---<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>-->
@@ -196,7 +270,26 @@
     <script type="text/javascript" src="slick/slick.min.js"></script>
     <script type="text/javascript">
         $(document).foundation();
+        
+        var addAncHide = true;
         $(document).ready(function(){
+
+            $('#addAncSection').hide();
+
+            $('#addAnc').on('click', function(){
+                var button = $('#addAnc');
+                if(addAncHide){
+                    $('#addAncSection').show();
+                    addAncHide = false;
+                    button.val('Collapse');
+                }
+                else{
+                    $('#addAncSection').hide();
+                    addAncHide = true;
+                    button.val('Expand');
+                }
+            });
+
 
             var width = $(window).width();
             var height = $(window).height();

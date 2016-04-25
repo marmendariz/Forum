@@ -3,6 +3,7 @@ include_once 'lib.php';
 set_path();
 force_ssl();
 session_start();
+auto_login();
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -102,9 +103,8 @@ if($fnStat && $mnStat && $lnStat && $emStat && $unStat && $pwStat){
 
     $query = 'Insert into user (user_name,user_type, f_name, 
                                m_name, l_name, email, date_joined, 
-                               hashed_pwd, salt)
-                               values (?,?,?,?,?,?,?,?,?)';
-    $stmt = $db->prepare($query);
+                               hashed_pwd, salt, selector)
+                               values (?,?,?,?,?,?,?,?,?,?)';
 
     $username = mysqli_real_escape_string($db, $username);
     $password = mysqli_real_escape_string($db, $password);
@@ -116,14 +116,29 @@ if($fnStat && $mnStat && $lnStat && $emStat && $unStat && $pwStat){
     $hashed = crypt($password,'$6$'.$salt); 
     $salt = mysqli_real_escape_string($db, $salt);
     $hashed = mysqli_real_escape_string($db, $hashed);
-    
+
+    $selector = gen_token(6);
+    $check = "select user_id from user where selector = '$selector'";
+    $selCheck  = $db->prepare($check);
+    $selCheck->execute();
+    $r = $selCheck->num_rows;
+    while($r!==0){
+        $selector = gen_token(6);
+        $check = "select user_id from user where selector = '$selector'";
+        $selCheck  = $db->prepare($check);
+        $selCheck->execute();
+        $r = $selCheck->num_rows;
+    }
+    $selCheck->close();
+
     $type = 0;
     $date = date('Y-m-d H:i:s');
-    $stmt->bind_param('sisssssss',$username, $type, $fname, $mname,
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('sissssssss',$username, $type, $fname, $mname,
                                   $lname, $email, $date,
-                                  $hashed, $salt);
+                                  $hashed, $salt, $selector);
     if(!$stmt->execute()){
-        echo 'Error<br>';
+        echo '<br><br><br>Error<br>';
         $stmt->close();
         $db->close();
         exit;

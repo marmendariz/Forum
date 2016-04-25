@@ -6,6 +6,7 @@ include_once 'lib.php';
 set_path();
 force_ssl();
 session_start();
+auto_login();
 
 if(!($db = db_connect())){
     echo "Database error<br>";
@@ -18,7 +19,6 @@ if (null == ($parent_dis = filter_input(INPUT_GET,
         echo 'Error. Invalid Discussion ID<br>';
         exit;
     }
-
 $logged_in = false;
 if(isset($_SESSION['valid_user']))
     $logged_in = true;
@@ -54,20 +54,62 @@ $dis_stmt->fetch();
   <body>
 <? include_once 'header.php';
 
+$bmark = false;
+
 /************************** PRINT DISCUSSION TOP-SECTION ****************************/
 echo "<div class='row'>";
     echo "<div class='large-12 large-centered columns medium-12 medium-centered small-12 small-centered'>";
+
+        /*********************************************************************************/
         echo "<div class='row'>";
-            echo "<div class='panel large-12 columns'>";
-                echo "<h1>$dis_name<h1><hr>";  
-                    echo "<h3>$dis_text<h3><hr>";
-                    echo "<input type='hidden' id='dis_id' value='$dis_id'>";
-                    if($logged_in)
-                        echo "<h6><a href='#' class='discussion_reply_link'>Reply</a></h6>";
-                    else
-                        echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
+            echo "<div class='panel large-12 medium-12 small-12 columns'>";
+
+                    echo "<div class='row'>";
+
+
+                        echo "<div class='large-10 medium-9 small-9 columns text-left'>";
+                            echo "<h6>USERNAME</h6>";
+                        echo "</div>";
+
+                        echo "<div class='large-1 medium-1 small-3 columns text-center'>";
+                            echo "<a><img src='img/up.png'></a>";
+                        echo "</div>";
+
+                    echo "</div>";
+
+                    echo "<div class='row'>";
+                        echo "<div class='large-10 medium-9 small-9 columns text-left'>";
+                            echo "<h1>$dis_name<h1><hr>";  
+                            echo "<h3>&nbsp &nbsp &nbsp &nbsp $dis_text<h3><hr>";
+                        echo "</div>";
+                        echo "<div class='large-1 medium-1 small-3 columns text-center'>";
+                            echo "<h4>0</h4>";
+                            echo "<a><img src='img/down.png'></a>";
+                        echo "</div>";
+                    echo "</div>";
+
+                    echo "<div class='row'>";
+                        echo "<div class='large-9 medium-9 small-8 columns text-left'>";
+                            echo "<input type='hidden' id='dis_id' value='$dis_id'>";
+                            if($logged_in)
+                                echo "<h6><a href='#' class='discussion_reply_link'>Reply</a></h6>";
+                            else
+                                echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
+                        echo "</div>";
+                            if($logged_in){
+                                echo "<div id ='bookmark' class='large-3 medium-3 small-4 columns text-right bookmark'>";
+                                    echo "<a href='#' class='bookmark_link'><img src='img/Bookmark.png' width='42' height='42'></a>";
+                                echo "</div>";
+                                echo "<div id='unbookmark' class='large-3 medium-3 small-4 columns text-right unbookmark'>";
+                                    echo "<a href='#' class='unbookmark_link'><img src='img/Unbookmark.png' width='42' height='42'></a>";
+                                echo "</div>";
+                            }
+
+                    echo "</div>";
             echo "</div>";
         echo "</div>";
+    echo "</div>";
+        /*********************************************************************************/
 /*************************************************************************************/
 
 /********************************* PRINT OUT COMMENTS ********************************/
@@ -108,11 +150,12 @@ if($logged_in){
 
 /***************************************** PRINT COMMENTS LOOP *********************************/
 while($stmt->fetch()){
-    $usernameQuery = "select user_name 
-                    from user 
-                    natural join user_edit_com 
-                    natural join com 
-                    where com_id = $com_id1";
+    $usernameQuery = "select u.user_name 
+                    from user as u, user_edit_com as e,
+                    com as c where c.com_id = $com_id1
+                    and e.user_id=u.user_id
+                    and c.com_id=e.com_id";
+    
     $ustmt = $db->prepare($usernameQuery);
     $ustmt->execute();
     $ustmt->store_result();
@@ -184,23 +227,81 @@ while($stmt->fetch()){
     /****** End Comment Links  *****/
 
     /************* UP/DOWN VOTE SECTION *******************/ 
-    echo "<div class='large-1 medium-2 small-3 columns'>";
-        echo "<h6><a>UP</a></h6>";
-        echo "<h6><a>DOWN</a></h6>";
+
+        echo "<div class='large-1 medium-2 small-3 columns text-center'>";
+        echo "<div class='row'>";
+            echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
+                echo "<a class='up_vote'><img src='img/up.png'></a>";
+            echo "</div>";
+        echo "</div>";
+
+
+      echo "<div class='row'>";
+            echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
+                echo "<h6 class='vote_count'>".($upvote_count-$downvote_count)."</h6>";
+            echo "</div>";
+      echo "</div>";
+
+        echo "<div class='row'>";
+            echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
+                echo "<a class='down_vote'><img src='img/down.png'></a>";
+            echo "</div>";
+        echo "</div>";
     echo "</div>";
-     
+    /********************************************************/
+
     echo "</div>";
     echo "</div>";
     /*******************************************************/
     echo "</div>";
+$ustmt->close();
 }
 /*********** END COMMENT PRINT LOOP  *********************/
-echo "</div>";
+    echo "</div>";
+
 /****************************************************************/
 
+/*********** SEE IF ALREADY BOOKMARKED *************************/
+
+
+if($logged_in){
+    
+    if(!($db = db_connect())){
+        echo "Database error<br>";
+        exit;
+    }
+        $user_name = input_clean($_SESSION['valid_user']);
+
+        $userQuery = "select user_id 
+                    from user
+                    where user_name=?";
+        $ustmt = $db->prepare($userQuery);
+        $ustmt->bind_param('s', $user_name);
+        $ustmt->execute();
+        $ustmt->store_result();
+        $ustmt->bind_result($user_id);
+        $ustmt->fetch();
+
+        $bookmarkQ = "select user_id, dis_id 
+                    from bookmarked 
+                    where user_id=? and dis_id=?";
+        $bstmt = $db->prepare($bookmarkQ);
+        $bstmt->bind_param('ii', $user_id, $dis_id);
+        $bstmt->execute();
+        $bstmt->store_result();
+        $brows = $bstmt->num_rows();
+        $bstmt->bind_result($b_user_id, $b_dis_id);
+        if($brows != 0)
+            $bmark=true;
+        else
+            $bmark=false;
+
+}
+
 $dis_stmt->close();
-$stmt->close();
 $ustmt->close();
+$stmt->close();
+$bstmt->close();
 $db->close();
 ?>
   <!-------------------------------------------->
@@ -220,6 +321,49 @@ $(document).foundation();
 var parent_com_id = 0;
 var com_id = 0;
 $(document).ready(function(){
+    
+/*********************Bookmark*********************************************/
+    var bookmark = '<?php echo $bmark; ?>';
+    
+    if(bookmark == true){
+        $('#bookmark').hide();
+        $('#unbookmark').show();
+    }
+    else{
+        $('#unbookmark').hide();
+        $('#bookmark').show();
+    }
+
+    $('body').on('click','.bookmark_link',function(e){
+        e.preventDefault();
+            var username = $('#username').val();
+            var userId = $('#user_id').val();
+            var disId = $('#dis_id').val();
+            $('.bookmark').css("visibility", "hidden");
+            $('.bookmark').css("display", "none");
+            $('.unbookmark').css("display", "block");
+            $('.unbookmark').css("visibility", "visible");
+        
+        $.post('post_bookmark.php', {username: username, user_id: userId, dis_id: disId}) 
+         
+    });
+    
+    $('body').on('click','.unbookmark_link',function(e){
+        e.preventDefault();
+            var username = $('#username').val();
+            var userId = $('#user_id').val();
+            var disId = $('#dis_id').val();
+            $('.unbookmark').css("visibility", "hidden");
+            $('.unbookmark').css("display", "none");
+            $('.bookmark').css("display", "block");
+            $('.bookmark').css("visibility", "visible");
+            
+        $.post('delete_bookmark.php', {username: username, user_id: userId, dis_id: disId}) 
+    
+    });
+
+
+
 
     /******************** CREATE TEXTAREA FOR COMMENTING  **********************/
     $('body').on('click','.comment_reply_link',function(e){
@@ -430,6 +574,48 @@ $(document).ready(function(){
         $(this).parent().parent().parent().find('textarea').val('');
     });
     /*********************************************************/
+
+
+    /******************** UPVOTE FUNCTION *********************/
+    $('body').on('click', '.up_vote', function(e){
+        var element = $(this).parent().parent().parent().parent();
+        var com_id = element.find('.com_id').val();
+        var count_html = element.find('.vote_count');
+        var user_id = $('#user_id').val();
+        
+        $.post('comment_vote.php', {user_id: user_id, com_id: com_id, vote: 1 }, 
+            function(result){
+                result = JSON.parse(result);
+                var vote = result.cur_vote;
+                var count = parseInt(count_html.text())+vote;
+                count_html.html("<b>"+count+"</b>");
+                //count_html.html(count);
+            });
+
+    });
+    /**********************************************************/
+
+    /******************* DOWNVOTE FUNCTION *********************/
+    $('body').on('click', '.down_vote', function(e){
+        var element = $(this).parent().parent().parent().parent();
+        var com_id = element.find('.com_id').val();
+        var count_html = element.find('.vote_count');
+        var user_id = $('#user_id').val();
+        
+        $.post('comment_vote.php', {user_id: user_id, com_id: com_id, vote: -1 }, 
+            function(result){
+                result = JSON.parse(result);
+                var vote = result.cur_vote;
+                var count = parseInt(count_html.text())+vote;
+                count_html.html("<b>"+count+"</b>");
+                //count_html.html(count);
+            });
+
+
+
+    });
+    /**********************************************************/
+
 });
 /********************************************************************************************/
 /********************************************************************************************/
