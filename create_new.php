@@ -42,6 +42,34 @@ if(null == ($parent_cat_passed = filter_input(INPUT_GET, parent_cat_id, FILTER_V
 }
 
 $parent_cat_backup = $parent_cat_passed;
+if(isset($_SESSION['valid_user'])){
+    $logged_in = true;
+    $username = input_clean($_SESSION['valid_user']);
+
+     if(!($db = db_connect())){
+        echo "Database error<br>";
+        exit;
+    }   
+
+    $query = 'select user_type from user where user_name=?';
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($user_type);
+    $stmt->fetch();
+
+    if($user_type != 2){
+        echo "<br> <br> <br> <h3> You are not an Administrator!!!</h3>";
+        exit;
+    }
+
+} else {
+        echo "<br> <br> <br> <h3> You are not logged in!!!</h3>";
+        exit;
+}
+    
+    
 
 /********** Connect to the Database ************/
 if(!($db = db_connect())){

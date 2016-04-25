@@ -8,3 +8,46 @@
 [24-Apr-2016 23:09:31 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'select' (T_STRING), expecting ',' or ';' in /home/stu/quadcore/public_html/kevin/Forum/discussion.php on line 277
 [24-Apr-2016 23:22:24 America/Los_Angeles] PHP Fatal error:  Call to a member function fetch() on a non-object in /home/stu/quadcore/public_html/kevin/Forum/discussion.php on line 274
 [24-Apr-2016 23:22:38 America/Los_Angeles] PHP Fatal error:  Call to a member function fetch() on a non-object in /home/stu/quadcore/public_html/kevin/Forum/discussion.php on line 274
+[24-Apr-2016 23:30:58 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/kevin/Forum/search_submit.php on line 64
+[24-Apr-2016 23:30:58 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/kevin/Forum/search_submit.php on line 92
+[24-Apr-2016 23:32:13 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/kevin/Forum/search_submit.php on line 64
+[24-Apr-2016 23:32:13 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/kevin/Forum/search_submit.php on line 92
+[24-Apr-2016 23:32:43 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/kevin/Forum/search_submit.php on line 64
+[24-Apr-2016 23:32:43 America/Los_Angeles] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/stu/quadcore/public_html/kevin/Forum/search_submit.php on line 92
+[24-Apr-2016 23:43:29 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '{' in /home/stu/quadcore/public_html/kevin/Forum/show_parent_cat.php on line 33
+[24-Apr-2016 23:44:16 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '{' in /home/stu/quadcore/public_html/kevin/Forum/show_parent_cat.php on line 33
+[24-Apr-2016 23:44:17 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '{' in /home/stu/quadcore/public_html/kevin/Forum/show_parent_cat.php on line 33
+[24-Apr-2016 23:56:35 America/Los_Angeles] PHP Warning:  mysqli::prepare(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 126
+[24-Apr-2016 23:56:35 America/Los_Angeles] PHP Fatal error:  Call to a member function close() on a non-object in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 141
+[25-Apr-2016 00:05:06 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:05:06 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:05:24 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:05:24 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:05:39 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:05:39 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:05:40 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:05:40 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:05:41 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:05:41 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:05:43 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:05:43 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:05:45 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:05:45 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:05:46 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:05:46 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:05:47 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:05:47 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:06:12 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:06:12 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:06:32 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:06:32 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:06:35 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:06:35 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:06:36 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:06:36 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:06:48 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:06:48 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:06:52 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:06:52 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147
+[25-Apr-2016 00:12:24 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 146
+[25-Apr-2016 00:12:24 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/kevin/Forum/show_child_cat.php on line 147

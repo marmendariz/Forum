@@ -30,6 +30,12 @@ include_once 'header.php';
 <div class='large-12 large-centered columns panel medium-7 medium-centered small-10 small-centered'>
   <!-------------------------------------------->
 <?php
+if(isset($_SESSION['valid_user'])){
+    $logged_in = true;
+    $username = input_clean($_SESSION['valid_user']);
+}
+
+
 if(!($db = db_connect())){
     echo "Database error<br>";
     exit;
@@ -48,7 +54,29 @@ while($stmt->fetch()){
 $stmt->close();
 $db->close();
 
+
+if($logged_in){
+    
+    if(!($db = db_connect())){
+        echo "Database error<br>";
+        exit;
+    }   
+
+    $query = 'select user_type from user where user_name=?';
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($user_type);
+    $stmt->fetch();
+    
+    if($user_type == 2){
       echo"<a href='create_new.php?parent_cat_id=1'class='small round button'>Create New Category</a><br/>";
+    }
+
+$stmt->close();
+$db->close();
+}
 ?>
   <!-------------------------------------------->
   </div>

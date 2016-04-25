@@ -30,6 +30,12 @@ $category_verified = false;
 <div class='large-12 large-centered columns panel medium-9 medium-centered small-10 small-centered'>
   <!-------------------------------------------->
 <?php
+
+if(isset($_SESSION['valid_user'])){
+    $logged_in = true;
+    $username = input_clean($_SESSION['valid_user']);
+}
+
 if(!($db = db_connect())){
     echo "Database error<br>";
     exit;
@@ -61,7 +67,20 @@ if ($rows) {
     exit;
 }
  
+    if(!($db = db_connect())){
+        echo "Database error<br>";
+        exit;
+    }   
 
+if($logged_in){
+    $query = 'select user_type from user where user_name=?';
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($user_type);
+    $stmt->fetch();
+}
 /********** Query **********/
 
 $query = 'select * from category where parent_cat_id=?';
@@ -78,9 +97,12 @@ if($rows){
     while($stmt->fetch()){
         echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name</h3>";
         echo "<p>&nbsp &nbsp &nbsp &nbsp$cat_text</p>";
-            echo "<div class = 'small-12 medium-12 large-12 columns text-right'>"; 
+            echo "<div class = 'small-12 medium-12 large-12 columns text-right'>";
+            if($logged_in && $user_type == 2){
+                 
             echo "<a href='create_new.php?parent_cat_id=$cat_id'class='small round button'>Create New SubCategory</a><br/>";
-            echo "</div>"; 
+            }    
+        echo "</div>"; 
         echo '<hr>';
     }
 }
@@ -111,14 +133,26 @@ $stmt->close();
             
 $db->close();
 
+if($logged_in){
+    
+
+ if($user_type == 2){
 if (!($discussion_flag)) {
 // This variable has been retrieved from the database 
     echo "<a href='create_new.php?parent_cat_id=$parent_cat_id'class='medium round button'>Create New Category Here!</a><br/>";
-} 
-if ($discussion_flag) 
+}
+}
+
+$stmt->close();
+$db->close();
+}
+
+ 
+if ($discussion_flag){ 
     // parent_cat_id was not set because there wasn't a category who had the passed in value as a parent
     // that's why we have to use the passed in value (stored a backup so if it's tampered with, it still passes original)
     echo"<a href='create_new_discussion.php?cat_id=$parent_cat_backup'class='small round button'>Create New Discussion</a><br/>";
+}
 ?>
 
   <!-------------------------------------------->

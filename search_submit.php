@@ -61,14 +61,14 @@ $cat_search_executed = false;
     $query = "SELECT * FROM category WHERE cat_name LIKE '%" . $cat_input_search . "%' OR cat_text LIKE '%" . $cat_input_search . "%'";
     
     $stmt = $db->prepare($query);
-    $stmt->bind_param('s', $cat_input_search);
+    //$stmt->bind_param('s', $cat_input_search);
     $stmt->execute();
     $stmt->store_result();
     $rows = $stmt->num_rows();
     $stmt->bind_result($cat_id_verified, $cat_name_verified, $cat_level_verified, $cat_text_verified, $parent_cat_id_verified);
     if ($rows) {
         $cat_search_executed = true;
-        echo "<h3>The Following Categories Were Found:<br><br>";
+        echo "<h3>The Following Categories Were Found: </h3> <br>";
         while ($stmt->fetch()) {
             echo "<a href='show_child_cat.php?cat_id=$cat_id_verified'><h3 style='color:#008cbb;'>$cat_name_verified</h3>";
         echo "<p>&nbsp &nbsp &nbsp &nbsp$cat_text_verified</p>";
@@ -89,13 +89,13 @@ $cat_search_executed = false;
     $query = "SELECT * FROM discussion WHERE dis_name LIKE '%" . $cat_input_search . "%' OR dis_text LIKE '%" . $cat_input_search . "%'";
     
     $stmt = $db->prepare($query);
-    $stmt->bind_param('s', $cat_input_search);
+    //$stmt->bind_param('s', $cat_input_search);
     $stmt->execute();
     $stmt->store_result();
     $rows = $stmt->num_rows();
     $stmt->bind_result($dis_id_verified, $dis_name_verified, $dis_text_verified, $dis_flag_verified, $dis_upvote_count, $dis_downvote_count);
     if ($rows) {
-        echo "<h3>The Following Discussions Were Found:<br><br>";
+        echo "<h3>The Following Discussions Were Found:</h3> <br>";
         while ($stmt->fetch()) {
             echo "<a href='discussion.php?dis_id=$dis_id_verified'><h3 style='color:#008cbb;'>$dis_name_verified</h3>";
         echo "<p>&nbsp &nbsp &nbsp &nbsp$dis_text_verified</p>";
