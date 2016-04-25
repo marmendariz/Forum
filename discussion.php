@@ -131,11 +131,11 @@ if($logged_in){
 
 /***************************************** PRINT COMMENTS LOOP *********************************/
 while($stmt->fetch()){
-    $usernameQuery = "select user_name 
-                    from user 
-                    natural join user_edit_com 
-                    natural join com 
-                    where com_id = $com_id1";
+    $usernameQuery = "select u.user_name 
+                    from user as u, user_edit_com as e,
+                    com as c where c.com_id = $com_id1
+                    and e.user_id=u.user_id
+                    and c.com_id=e.com_id";
     $ustmt = $db->prepare($usernameQuery);
     $ustmt->execute();
     $ustmt->store_result();
@@ -198,23 +198,24 @@ while($stmt->fetch()){
     /****** End Comment Links  *****/
 
     /************* UP/DOWN VOTE SECTION *******************/ 
+
         echo "<div class='large-1 medium-2 small-3 columns text-center'>";
-        //echo '<br>';
         echo "<div class='row'>";
             echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
-                echo "<a><img src='img/up.png'></a>";
+                echo "<a class='up_vote'><img src='img/up.png'></a>";
             echo "</div>";
         echo "</div>";
 
+
       echo "<div class='row'>";
             echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
-                echo "<h6>0</h6>";
+                echo "<h6 class='vote_count'>".($upvote_count-$downvote_count)."</h6>";
             echo "</div>";
       echo "</div>";
 
         echo "<div class='row'>";
             echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
-                echo "<a><img src='img/down.png'></a>";
+                echo "<a class='down_vote'><img src='img/down.png'></a>";
             echo "</div>";
         echo "</div>";
     echo "</div>";
@@ -461,6 +462,48 @@ $(document).ready(function(){
         $(this).parent().parent().parent().find('textarea').val('');
     });
     /*********************************************************/
+
+
+    /******************** UPVOTE FUNCTION *********************/
+    $('body').on('click', '.up_vote', function(e){
+        var element = $(this).parent().parent().parent().parent();
+        var com_id = element.find('.com_id').val();
+        var count_html = element.find('.vote_count');
+        var user_id = $('#user_id').val();
+        
+        $.post('comment_vote.php', {user_id: user_id, com_id: com_id, vote: 1 }, 
+            function(result){
+                result = JSON.parse(result);
+                var vote = result.cur_vote;
+                var count = parseInt(count_html.text())+vote;
+                count_html.html("<b>"+count+"</b>");
+                //count_html.html(count);
+            });
+
+    });
+    /**********************************************************/
+
+    /******************* DOWNVOTE FUNCTION *********************/
+    $('body').on('click', '.down_vote', function(e){
+        var element = $(this).parent().parent().parent().parent();
+        var com_id = element.find('.com_id').val();
+        var count_html = element.find('.vote_count');
+        var user_id = $('#user_id').val();
+        
+        $.post('comment_vote.php', {user_id: user_id, com_id: com_id, vote: -1 }, 
+            function(result){
+                result = JSON.parse(result);
+                var vote = result.cur_vote;
+                var count = parseInt(count_html.text())+vote;
+                count_html.html("<b>"+count+"</b>");
+                //count_html.html(count);
+            });
+
+
+
+    });
+    /**********************************************************/
+
 });
 /********************************************************************************************/
 /********************************************************************************************/
