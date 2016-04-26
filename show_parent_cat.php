@@ -28,7 +28,15 @@ include_once 'header.php';
 <!---------------------- SHOW PARENT CATEGORIES------------------------------>
 <div class='row'>
 <div class='large-12 large-centered columns panel medium-7 medium-centered small-10 small-centered'>
-  <!-------------------------------------------->
+
+    <div class='row'>
+    <div class='large-12 small-centered text-center'>
+        <h2>Main Forum Categories</h2>
+    </div> 
+    </div> 
+<hr>
+
+ <!-------------------------------------------->
 <?php
 if(isset($_SESSION['valid_user'])){
     $logged_in = true;
