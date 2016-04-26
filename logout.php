@@ -37,7 +37,8 @@ if(isset($_SESSION['valid_user'])){
 ?>
     <div class='row'>
         <div class='large-7 columns panel large-centered text-center'>
-            <h5>You have been logged out.</h5>
+            <? echo "<h5>$old_user has been logged out.</h5>"; ?>
+            <a href='login.php'><h5>Log back in here.</h5></a>
         </div>
     </div>
 
