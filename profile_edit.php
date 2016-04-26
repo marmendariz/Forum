@@ -52,7 +52,9 @@ if(isset($_SESSION['valid_user'])){
 
                 if(!in_array(end(explode('.', $filename)), $whitelist))
                 {
-                    echo 'Invalid file type';
+                    echo '<script language="javascript">';
+                    echo 'alert("Invalid File Type")';
+                    echo '</script>';
                     exit(0);
                 }
 

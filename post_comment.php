@@ -23,7 +23,7 @@ if(isset($_POST['username'])){
                     parent_com_id) values (2,?,$parent_com_id)";
     $stmt = $db->prepare($comInsert);
     $stmt->bind_param('s',$commentText);
-    //$stmt->execute();
+    $stmt->execute();
     /************************************************************/
 
     $com_id = mysqli_insert_id($db);
@@ -31,12 +31,12 @@ if(isset($_POST['username'])){
         values (?,?,'".date('Y-m-d H:i:s')."',0)";
     $stmt = $db->prepare($comInsert);
     $stmt->bind_param('ii',$user_id,$com_id);
-    //$stmt->execute();
+    $stmt->execute();
  
     $comInsert = "Insert into dis_cont_com values (?,?)";
     $stmt = $db->prepare($comInsert);
     $stmt->bind_param('ii',$dis_id,$com_id);
-    //$stmt->execute();
+    $stmt->execute();
 
     /******** Return Comment Text and Comment id  **********/
     $result = array();
