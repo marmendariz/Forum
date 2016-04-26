@@ -61,7 +61,7 @@ if(isset($_POST['username']) && isset($_POST['password'])){
                     $exp = time()+(86400*30);
                     $token = gen_token();
                     /**/
-                    setcookie("selector", $selector, $exp);
+                    setcookie("selector", $selector, $exp, '/' );
                     setcookie("token", $token, $exp);
                     setcookie("active", true, $exp);
                     /**/

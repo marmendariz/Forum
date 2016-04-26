@@ -26,22 +26,22 @@
           <p>Once you've exhausted the fun in this document, you should check out:</p>
           <div class="row">
             <div class="large-4 medium-4 columns">
-              <p><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything 
+              <p><a href="https://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything 
                 you need to know about using the framework.</p>
             </div>
             <div class="large-4 medium-4 columns">
-              <p><a href="http://zurb.com/university/code-skills">Foundation Code Skills</a><br />These 
+              <p><a href="https://zurb.com/university/code-skills">Foundation Code Skills</a><br />These 
                 online courses offer you a chance to better understand how Foundation works and how you 
                 can master it to create awesome projects.</p>
             </div>
             <div class="large-4 medium-4 columns">
-              <p><a href="http://foundation.zurb.com/forum">Foundation Forum</a><br />Join the 
+              <p><a href="https://foundation.zurb.com/forum">Foundation Forum</a><br />Join the 
                 Foundation community to ask a question or show off your knowlege.</p>
             </div>
           </div>
           <div class="row">
             <div class="large-4 medium-4 medium-push-2 columns">
-              <p><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, 
+              <p><a href="https://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, 
                  issue reports, feature requests and more.</p>
             </div>
             <div class="large-4 medium-4 medium-pull-2 columns">
@@ -170,7 +170,7 @@
         <div class="panel">
           <h5>So many components, girl!</h5>
           <p>A whole kitchen sink of goodies comes with Foundation. Check out the docs to see them all, along with details on making them your own.</p>
-          <a href="http://foundation.zurb.com/docs/" class="small button">Go to Foundation Docs</a>          
+          <a href="https://foundation.zurb.com/docs/" class="small button">Go to Foundation Docs</a>          
         </div>
       </div>
     </div>

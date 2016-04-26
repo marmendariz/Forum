@@ -79,8 +79,8 @@ echo "<div class='row'>";
 
                     echo "<div class='row'>";
                         echo "<div class='large-10 medium-9 small-9 columns text-left'>";
-                            echo "<h1>$dis_name<h1><hr>";  
-                            echo "<h3>&nbsp &nbsp &nbsp &nbsp $dis_text<h3><hr>";
+                            echo "<h1>".stripslashes($dis_name)."<h1><hr>";  
+                            echo "<h3>&nbsp &nbsp &nbsp &nbsp ".stripslashes($dis_text)."<h3><hr>";
                         echo "</div>";
                         echo "<div class='large-1 medium-1 small-3 columns text-center'>";
                             echo "<h4>0</h4>";
@@ -185,7 +185,7 @@ while($stmt->fetch()){
    echo "<div class='columns large-2 medium-2 small-3 small-centered large-uncentered medium-uncentered text-center'>";
                 echo "<div class='row'>";
                     echo "<div class='large-12 medium-12 small-12 columns text-center large-uncentered medium-uncentered small-centered'>";
-                        echo "<h6 class='text-center'><b>$username</b></h6>";
+                        echo "<h6 class='text-center'><b>".stripslashes($username)."</b></h6>";
                     echo "</div>";
                 echo "</div>";
                 echo "<div class='row'>";
@@ -201,7 +201,7 @@ while($stmt->fetch()){
         echo "<input class='parent_com_id' type='hidden' value='$parent_com_id'>";
         echo "<input class='com_id' type='hidden' value='$com_id1'>";
         echo "<hr>";
-        echo "<p>$com_text</p>";
+        echo "<p>".stripslashes($com_text)."</p>";
         echo "<hr>";
 
     /******* Comment links  *********/
@@ -296,12 +296,12 @@ if($logged_in){
         else
             $bmark=false;
 
+$bstmt->close();
 }
 
 $dis_stmt->close();
 $ustmt->close();
 $stmt->close();
-$bstmt->close();
 $db->close();
 ?>
   <!-------------------------------------------->

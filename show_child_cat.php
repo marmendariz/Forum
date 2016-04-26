@@ -97,7 +97,7 @@ echo "<h2>Categories in $cat_name_verified</h2><hr>";
 if($rows){
     while($stmt->fetch()){
         echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name</h3>";
-        echo "<p>&nbsp &nbsp &nbsp &nbsp$cat_text</p>";
+        echo "<p>&nbsp &nbsp &nbsp &nbsp".stripslashes($cat_text)."</p>";
         echo "<div class='row'>";
         echo "<div class = 'small-12 medium-12 large-12 columns text-right'>";
         if($logged_in && $user_type == 2){         
@@ -127,7 +127,7 @@ echo "<div class='panel'>";
         while($stmt->fetch()){
             echo "<hr>"; 
             echo "<a href='discussion.php?dis_id=$dis_id1'><h3 style='color:#008cbb;'>$dis_name</h3>";
-            echo "<p>&nbsp &nbsp &nbsp &nbsp$dis_text</p>";
+            echo "<p>&nbsp &nbsp &nbsp &nbsp".stripslashes($dis_text)."</p>";
             echo '<hr>'; 
         }
     }
