@@ -48,7 +48,7 @@ if(isset($_POST['username'])){
 
     /******** Return Comment Text and Comment id  **********/
     $result = array();
-    $result['commentText'] = $commentText;
+    $result['commentText'] = stripslashes($commentText);
     $result['com_id'] = $com_id;
     $result['image_url'] = $url;
     echo json_encode($result);
