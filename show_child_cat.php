@@ -98,7 +98,7 @@ if($rows){
     while($stmt->fetch()){
         echo "<div class='row'>";
         echo "<div class ='small-6 medium-6 large-6 columns'>";
-        echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name</h3>";
+        echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name</h3></a>";
         echo "<p>&nbsp &nbsp &nbsp &nbsp".stripslashes($cat_text)."</p>";
         echo "</div>";
 
@@ -133,10 +133,10 @@ echo "<div class='panel'>";
         $stmt->store_result();
         $stmt->bind_result($cat_id, $dis_id1, $dis_id2, $dis_name, $dis_text, $dis_flag, $upvote_count, $downvote_count);
 
-            echo "<h2>Discussions<h2>";
+            echo "<h2>Discussions</h2>";
         while($stmt->fetch()){
             echo "<hr>"; 
-            echo "<a href='discussion.php?dis_id=$dis_id1'><h3 style='color:#008cbb;'>$dis_name</h3>";
+            echo "<a href='discussion.php?dis_id=$dis_id1'><h3 style='color:#008cbb;'>$dis_name</h3></a>";
             echo "<p>&nbsp &nbsp &nbsp &nbsp".stripslashes($dis_text)."</p>";
             echo '<hr>'; 
         }
