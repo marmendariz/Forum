@@ -96,10 +96,13 @@ echo "<div class='panel'>";
 echo "<h2>Categories in $cat_name_verified</h2><hr>";
 if($rows){
     while($stmt->fetch()){
+        echo "<div class='row'>";
+        echo "<div class ='small-6 medium-6 large-6 columns'>";
         echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name</h3>";
         echo "<p>&nbsp &nbsp &nbsp &nbsp".stripslashes($cat_text)."</p>";
-        echo "<div class='row'>";
-        echo "<div class = 'small-12 medium-12 large-12 columns text-right'>";
+        echo "</div>";
+
+        echo "<div class = 'small-6 medium-6 large-6 columns text-right'><br>";
         if($logged_in && $user_type == 2){         
             echo "<a href='create_new.php?parent_cat_id=$cat_id'class='small round button'>Create New SubCategory</a><br/>";
         }    
@@ -107,6 +110,13 @@ if($rows){
         echo "</div>"; 
         echo '<hr>';
     }
+}
+if($user_type==2){
+    echo "<div class='row'>";
+    echo "<div class='large-centered columns large-4 small-centered'>";
+echo "<a href='create_new.php?parent_cat_id=$parent_cat_id'class='medium round button'>Create New Category Here!</a><br/>";
+echo "</div>";
+echo "</div>";
 }
 echo "</div>";
 $stmt->close(); 
@@ -132,16 +142,16 @@ echo "<div class='panel'>";
         }
     }
     $stmt->close();
-    echo "</div>";
 $db->close();
 
 if($logged_in){
     
-
+    echo "<div class='row'>";
+    echo "<div class='large-centered columns large-4 small-centered'>";
  if($user_type == 2){
 if (!($discussion_flag)) {
 // This variable has been retrieved from the database 
-    echo "<a href='create_new.php?parent_cat_id=$parent_cat_id'class='medium round button'>Create New Category Here!</a><br/>";
+    echo "<a href='create_new_discussion.php?parent_cat_id=$parent_cat_id'class='medium round button'>Create New Discussion Here!</a><br/>";
 }
 }
 }
@@ -153,8 +163,11 @@ $db->close();
 if ($discussion_flag){ 
     // parent_cat_id was not set because there wasn't a category who had the passed in value as a parent
     // that's why we have to use the passed in value (stored a backup so if it's tampered with, it still passes original)
-    echo"<a href='create_new_discussion.php?cat_id=$parent_cat_backup'class='small round button'>Create New Discussion</a><br/>";
+    echo"<a href='create_new_discussion.php?cat_id=$parent_cat_backup'class='small round button'>Create New Discussion!</a><br/>";
 }
+
+    echo "</div>";
+    echo "</div>";
 ?>
 
   <!-------------------------------------------->

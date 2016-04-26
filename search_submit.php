@@ -66,21 +66,36 @@ $cat_search_executed = false;
     $stmt->store_result();
     $rows = $stmt->num_rows();
     $stmt->bind_result($cat_id_verified, $cat_name_verified, $cat_level_verified, $cat_text_verified, $parent_cat_id_verified);
+    /******/
+    //row, panel
+    //columns
     if ($rows) {
         $cat_search_executed = true;
+        //row 2
+        //columns 2
         echo "<h3>The Following Categories Were Found: </h3> <br>";
+        //close columns 2
+        //close row 2
+
+        //row 3
+        //columns 3
         while ($stmt->fetch()) {
             echo "<a href='show_child_cat.php?cat_id=$cat_id_verified'><h3 style='color:#008cbb;'>$cat_name_verified</h3>";
         echo "<p>&nbsp &nbsp &nbsp &nbsp$cat_text_verified</p>";
         echo "<hr>";
         }
+        //close columns 3
+        //close row 3
     } else {
         echo "<br><br>Sorry, no results were found.";
         exit;
     } 
+    //close row
+    //close columns
+    /*****/
 
     }
-
+    /***************************************/
 
 /*************** Discussion ******************/
 

@@ -195,7 +195,8 @@ if(isset($_SESSION['valid_user'])){
 ?>
     <div class ='row'>
         <div class='columns panel text-center large-8 large-centered medium-8 medium-centered  small-10 small-centered '>
-        <h2 style='color: #008cbb'>Create New Category in <?echo $cat_name_verified?></h2>
+        <h3 style='color: #008cbb'>Create New Category in: </h3>
+        <h2><?echo $cat_name_verified?></h2>
         </div>
     </div>
 <?php
