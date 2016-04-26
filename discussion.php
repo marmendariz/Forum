@@ -424,7 +424,7 @@ $(document).ready(function(){
                                     "</div>"+ //5
                                 "<div class='row'>"+ //7
                                 "<div class='large-12 medium-12 small-12 text-center columns show-for-medium-up'>"+ //8
-                                    "<img class='user_comment_info' src='img/bleh.gif'>"+
+                                    "<img class='profile_image'>"+
                                 "</div>"+ //8
                                 "</div>"+ //7
                                 "</div>"+ //4
@@ -472,6 +472,7 @@ $(document).ready(function(){
                 result = JSON.parse(result);
                 $post.find('.innerdiv').find('p').text(result.commentText);
                 $post.find('.com_id').val(result.com_id);
+                $post.find('.profile_image').attr('src', result.image_url);
             });
 
             $(this).parent().parent().parent().parent().parent().after($post);

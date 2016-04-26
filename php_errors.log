@@ -573,3 +573,19 @@
 [25-Apr-2016 17:12:39 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/mark/temp/Forum/show_child_cat.php on line 149
 [25-Apr-2016 17:12:44 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/mark/temp/Forum/show_child_cat.php on line 148
 [25-Apr-2016 17:12:44 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/mark/temp/Forum/show_child_cat.php on line 149
+[25-Apr-2016 17:24:48 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/Forum/discussion.php on line 302
+[25-Apr-2016 17:24:48 America/Los_Angeles] PHP Fatal error:  Call to a member function close() on a non-object in /home/stu/quadcore/public_html/Forum/discussion.php on line 304
+[25-Apr-2016 17:25:01 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 148
+[25-Apr-2016 17:25:01 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 149
+[25-Apr-2016 17:25:02 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 148
+[25-Apr-2016 17:25:02 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 149
+[25-Apr-2016 17:30:17 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 148
+[25-Apr-2016 17:30:17 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 149
+[25-Apr-2016 17:30:18 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 148
+[25-Apr-2016 17:30:18 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 149
+[25-Apr-2016 17:30:25 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 148
+[25-Apr-2016 17:30:25 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 149
+[25-Apr-2016 17:30:31 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 148
+[25-Apr-2016 17:30:31 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 149
+[25-Apr-2016 17:30:38 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 148
+[25-Apr-2016 17:30:38 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/Forum/show_child_cat.php on line 149

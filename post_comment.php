@@ -38,10 +38,19 @@ if(isset($_POST['username'])){
     $stmt->bind_param('ii',$dis_id,$com_id);
     $stmt->execute();
 
+    $image = "select profile_image from user where user_id=$user_id";
+    $stmt = $db->prepare($image);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($url);
+    $stmt->fetch();
+    $stmt->close();
+
     /******** Return Comment Text and Comment id  **********/
     $result = array();
-    $result['commentText'] = $parent_com_id.$commentText;
+    $result['commentText'] = $commentText;
     $result['com_id'] = $com_id;
+    $result['image_url'] = $url;
     echo json_encode($result);
     /******************************************************/
 }
