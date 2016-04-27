@@ -25,9 +25,17 @@ auto_login();
 <?php
 include_once 'header.php'; 
 ?>
+
+    <div class='row'>
+        <div class='large-12 large-centered columns medium-9 medium-centered small-10 small-centered'>
+            <h5>Forums</h5>
+        </div>
+    </div>
 <!---------------------- SHOW PARENT CATEGORIES------------------------------>
 <div class='row'>
 <div class='large-12 large-centered columns panel medium-7 medium-centered small-10 small-centered'>
+
+
 
     <div class='row'>
     <div class='large-12 small-centered text-center'>

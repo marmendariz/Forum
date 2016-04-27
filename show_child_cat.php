@@ -24,38 +24,13 @@ include_once 'header.php';
 $discussion_flag = false;
 $category_verified = false;
 
-?>
-
-<!--
-<div class='row'>
-    <div class='large-12 large-centered columns medium-9 medium-centered small-10 small-centered'>
-        <p><a href='show_parent_cat.php'>Forums  </a>&gt;</p>
-
-    </div>
-</div>
--->
-
-
-
-<!---------------------- SHOW PARENT CATEGORIES------------------------------>
-<div class='row'>
-<div class='large-12 large-centered columns medium-9 medium-centered small-10 small-centered'>
-  <!-------------------------------------------->
-<?php
-
-if(isset($_SESSION['valid_user'])){
-    $logged_in = true;
-    $username = input_clean($_SESSION['valid_user']);
+if(null == ($parent_cat = filter_input(INPUT_GET, cat_id, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) ) || $_GET['cat_id']=='1'){
+    echo '<br><br><h4>Error! Invalid category ID - Must be Numeric!</h4>';
+    exit;
 }
 
 if(!($db = db_connect())){
     echo "Database error<br>";
-    exit;
-}
-
-
-if(null == ($parent_cat = filter_input(INPUT_GET, cat_id, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) ) || $_GET['cat_id']=='1'){
-    echo '<br><br><h4>Error! Invalid category ID - Must be Numeric!</h4>';
     exit;
 }
 
@@ -79,6 +54,63 @@ if ($rows) {
     exit;
 }
  
+
+/********************************* PRINT OUT NAVIGATION *****************************************/
+$nav_items = array();
+$nav_ids = array();
+echo "<div class='row'>
+    <div class='large-12 large-centered columns medium-9 medium-centered small-10 small-centered'>
+    <h5><a href='show_parent_cat.php'>Forums  </a>&gt;";
+
+$nav = "select cat_name, parent_cat_id from category where cat_id = ?";
+$stmt = $db->prepare($nav);
+$stmt->bind_param('i', $cat_id_verified);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($name, $id);
+$stmt->fetch();
+$nav_ids[] = $cat_id_verified;
+$nav_items[] = $name;
+while($name!=='Quadcore - Main Category'){
+    $nav = "select cat_name, parent_cat_id from category where cat_id = ?";
+    $stmt = $db->prepare($nav);
+    $nav_ids[] = $id;
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($name, $id);
+    $stmt->fetch();
+    $nav_items[] = $name;
+}
+//var_dump($nav_items);
+for($i=count($nav_items)-2; $i>=0;$i--){
+    if($i!=0){   
+        echo " <a href='show_child_cat.php?cat_id=".$nav_ids[$i]."'>".$nav_items[$i]."</a>";
+        echo " &gt;";
+    }
+    else{
+        echo " ".$nav_items[$i];
+    }
+}
+
+echo "</h5>
+    </div>
+</div>";
+/*************************************************************************/
+
+?>
+<!---------------------- SHOW PARENT CATEGORIES------------------------------>
+<div class='row'>
+<div class='large-12 large-centered columns medium-9 medium-centered small-10 small-centered'>
+  <!-------------------------------------------->
+<?php
+
+if(isset($_SESSION['valid_user'])){
+    $logged_in = true;
+    $username = input_clean($_SESSION['valid_user']);
+}
+
+
     if(!($db = db_connect())){
         echo "Database error<br>";
         exit;
