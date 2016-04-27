@@ -59,8 +59,8 @@ if ($rows) {
 $nav_items = array();
 $nav_ids = array();
 echo "<div class='row'>
-    <div class='large-12 large-centered columns medium-9 medium-centered small-10 small-centered'>
-    <h5><a href='show_parent_cat.php'>Forums  </a>&gt;";
+        <div class='large-12 large-centered columns medium-9 medium-centered small-10 small-centered'>
+            <h5><a href='show_parent_cat.php'>Forums  </a>&gt;";
 
 $nav = "select cat_name, parent_cat_id from category where cat_id = ?";
 $stmt = $db->prepare($nav);
@@ -82,7 +82,6 @@ while($name!=='Quadcore - Main Category'){
     $stmt->fetch();
     $nav_items[] = $name;
 }
-//var_dump($nav_items);
 for($i=count($nav_items)-2; $i>=0;$i--){
     if($i!=0){   
         echo " <a href='show_child_cat.php?cat_id=".$nav_ids[$i]."'>".$nav_items[$i]."</a>";
@@ -93,9 +92,7 @@ for($i=count($nav_items)-2; $i>=0;$i--){
     }
 }
 
-echo "</h5>
-    </div>
-</div>";
+echo "</h5></div>";
 /*************************************************************************/
 
 ?>
