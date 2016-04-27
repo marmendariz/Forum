@@ -129,7 +129,8 @@ for($i=count($nav_items)-2; $i>=0;$i--){
         echo " ".$nav_items[$i];
     }
 }
-echo "</h2>";
+echo "</h2><hr>";
+echo "<h3 class='text-center'>Categories</h3>";
 /****/
 
 if($rows){
@@ -172,7 +173,7 @@ echo "<div class='panel'>";
         $stmt->store_result();
         $stmt->bind_result($cat_id, $dis_id1, $dis_id2, $dis_name, $dis_text, $dis_flag, $upvote_count, $downvote_count);
 
-            echo "<h2 class='text-center'>Discussions</h2>";
+            echo "<h3 class='text-center'>Discussions</h3>";
         while($stmt->fetch()){
             echo "<hr>";
             echo "<a href='discussion.php?dis_id=$dis_id1'><h3 style='color:#008cbb;'>$dis_name</h3></a>";
