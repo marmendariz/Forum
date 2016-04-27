@@ -54,9 +54,14 @@ if ($rows) {
     exit;
 }
  
-/*Navigation queries*/
+
+/********************************* PRINT OUT NAVIGATION *****************************************/
 $nav_items = array();
 $nav_ids = array();
+echo "<div class='row'>
+        <div class='large-12 large-centered columns medium-9 medium-centered small-10 small-centered'>
+            <h2><a href='show_parent_cat.php'>Forums  </a>&gt;";
+
 $nav = "select cat_name, parent_cat_id from category where cat_id = ?";
 $stmt = $db->prepare($nav);
 $stmt->bind_param('i', $cat_id_verified);
@@ -77,7 +82,18 @@ while($name!=='Quadcore - Main Category'){
     $stmt->fetch();
     $nav_items[] = $name;
 }
-/****************/
+for($i=count($nav_items)-2; $i>=0;$i--){
+    if($i!=0){   
+        echo " <a href='show_child_cat.php?cat_id=".$nav_ids[$i]."'>".$nav_items[$i]."</a>";
+        echo " &gt;";
+    }
+    else{
+        echo " ".$nav_items[$i];
+    }
+}
+
+echo "</h2></div>";
+/*************************************************************************/
 
 ?>
 <!---------------------- SHOW PARENT CATEGORIES------------------------------>
@@ -117,21 +133,8 @@ $stmt->store_result();
 $rows = $stmt->num_rows();
 $stmt->bind_result($cat_id, $cat_name, $cat_level, $cat_text, $parent_cat_id);
 
-/**Navigation**/
 echo "<div class='panel'>";
-echo "<h2><a href='show_parent_cat.php'>Forums </a>&gt; ";
-for($i=count($nav_items)-2; $i>=0;$i--){
-    if($i!=0){   
-        echo " <a href='show_child_cat.php?cat_id=".$nav_ids[$i]."'>".$nav_items[$i]."</a>";
-        echo " &gt;";
-    }
-    else{
-        echo " ".$nav_items[$i];
-    }
-}
-echo "</h2>";
-/****/
-
+echo "<h2 class='text-center'>Categories in: $cat_name_verified</h2>";
 if($rows){
     while($stmt->fetch()){
         echo "<hr>";
