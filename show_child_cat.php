@@ -192,12 +192,10 @@ if($logged_in){
  if($user_type == 2){
 if (!($discussion_flag)) {
 // This variable has been retrieved from the database 
-    echo "<a href='create_new_discussion.php?parent_cat_id=$parent_cat_id'class='medium round button'>Create New Discussion Here!</a><br/>";
+    echo "<a href='create_new_discussion.php?cat_id=$parent_cat_id'class='medium round button'>Create New Discussion Here!</a><br/>";
 }
 }
 }
-$stmt->close();
-$db->close();
 
 
  
@@ -206,6 +204,9 @@ if ($discussion_flag){
     // that's why we have to use the passed in value (stored a backup so if it's tampered with, it still passes original)
     echo"<a href='create_new_discussion.php?cat_id=$parent_cat_backup'class='small round button'>Create New Discussion!</a><br/>";
 }
+//$stmt->close();
+//$db->close();
+
 
     echo "</div>";
     echo "</div>";
