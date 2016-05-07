@@ -14,7 +14,10 @@
           <li class="has-dropdown">
           <a href="#">User</a>
           <ul class="dropdown">
-            <li><a href="profile.php">Profile</a></li>
+          <li>
+            <a href="profile.php">Profile</a>
+            <a href="bookmarks.php">Bookmarks</a>
+          </li>
           </ul>
           </li>
           <li><a href="login.php">Sign-In</a></li>
