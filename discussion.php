@@ -27,7 +27,7 @@ $parent_dis = intval(input_clean($_GET['dis_id']));
 $dis_id = $parent_dis;
 
 /********** Discussion Query ****************/
-$dis_query = 'select dis_name, dis_text, user_name,
+$dis_query = 'select dis_name, dis_text, user_name, profile_image,
               (ds.upvote_count-ds.downvote_count) as vote_count 
               from discussion as ds,
               user_edit_dis as ue, user as u
@@ -38,7 +38,7 @@ $dis_stmt = $db->prepare($dis_query);
 $dis_stmt->bind_param('i',$parent_dis);
 $dis_stmt->execute();
 $dis_stmt->store_result();
-$dis_stmt->bind_result($dis_name, $dis_text, $dis_usr, $dis_vote);
+$dis_stmt->bind_result($dis_name, $dis_text, $dis_usr,$profile_image, $dis_vote);
 $dis_stmt->fetch();
 /*******************************************/
 
@@ -77,7 +77,7 @@ echo "<div class='row'>";
                     echo "</div>";
                     echo "<div class='row'>";
                         echo "<div class='large-12 columns'>";
-                            echo "<img src='img/bleh.gif'>"; 
+                            echo "<img src='$profile_image'>"; 
                         echo "</div>";
                     echo "</div>";
             echo "</div>";
