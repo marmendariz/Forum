@@ -21,68 +21,66 @@ auto_login();
 
 <?php
 include_once 'header.php';
-$login_failed = false;
+$password_update = false;
 
 /****************QUERY DB FOR LOGIN************************/
-if(isset($_POST['username']) && isset($_POST['password'])){
+/*if(!isset($_GET['hash']) || empty($_GET['hash']))
+{
+    die("<br><br><br>Bad Request");
+}*/
+
+if(isset($_POST['new_password']) && isset($_POST['password'])){
+    $passedhash = $_POST['hash'];
+    $userid = 0;
     if(!($db = db_connect()))
     {
         echo "Database error<br>";
         exit;
     }
-    else{
-        $username = mysqli_real_escape_string($db, input_clean($_POST['username']));
+    $query = 'select user_id from reset_password where hash = ?';
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('s', $passedhash);
+   // echo "<br><br><br> $passedhash";
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($userid);
+    $stmt->fetch();
+
+    //echo "<br><br><br> $userid";
+    if($userid != 0){
+
+        //$username = mysqli_real_escape_string($db, input_clean($_POST['username']));
         $pwd = mysqli_real_escape_string($db,input_clean($_POST['password']));
-        $query = 'select salt from user where user_name=?';
+        $query = 'Update user set hashed_pwd = ?, salt = ? where user_id = ?';
+        //$query2 = 'Update salt=? from user where user_name = ?';
+        $fp = fopen('/dev/urandom','r');
+        $random = fread($fp,32);
+        fclose($fp);
+        $salt = base64_encode($random);
+        $hashed = crypt($pwd, '$6$'.$salt);
+        $salt = mysqli_real_escape_string($db,$salt);
+        $hashed = mysqli_real_escape_string($db,$hashed);
+        //echo "$username ** $pwd ** $hashed ** $salt";
         $stmt = $db->prepare($query);
-        $stmt->bind_param('s', $username);
-        $stmt->execute();
-        $stmt->store_result();
-        $stmt->bind_result($salt);
-        $stmt->fetch();
-        $hashed=crypt($pwd,'$6$'.$salt);
+        $stmt->bind_param('sss', $hashed,$salt,$userid);
+        if(!$stmt->execute()){
+            echo 'Failure to save to database';
+            $stmt->close();
+            exit();
 
-        $query = 'select user_id, selector from user where user_name=? and hashed_pwd=?';
-        $stmt = $db->prepare($query);
-        $stmt->bind_param('ss',$username, $hashed);
-        $stmt->execute();
-        $stmt->store_result();
-        $num_rows = $stmt->num_rows;
-        if($num_rows>0){
-            $stmt->bind_result($user_id, $selector);
-            $stmt->fetch();
-            $_SESSION['valid_user'] = $username;
-            $_SESSION['user_id'] = $user_id;
-
-            /******* COOKIE STUFF *********/
-            if(isset($_POST['rememberMe'])){
-                $rememberMe = input_clean($_POST['rememberMe']);
-                if(input_clean($_POST['rememberMe'])=='yes'){
-                    $exp = time()+(86400*30);
-                    $token = gen_token();
-                    /**/
-                    setcookie("selector", $selector, $exp);
-                    setcookie("token", $token, $exp);
-                    setcookie("active", true, $exp);
-                    /**/
-                    $hToken = crypt($token,"$5$");
-                    $updateToken = "Update user set token='$hToken' where user_id=$user_id";
-                    $st = $db->prepare($updateToken);
-                    if(!$st->execute()){
-                        echo "<br><br><br>Error";
-                        exit;
-                    }
-                    $st->close();
-                }
-            }
-            /******************************/
+            $stmt->close();
         }
-        else
-            $login_failed = true;
-        $stmt->close();
+        $db->close();
+        //header("Location: login.php");
     }
-    $db->close();
+}   
+
+else if(!isset($_GET['hash']) || empty($_GET['hash']))
+{
+        die("<br><br><br>Bad Request");
 }
+
+
 
 /**********************************************/
 /*IF VALID LOGIN STILL ACTIVE, DISPLAY MESSAGE*/
@@ -109,32 +107,33 @@ if(isset($_SESSION['valid_user'])){
 <div class='row'>
 <div class='large-7 large-centered columns panel medium-7 medium-centered small-10 small-centered'>
   <!----------------------------------------->
-  <form method='post' action='login.php'>
+  <form method='post' action='password_recover.php'>
 
     <div class="row">
       <div class='large-3 columns large-centered text-center'>
-      <h5>Please Login</h5>
+      <h5>Reset Password</h5>
       </div>
     </div>
-
-    <div class='row'>
+<!--
+   <div class='row'>
       <div class='large-8 columns large-centered medium-8 medium-centered'>
-        <label for='username'><b>Username:</b></label>
+        <label for='username'><b>User Name:</b></label>
         <input type="text" id = 'username' placeholder="" name='username'/>
       </div>         
     </div>
-
+-->
+<? echo "<input type='hidden' name='hash' value='".$_GET['hash']."'>";?>
     <div class='row'>
       <div class='large-8 columns large-centered medium-8 medium-centered'>
-        <label for='password'><b>Password:</b></label>
-        <input type="password" id = 'password' placeholder="" name='password'/>
+        <label for='new_password'><b>New Password:</b></label>
+        <input type="text" id = 'new_password' placeholder="" name='new_password'/>
       </div>         
     </div>
 
     <div class='row'>
       <div class='large-8 columns large-centered medium-8 medium-centered'>
-        <input type="checkbox" checked id='rememberMe' name='rememberMe' value='yes'/>
-        <label for='password' id='rememberMeLabel'><b>Stay signed in</b></label>
+        <label for='password'><b>Repeat Password:</b></label>
+        <input type="password" id = 'password' placeholder="" name='password'/>
       </div>         
     </div>
 
@@ -145,34 +144,20 @@ if(isset($_SESSION['valid_user'])){
 
      <input type='submit' class='button expand' value='Submit'>    
 
-        <a href="email_password.php"><input type='button' class='button expand' value='Recover Password'></a>
    </div>
     </div>
 
 <?php
-if($login_failed){
+if($password_update){
     echo "
         <div class='row'>
         <div class='columns large-4 large-centered text-center'>
-        <h5 id='login_error'>Login Failed</h5>
+        <h5 id='login_error'>Passsword Reset Failed</h5>
         </div>
         </div>
         ";
 }
 ?>
-
-    <hr>
-    <div class='row'>
-      <div class='row'>
-        <div class='large-4 columns large-centered text-center'>        
-          <h5>New to the Forum?</h5>
-        </div>
-      </div>
-      <div class='large-8 large-centered columns medium-8 medium-centered'>
-        <a href="create_acct.php"><input type='button' class='button expand' value='Create an Account'></a>
-
-      </div>
-    </div>
 
   </form>
   <!---------------------------------------->

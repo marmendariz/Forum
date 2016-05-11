@@ -21,10 +21,10 @@ auto_login();
 
 <?php
 include_once 'header.php';
-$login_failed = false;
+$email_failed = false;
 
 /****************QUERY DB FOR LOGIN************************/
-if(isset($_POST['username']) && isset($_POST['password'])){
+if(isset($_POST['username']) && isset($_POST['email'])){
     if(!($db = db_connect()))
     {
         echo "Database error<br>";
@@ -32,58 +32,89 @@ if(isset($_POST['username']) && isset($_POST['password'])){
     }
     else{
         $username = mysqli_real_escape_string($db, input_clean($_POST['username']));
-        $pwd = mysqli_real_escape_string($db,input_clean($_POST['password']));
-        $query = 'select salt from user where user_name=?';
+        $email = mysqli_real_escape_string($db,input_clean($_POST['email']));
+        $query = 'select user_name from user where email=?';
         $stmt = $db->prepare($query);
-        $stmt->bind_param('s', $username);
+        $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($salt);
+        $stmt->bind_result($username2);
         $stmt->fetch();
-        $hashed=crypt($pwd,'$6$'.$salt);
+        
+        if($username2 == $username){
+            $hash= hash('sha512',rand(0,1000));
+            $query2 = 'select user_id from user where user_name = ?';
+            $stmt2 = $db->prepare($query2);
+            $stmt2->bind_param('s', $username2);
+            $stmt2->execute();
+            $stmt2->store_result();
+            $stmt2->bind_result($user_id);
+            $stmt2->fetch();
 
-        $query = 'select user_id, selector from user where user_name=? and hashed_pwd=?';
-        $stmt = $db->prepare($query);
-        $stmt->bind_param('ss',$username, $hashed);
-        $stmt->execute();
-        $stmt->store_result();
-        $num_rows = $stmt->num_rows;
-        if($num_rows>0){
-            $stmt->bind_result($user_id, $selector);
-            $stmt->fetch();
-            $_SESSION['valid_user'] = $username;
-            $_SESSION['user_id'] = $user_id;
+            $query3 = 'Insert into reset_password (user_id , hash) values (?,?)';
+            $stmt3= $db->prepare($query3);
+            $stmt3->bind_param('ss',$user_id,$hash);
+            $stmt3->execute();
 
-            /******* COOKIE STUFF *********/
-            if(isset($_POST['rememberMe'])){
-                $rememberMe = input_clean($_POST['rememberMe']);
-                if(input_clean($_POST['rememberMe'])=='yes'){
-                    $exp = time()+(86400*30);
-                    $token = gen_token();
-                    /**/
-                    setcookie("selector", $selector, $exp);
-                    setcookie("token", $token, $exp);
-                    setcookie("active", true, $exp);
-                    /**/
-                    $hToken = crypt($token,"$5$");
-                    $updateToken = "Update user set token='$hToken' where user_id=$user_id";
-                    $st = $db->prepare($updateToken);
-                    if(!$st->execute()){
-                        echo "<br><br><br>Error";
-                        exit;
-                    }
-                    $st->close();
-                }
-            }
-            /******************************/
+
+
+            echo "usernames matched";
+            $email_failed=false;
+
+            $to      = $email; // Send email to our user
+            $subject = 'Password Reset'; // Give the email a subject 
+            $message = '
+
+                Hello,
+                We have recieved a request for your Quadcore password to be reset. If you did not send this request please ignore this email. 
+                The request was made for the account below:
+                ------------------------
+                Username: '.$username.'
+                ------------------------
+
+                Please click this link to reset your password:
+                http://www.cs.csubak.edu/~quadcore/mark/temp/Forum/password_recover.php?hash='.$hash.'
+
+                '; // Our message above including the link
+
+            $headers = 'From:noreply@quadcore.cs.csubak.edu' . "\r\n"; // Set from headers
+            mail($to, $subject, $message, $headers); // Send our email
+
         }
-        else
-            $login_failed = true;
+        else{
+            $email_failed=true;
+        }
+
+
+        /******* COOKIE STUFF *********/
+        if(isset($_POST['rememberMe'])){
+            $rememberMe = input_clean($_POST['rememberMe']);
+            if(input_clean($_POST['rememberMe'])=='yes'){
+                $exp = time()+(86400*30);
+                $token = gen_token();
+                /**/
+                setcookie("selector", $selector, $exp);
+                setcookie("token", $token, $exp);
+                setcookie("active", true, $exp);
+                /**/
+                $hToken = crypt($token,"$5$");
+                $updateToken = "Update user set token='$hToken' where user_id=$user_id";
+                $st = $db->prepare($updateToken);
+                if(!$st->execute()){
+                    echo "<br><br><br>Error";
+                    exit;
+                }
+                $st->close();
+            }
+        }
+        /******************************/
         $stmt->close();
+        $stmt2->close();
+        $stmt3->close();
     }
     $db->close();
-}
 
+}
 /**********************************************/
 /*IF VALID LOGIN STILL ACTIVE, DISPLAY MESSAGE*/
 if(isset($_SESSION['valid_user'])){
@@ -109,11 +140,11 @@ if(isset($_SESSION['valid_user'])){
 <div class='row'>
 <div class='large-7 large-centered columns panel medium-7 medium-centered small-10 small-centered'>
   <!----------------------------------------->
-  <form method='post' action='login.php'>
+  <form method='post' action='email_password.php'>
 
     <div class="row">
       <div class='large-3 columns large-centered text-center'>
-      <h5>Please Login</h5>
+      <h5>Password Recovery</h5>
       </div>
     </div>
 
@@ -126,18 +157,10 @@ if(isset($_SESSION['valid_user'])){
 
     <div class='row'>
       <div class='large-8 columns large-centered medium-8 medium-centered'>
-        <label for='password'><b>Password:</b></label>
-        <input type="password" id = 'password' placeholder="" name='password'/>
+        <label for='email'><b>Email:</b></label>
+        <input type="text" id = 'email' placeholder="" name='email'/>
       </div>         
     </div>
-
-    <div class='row'>
-      <div class='large-8 columns large-centered medium-8 medium-centered'>
-        <input type="checkbox" checked id='rememberMe' name='rememberMe' value='yes'/>
-        <label for='password' id='rememberMeLabel'><b>Stay signed in</b></label>
-      </div>         
-    </div>
-
 
 
     <div class='row'>
@@ -145,36 +168,23 @@ if(isset($_SESSION['valid_user'])){
 
      <input type='submit' class='button expand' value='Submit'>    
 
-        <a href="email_password.php"><input type='button' class='button expand' value='Recover Password'></a>
    </div>
     </div>
 
 <?php
-if($login_failed){
+if($email_failed){
     echo "
         <div class='row'>
         <div class='columns large-4 large-centered text-center'>
-        <h5 id='login_error'>Login Failed</h5>
+        <h5 id='login_error'>Email Failed</h5>
         </div>
         </div>
         ";
+
 }
 ?>
 
-    <hr>
-    <div class='row'>
-      <div class='row'>
-        <div class='large-4 columns large-centered text-center'>        
-          <h5>New to the Forum?</h5>
-        </div>
-      </div>
-      <div class='large-8 large-centered columns medium-8 medium-centered'>
-        <a href="create_acct.php"><input type='button' class='button expand' value='Create an Account'></a>
 
-      </div>
-    </div>
-
-  </form>
   <!---------------------------------------->
   </div>
 </div>

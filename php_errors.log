@@ -3,3 +3,4 @@
 [02-May-2016 14:59:14 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/sarahbeth/Forum/show_child_cat.php on line 207
 [02-May-2016 14:59:14 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/sarahbeth/Forum/show_child_cat.php on line 208
 [07-May-2016 03:08:51 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/discussion.php on line 303
+[11-May-2016 10:34:24 America/Los_Angeles] PHP Fatal error:  Call to a member function close() on a non-object in /home/stu/quadcore/public_html/temp/Forum/email_password.php on line 112
