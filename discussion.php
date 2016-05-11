@@ -3,6 +3,7 @@
     discussion.php
  */
 include_once 'lib.php';
+require_once 'comment_lib.php';
 set_path();
 force_ssl();
 session_start();
@@ -173,15 +174,18 @@ if($logged_in){
     echo "<input id='user_id' type='hidden' value='$id'>";
 }
 
-/***************************************** PRINT COMMENTS LOOP *********************************/
+$comments = array();
+
+/************* PRINT COMMENTS ************************/
 while($stmt->fetch()){
     $usernameQuery = "select u.user_name 
                     from user as u, user_edit_com as e,
-                    com as c where c.com_id = $com_id1
+                    com as c where c.com_id = ?
                     and e.user_id=u.user_id
                     and c.com_id=e.com_id";
     
     $ustmt = $db->prepare($usernameQuery);
+    $ustmt->bind_param('i', $com_id1);
     $ustmt->execute();
     $ustmt->store_result();
     $ustmt->bind_result($username);
@@ -196,93 +200,55 @@ while($stmt->fetch()){
     $pstmt->bind_result($pimg);
     $pstmt->fetch();
 
-
-   echo "<div class='row comment'>"; /*********************/
-   if($com_level == 2){
-       $level2 = true;
-        echo "<div class='columns large-10 medium-10 small-10 panel right'>";
-    }
-    else
-        echo "<div class='columns large-10 medium-12 small-12 panel small-centered'>";
-
-   echo "<div class='row'>";
-   /*****/
-   echo "<div class='columns large-2 medium-2 small-3 small-centered large-uncentered medium-uncentered text-center'>";
-                echo "<div class='row'>";
-                    echo "<div class='large-12 medium-12 small-12 columns text-center large-uncentered medium-uncentered small-centered'>";
-                        echo "<h6 class='text-center'><b>".stripslashes($username)."</b></h6>";
-                    echo "</div>";
-                echo "</div>";
-                echo "<div class='row'>";
-                    echo "<div class='large-12 medium-12 show-for-medium-up columns'>";
-                        echo "<img class='user_comment_info' src='$pimg'>";
-                    echo "</div>";
-                echo "</div>";
-    echo "</div>";
-    /*****/
-            
-    echo "<div class='columns large-9 medium-8 small-9'>";
-        echo "<input class='com_level' id='$com_id1' type='hidden' value='$com_level'>"; /*COM LEVEL*/
-        echo "<input class='parent_com_id' type='hidden' value='$parent_com_id'>";
-        echo "<input class='com_id' type='hidden' value='$com_id1'>";
-        echo "<hr>";
-        echo "<p class='comment_text'>".stripslashes($com_text)."</p>";
-        echo "<hr>";
-
-    /******* Comment links  *********/
-    echo "<div class='row com_links text-center'>"; 
-        echo "<div class='columns large-4 medium-4 small-4'>";
-            if($logged_in)
-                echo "<h6><a class='comment_reply_link'>Reply</a></h6>";
-            else
-                echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
-        echo "</div>";
-
-        if($username === $_SESSION['valid_user']){
-            echo "<div class='columns large-4 medium-4 small-4'>";
-                echo "<h6><a class='comment_edit_link'>Edit</a></h6>";
-            echo "</div>";
-        
-            echo "<div class='columns large-4 medium-4 small-4'>";
-                echo "<h6><a class='comment_delete_link'>Delete</a></h6>";
-            echo "</div>";
-        }
-        echo "</div>";
-    echo "</div>";
-    /****** End Comment Links  *****/
-
-    /************* UP/DOWN VOTE SECTION *******************/ 
-
-        echo "<div class='large-1 medium-2 small-3 columns text-center'>";
-        echo "<div class='row'>";
-            echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
-                echo "<a class='up_vote'><img src='img/up.png'></a>";
-            echo "</div>";
-        echo "</div>";
-
-
-      echo "<div class='row'>";
-            echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
-                echo "<h6 class='vote_count'>".($upvote_count-$downvote_count)."</h6>";
-            echo "</div>";
-      echo "</div>";
-
-        echo "<div class='row'>";
-            echo "<div class='large-12 medium-8 small-12 columns small-centered'>";
-                echo "<a class='down_vote'><img src='img/down.png'></a>";
-            echo "</div>";
-        echo "</div>";
-    echo "</div>";
-    /********************************************************/
-
-    echo "</div>";
-    echo "</div>";
-    /*******************************************************/
-    echo "</div>";
-$ustmt->close();
+    $comment = new comment();
+    $comment->dis_id = $dis_id;
+    $comment->com_id = $com_id2;
+    $comment->com_name = $com_name;
+    $comment->com_level = $com_level;
+    $comment->com_text = $com_text;
+    $comment->com_flag = $com_flag;
+    $comment->parent_com_id = $parent_com_id;
+    $comment->upvote_count = $upvote_count;
+    $comment->downvote_count = $downvote_count;
+    $comment->username = $username;
+    $comment->pimg = $pimg;
+    
+    $comments[] = $comment;
 }
-/*********** END COMMENT PRINT LOOP  *********************/
+
+    $ustmt->close();
+    $pstmt->close();
+$l1comments = array();
+$l2comments = array();
+
+foreach($comments as $c){
+    if($c->com_level == 1)
+        $l1comments[] = $c;
+    else
+        $l2comments[] = $c;
+}
+
+foreach($l1comments as $c1){
+    print_comment($db,$logged_in, $c1->dis_id, $c1->com_id, 
+                  $c1->com_name, $c1->com_level,$c1->com_text, 
+                  $c1->com_flag, $c1->parent_com_id, 
+                  $c1->upvote_count, $c1->downvote_count, 
+                  $c1->username, $c1->pimg);
+    foreach($l2comments as $c2){
+        if($c2->parent_com_id == $c1->com_id){
+            print_comment($db,$logged_in, $c2->dis_id, $c2->com_id, 
+                  $c2->com_name, $c2->com_level,$c2->com_text, 
+                  $c2->com_flag, $c2->parent_com_id, 
+                  $c2->upvote_count, $c2->downvote_count, 
+                  $c2->username, $c2->pimg);
+        }
+    }
+}
     echo "</div>";
+
+
+    echo "</div>";
+/*********** END COMMENT PRINT LOOP  *********************/
 
 /****************************************************************/
 
@@ -322,10 +288,10 @@ if($logged_in){
             $bmark=false;
 
 $bstmt->close();
+$ustmt->close();
 }
 
 $dis_stmt->close();
-$ustmt->close();
 $stmt->close();
 $db->close();
 ?>
@@ -351,8 +317,7 @@ var oldComText;
 $(document).ready(function(){
     
 /*********************Bookmark*********************************************/
-    var bookmark = '<?php echo $bmark; ?>';
-    
+    var bookmark = '<?php echo $bmark; ?>';    
     if(bookmark == true){
         $('#bookmark').hide();
         $('#unbookmark').show();
@@ -389,8 +354,6 @@ $(document).ready(function(){
         $.post('delete_bookmark.php', {username: username, user_id: userId, dis_id: disId}) 
     
     });
-
-
 
 
     /******************** CREATE TEXTAREA FOR COMMENTING  **********************/
@@ -431,6 +394,9 @@ $(document).ready(function(){
 
         parent_com_id = $temp.find('.parent_com_id').val();
         com_id = $temp.find('.com_id').val();
+        //var comment = $(this).parent().parent().parent().parent();
+        //com_id = comment.find('.com_id').val();
+        //alert(com_id);
     });
     /***************************************************************************/ 
 
@@ -504,7 +470,7 @@ $(document).ready(function(){
         var commentText = $newComment.val();
         /*Append comment to page*/
         $post.find('.username').find('b').text(username);
-        
+
         //AJAX for posting comment to page
         $.post('post_comment.php', {username: username, commentText: commentText, 
                                     user_id: userId, dis_id: disId, com_id: com_id, 
@@ -612,7 +578,8 @@ $(document).ready(function(){
 
         var $post = $(commentPost); 
         var commentText = $newComment.val();
-        
+
+
         var userId = $('#user_id').val();
         var disId = $('#dis_id').val();
 
@@ -621,9 +588,6 @@ $(document).ready(function(){
                                         user_id: userId, dis_id: disId }, 
             function(result){
                 result = JSON.parse(result);
-                //alert(result);
-                //$post.find('.innerdiv').find('p').text(result.commentText);
-                //alert(result.text);
                 $post.find('.innerdiv').find('p').text(result.text);
                 $post.find('.com_id').val(result.com_id);
                 $post.find('.profile_image').attr('src', result.image_url);
@@ -656,7 +620,6 @@ $(document).ready(function(){
                 var vote = result.cur_vote;
                 var count = parseInt(count_html.text())+vote;
                 count_html.html("<b>"+count+"</b>");
-                //count_html.html(count);
             });
     });
     /**********************************************************/
@@ -673,7 +636,6 @@ $(document).ready(function(){
                 var vote = result.cur_vote;
                 var count = parseInt(count_html.text())+vote;
                 count_html.html("<b>"+count+"</b>");
-                //count_html.html(count);
             });
     });
     /**********************************************************/
@@ -697,7 +659,6 @@ $(document).ready(function(){
     /**********************************************************/
     /************* DISCUSSION DOWNVOTE FUNCTION ***************/
     $('body').on('click', '#dis_downvote', function(e){
-        
         var element = $(this).parent().parent().parent().parent();
         var dis_id = $('#dis_id').val();
         var count_html = $('#dis_votecount');
