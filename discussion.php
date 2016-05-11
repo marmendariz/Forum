@@ -26,14 +26,18 @@ $parent_dis = intval(input_clean($_GET['dis_id']));
 $dis_id = $parent_dis;
 
 /********** Discussion Query ****************/
-$dis_query = 'select dis_name, dis_text 
-              from discussion 
-              where dis_id = ?';
+$dis_query = 'select dis_name, dis_text, user_name,
+              (ds.upvote_count-ds.downvote_count) as vote_count 
+              from discussion as ds,
+              user_edit_dis as ue, user as u
+              where u.user_id = ue.user_id
+              and ue.dis_id = ds.dis_id
+              and ds.dis_id = ?';
 $dis_stmt = $db->prepare($dis_query);
 $dis_stmt->bind_param('i',$parent_dis);
 $dis_stmt->execute();
 $dis_stmt->store_result();
-$dis_stmt->bind_result($dis_name, $dis_text);
+$dis_stmt->bind_result($dis_name, $dis_text, $dis_usr, $dis_vote);
 $dis_stmt->fetch();
 /*******************************************/
 
@@ -56,59 +60,80 @@ $dis_stmt->fetch();
 
 $bmark = false;
 
-/************************** PRINT DISCUSSION TOP-SECTION ****************************/
 echo "<div class='row'>";
-    echo "<div class='large-12 large-centered columns medium-12 medium-centered small-12 small-centered'>";
+    echo "<div class='large-12 columns medium-12 small-12 small-centered'>";
 
-        /*********************************************************************************/
-        echo "<div class='row'>";
-            echo "<div class='panel large-12 medium-12 small-12 columns'>";
+/************************** PRINT DISCUSSION TOP-SECTION ****************************/
 
+/*********************************************************************************/
+        echo "<div class='row panel'>";
+
+            echo "<div class='large-2 medium-1 small-1 columns'>";
                     echo "<div class='row'>";
-
-
-                        echo "<div class='large-10 medium-9 small-9 columns text-left'>";
-                            echo "<h6>USERNAME</h6>";
-                        echo "</div>";
-
-                        echo "<div class='large-1 medium-1 small-3 columns text-center'>";
-                            echo "<a><img src='img/up.png'></a>";
-                        echo "</div>";
-
-                    echo "</div>";
-
-                    echo "<div class='row'>";
-                        echo "<div class='large-10 medium-9 small-9 columns text-left'>";
-                            echo "<h1>".stripslashes($dis_name)."<h1><hr>";  
-                            echo "<h3>&nbsp &nbsp &nbsp &nbsp ".stripslashes($dis_text)."<h3><hr>";
-                        echo "</div>";
-                        echo "<div class='large-1 medium-1 small-3 columns text-center'>";
-                            echo "<h4>0</h4>";
-                            echo "<a><img src='img/down.png'></a>";
+                        echo "<div class='large-12 medium-3 small-3 columns text-center'>";
+                            echo "<h6><b>$dis_usr</b></h6>";
                         echo "</div>";
                     echo "</div>";
-
                     echo "<div class='row'>";
-                        echo "<div class='large-9 medium-9 small-8 columns text-left'>";
-                            echo "<input type='hidden' id='dis_id' value='$dis_id'>";
-                            if($logged_in)
-                                echo "<h6><a href='#' class='discussion_reply_link'>Reply</a></h6>";
-                            else
-                                echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
+                        echo "<div class='large-12 columns'>";
+                            echo "<img src='img/bleh.gif'>"; 
                         echo "</div>";
-                            if($logged_in){
-                                echo "<div id ='bookmark' class='large-3 medium-3 small-4 columns text-right bookmark'>";
-                                    echo "<a href='#' class='bookmark_link'><img src='img/Bookmark.png' width='42' height='42'></a>";
-                                echo "</div>";
-                                echo "<div id='unbookmark' class='large-3 medium-3 small-4 columns text-right unbookmark'>";
-                                    echo "<a href='#' class='unbookmark_link'><img src='img/Unbookmark.png' width='42' height='42'></a>";
-                                echo "</div>";
-                            }
-
                     echo "</div>";
             echo "</div>";
-        echo "</div>";
+
+
+                    /******************************/
+echo "<div class='large-9 medium-8 small-8 columns text-left'>";
+        
+    echo "<div class='row'>";
+            echo "<div class='large-12'>";
+                echo "<h2>".stripslashes($dis_name)."</h2><hr>";  
+                    echo "<h4>".stripslashes($dis_text)."</h4><hr>";
+            echo "</div>";
+     echo "</div>";
+
+    echo "<div class='row'>";
+            echo "<div class='large-10 medium-10 small-8 columns text-left'>";
+                echo "<input type='hidden' id='dis_id' value='$dis_id'>";
+                if($logged_in)
+                echo "<h6><a href='#' class='discussion_reply_link'>Reply</a></h6>";
+                else
+                echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
+            echo "</div>";
+                    
+            if($logged_in){
+            echo "<div id ='bookmark' class='large-1 medium-1 small-2 columns text-right bookmark'>";
+                echo "<a href='#' class='bookmark_link'><img src='img/Bookmark.png' width='42' height='42'></a>";
+            echo "</div>";
+            echo "<div id='unbookmark' class='large-1 medium-1 small-2 columns text-right unbookmark'>";
+                echo "<a href='#' class='unbookmark_link'><img src='img/Unbookmark.png' width='42' height='42'></a>";
+            echo "</div>";
+            }
     echo "</div>";
+
+echo "</div>";
+                    /******************************************/
+                            
+            echo "<div class='large-1 medium-2 small-3 columns text-center'>";
+                echo "<div class='row'>";
+                    echo "<div id='dis_upvote' class='large-12 columns small-centered'>";
+                        echo "<a><img src='img/up.png'></a>";
+                    echo "</div>";
+                echo "</div>";
+                echo "<div class='row'>";
+                    echo "<div class='large-12 columns small-centered'>";
+                        echo "<h4 id='dis_votecount'>$dis_vote</h4>";/*Voting count*/
+                    echo "</div>";
+                echo "</div>";
+                echo "<div class='row'>";
+                    echo "<div id='dis_downvote' class='large-12 columns small-centered'>";
+                        echo "<a><img src='img/down.png'></a>";
+                    echo "</div>";
+                echo "</div>";
+            echo "</div>";
+
+        echo "</div><br>";
+
         /*********************************************************************************/
 /*************************************************************************************/
 
@@ -201,25 +226,25 @@ while($stmt->fetch()){
         echo "<input class='parent_com_id' type='hidden' value='$parent_com_id'>";
         echo "<input class='com_id' type='hidden' value='$com_id1'>";
         echo "<hr>";
-        echo "<p>".stripslashes($com_text)."</p>";
+        echo "<p class='comment_text'>".stripslashes($com_text)."</p>";
         echo "<hr>";
 
     /******* Comment links  *********/
     echo "<div class='row com_links text-center'>"; 
         echo "<div class='columns large-4 medium-4 small-4'>";
             if($logged_in)
-                echo "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>";
+                echo "<h6><a class='comment_reply_link'>Reply</a></h6>";
             else
                 echo "<h6><a href='login.php' class='login_reply_link'>Login to Reply</a></h6>";
         echo "</div>";
 
         if($username === $_SESSION['valid_user']){
             echo "<div class='columns large-4 medium-4 small-4'>";
-                echo "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>";
+                echo "<h6><a class='comment_edit_link'>Edit</a></h6>";
             echo "</div>";
         
             echo "<div class='columns large-4 medium-4 small-4'>";
-                echo "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>";
+                echo "<h6><a class='comment_delete_link'>Delete</a></h6>";
             echo "</div>";
         }
         echo "</div>";
@@ -320,6 +345,9 @@ $(document).foundation();
 
 var parent_com_id = 0;
 var com_id = 0;
+var oldCom;
+var oldComText;
+
 $(document).ready(function(){
     
 /*********************Bookmark*********************************************/
@@ -435,20 +463,33 @@ $(document).ready(function(){
                                 "<p></p><hr>"+
                                 "<div class='row com_links text-center'>"+ //10
                                     "<div class='columns large-4 medium-4 small-4'>"+ //11
-                                        "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>"+
+                                        "<h6><a class='comment_reply_link'>Reply</a></h6>"+
                                     "</div>"+ //11
                                     "<div class='columns large-4 medium-4 small-4'>"+ //12
-                                        "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>"+
+                                        "<h6><a class='comment_edit_link'>Edit</a></h6>"+
                                     "</div>"+ //12
                                     "<div class='columns large-4 medium-4 small-4'>"+ //13
-                                        "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>"+
+                                        "<h6><a class='comment_delete_link'>Delete</a></h6>"+
                                     "</div>"+//13
                                     "</div>"+//10
                                     "</div>"+//9
-                                    "<div class='large-1 medium-2 small-3 columns'>"+ //14
-                                        "<h6><a>UP</a></h6>"+
-                                        "<h6><a>DOWN</a></h6>"+
-                                    "</div>"+ //14
+                                    "<div class='large-1 medium-2 small-3 columns text-center'>"+
+                                    "<div class='row'>"+
+                                    "<div class='large-12 medium-8 small-12 columns small-centered'>"+
+                                    "<a class='up_vote'><img src='img/up.png'></a>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "<div class='row'>"+
+                                    "<div class='large-12 medium-8 small-12 columns small-centered'>"+
+                                    "<h6 class='vote_count'>0</h6>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "<div class='row'>"+
+                                    "<div class='large-12 medium-8 small-12 columns small-centered'>"+
+                                    "<a class='down_vote'><img src='img/down.png'></a>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "</div>"+
                                     "</div>"+//3
                                 "</div>"+//2
                             "</div>"; //1
@@ -511,7 +552,6 @@ $(document).ready(function(){
     $('body').on('click','.dis_comment_submit', function(e){
         $('.discussion_reply').css('visibility', 'hidden');
         $('.discussion_reply').css('display', 'none');
-
         
         var $newComment = $('#dis_reply_area');
         var username = $('#username').val();
@@ -523,36 +563,49 @@ $(document).ready(function(){
                             "<div class='columns large-2 medium-2 small-3 text-center small-centered large-uncentered medium-uncentered'>"+ //4
                                 "<div class='row'>"+ //5
                                     "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncentered'>"+ //6
-                                        "<h6 class='username'><b></b></h6>"+
+                                        "<h6 class='username'><b>"+username+"</b></h6>"+
                                     "</div>"+ //6
                                     "</div>"+ //5
                                 "<div class='row'>"+ //7
                                 "<div class='large-12 medium-12 small-12 text-center columns small-centered large-uncentered show-for-medium-up'>"+ //8
-                                    "<img class='user_comment_info' src='img/bleh.gif'>"+
+                                    "<img class='profile_image'>"+
                                 "</div>"+ //8
                                 "</div>"+ //7
                                 "</div>"+ //4
                                 "<div class='columns large-9 medium-8 small-9'>"+ //9
-                                "<input type='hidden' class='com_level' value='2'>"+
-                                "<input type='hidden' class='parent_com_id' value='"+com_id+"'>"+ /*Parent com id needs to be set*/
+                                "<input type='hidden' class='com_level' value='1'>"+
+                                "<input type='hidden' class='parent_com_id' value='1'>"+
                                 "<input type='hidden' class='com_id'><hr>"+ /*Com id needs to be set*/
-                                "<p></p><hr>"+
+                                "<p class='comment_text'></p><hr>"+
                                 "<div class='row com_links text-center'>"+ //10
                                     "<div class='columns large-4 medium-4 small-4'>"+ //11
-                                        "<h6><a href='#' class='comment_reply_link'>Reply</a></h6>"+
+                                        "<h6><a class='comment_reply_link'>Reply</a></h6>"+
                                     "</div>"+ //11
                                     "<div class='columns large-4 medium-4 small-4'>"+ //12
-                                        "<h6><a href='#' class='comment_edit_link'>Edit</a></h6>"+
+                                        "<h6><a class='comment_edit_link'>Edit</a></h6>"+
                                     "</div>"+ //12
                                     "<div class='columns large-4 medium-4 small-4'>"+ //13
-                                        "<h6><a href='#' class='comment_delete_link'>Delete</a></h6>"+
+                                        "<h6><a class='comment_delete_link'>Delete</a></h6>"+
                                     "</div>"+//13
                                     "</div>"+//10
                                     "</div>"+//9
-                                    "<div class='large-1 medium-2 small-3 columns'>"+ //14
-                                        "<h6><a>UP</a></h6>"+
-                                        "<h6><a>DOWN</a></h6>"+
-                                    "</div>"+ //14
+                                    "<div class='large-1 medium-2 small-3 columns text-center'>"+
+                                    "<div class='row'>"+
+                                    "<div class='large-12 medium-8 small-12 columns small-centered'>"+
+                                    "<a class='up_vote'><img src='img/up.png'></a>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "<div class='row'>"+
+                                    "<div class='large-12 medium-8 small-12 columns small-centered'>"+
+                                    "<h6 class='vote_count'>0</h6>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "<div class='row'>"+
+                                    "<div class='large-12 medium-8 small-12 columns small-centered'>"+
+                                    "<a class='down_vote'><img src='img/down.png'></a>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "</div>"+
                                     "</div>"+//3
                                 "</div>"+//2
                             "</div>"; //1
@@ -560,9 +613,22 @@ $(document).ready(function(){
         var $post = $(commentPost); 
         var commentText = $newComment.val();
         
-        /*Append comment to page*/
-        $post.find('.username').find('b').text(username);
-        $post.find('.innerdiv').find('p').text($newComment.val());
+        var userId = $('#user_id').val();
+        var disId = $('#dis_id').val();
+
+        
+        $.post('dis_post_comment.php', {username: username, commentText: commentText, 
+                                        user_id: userId, dis_id: disId }, 
+            function(result){
+                result = JSON.parse(result);
+                //alert(result);
+                //$post.find('.innerdiv').find('p').text(result.commentText);
+                //alert(result.text);
+                $post.find('.innerdiv').find('p').text(result.text);
+                $post.find('.com_id').val(result.com_id);
+                $post.find('.profile_image').attr('src', result.image_url);
+            });
+        
         $(this).parent().parent().parent().after($post);
         $('#dis_reply_area').val('');
     });
@@ -592,10 +658,8 @@ $(document).ready(function(){
                 count_html.html("<b>"+count+"</b>");
                 //count_html.html(count);
             });
-
     });
     /**********************************************************/
-
     /******************* DOWNVOTE FUNCTION *********************/
     $('body').on('click', '.down_vote', function(e){
         var element = $(this).parent().parent().parent().parent();
@@ -611,11 +675,93 @@ $(document).ready(function(){
                 count_html.html("<b>"+count+"</b>");
                 //count_html.html(count);
             });
-
-
-
     });
     /**********************************************************/
+
+    
+    /************** DISCUSSION UPVOTE FUNCTION *****************/
+    $('body').on('click', '#dis_upvote', function(e){
+        var element = $(this).parent().parent().parent().parent();
+        var dis_id = $('#dis_id').val();
+        var count_html = $('#dis_votecount');
+        var user_id = $('#user_id').val();
+        
+        $.post('discussion_vote.php', {user_id: user_id, dis_id: dis_id, vote: 1 }, 
+            function(result){
+                result = JSON.parse(result);
+                var vote = result.cur_vote;
+                var count = parseInt(count_html.text())+vote;
+                count_html.html("<b>"+count+"</b>");
+            });
+    });
+    /**********************************************************/
+    /************* DISCUSSION DOWNVOTE FUNCTION ***************/
+    $('body').on('click', '#dis_downvote', function(e){
+        
+        var element = $(this).parent().parent().parent().parent();
+        var dis_id = $('#dis_id').val();
+        var count_html = $('#dis_votecount');
+        var user_id = $('#user_id').val();
+        
+        
+        $.post('discussion_vote.php', {user_id: user_id, dis_id: dis_id, vote: -1 }, 
+            function(result){
+                result = JSON.parse(result);
+                var vote = result.cur_vote;
+                var count = parseInt(count_html.text())+vote;
+                count_html.html("<b>"+count+"</b>");
+            });
+    });
+    /**********************************************************/
+
+
+    /**********************************************************/
+    $('body').on('click', '.comment_edit_link', function(e){
+        $('.comment_edit_area').remove();
+        var comment = $(this).parent().parent().parent().parent();
+        oldComText = comment.find('p').text();
+        oldCom = comment;
+        var text = comment.find('.comment_text').text();
+        
+        var editArea = "<div class='comment_edit_area'>"+
+                            "<div class='row'>"+
+                                "<div class='large-12 columns'>"+
+                                    "<p>Edit your comment:<textarea id='editArea' rows='5'>"+text+"</textarea>"+
+                                    "</p>"+
+                                "</div>"+
+                            "</div>"+
+                            "<div class='row'>"+
+                                "<div class='large-6 small-12 medium-6 columns'>"+
+                                    "<input type='button' class='button expand comment_edit_submit' value='Submit'>"+
+                                "</div>"+
+                                "<div class='large-6 medium-6 small-12 columns'>"+
+                                    "<input type='button' class='button expand alert comment_edit_cancel' value='Cancel'>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>";
+        comment.find('.comment_text').replaceWith(editArea);
+    });
+
+
+    $('body').on('click', '.comment_edit_cancel', function(e){
+        $('.comment_edit_area').replaceWith("<p class='comment_text'>"+oldComText+"</p>");
+    });
+
+
+    $('body').on('click', '.comment_edit_submit', function(e){
+        var user_id = $('#user_id').val();
+        var com_id = oldCom.find('.com_id').val();
+        
+        var newText = $('#editArea').val();
+        $.post('edit_comment.php', {user_id: user_id, com_id: com_id, 
+                                       text: newText }, 
+            function(result){
+                var result = JSON.parse(result);
+                $('.comment_edit_area').replaceWith("<p class='comment_text'>"+result.text+"</p>");
+            });
+    });
+    /**********************************************************/
+
 
 });
 /********************************************************************************************/
