@@ -26,6 +26,22 @@ if(isset($_SESSION['valid_user']))
 $parent_dis = intval(input_clean($_GET['dis_id']));
 $dis_id = $parent_dis;
 
+/***/
+$nav_items = array();
+$nav_ids = array();
+$category = "select c.cat_id, c.cat_name 
+             from category as c,
+             cat_cont_dis as cd
+             where cd.cat_id = c.cat_id";
+$stmt = $db->prepare($category);
+$stmt->execute();
+$stmt->bind_result($cat_id, $cat_name);
+$stmt->fetch();
+echo $cat_name;
+$stmt->close();
+
+/***/
+
 /********** Discussion Query ****************/
 $dis_query = 'select dis_name, dis_text, user_name, profile_image,
               (ds.upvote_count-ds.downvote_count) as vote_count 
@@ -214,10 +230,10 @@ while($stmt->fetch()){
     $comment->pimg = $pimg;
     
     $comments[] = $comment;
-}
-
     $ustmt->close();
     $pstmt->close();
+}
+
 $l1comments = array();
 $l2comments = array();
 
