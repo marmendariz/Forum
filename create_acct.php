@@ -261,7 +261,11 @@ else
     <div class='row'>
       <div class='large-6 columns'>
         <label for='password'><b>Password</b></label>
-        <input type="password" id = 'password' placeholder="Enter at least 5 characters" name='password' required maxlength="15"/>
+        <input type="password" id = 'password' 
+        name='password' required maxlength="20"
+        class='has-tip tip-top' aria-haspopup='true'
+        title='Must be at least 8 characters, with at least one uppercase, 
+        one number, and one special character' data-tooltip/>
       </div> 
 <?php
         

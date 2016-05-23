@@ -1,16 +1,45 @@
 <?php
 include_once 'lib.php';
-$length = 5;
+
+define('LENGTH', 8);
 
 if(isset($_POST['password'])){
-    $pwd = input_clean($_POST['password']);
-    $size = strlen($pwd);
-    if($size<$length && $size>0){
-        echo 'Too short';
+    if(empty($_POST['password']) || $_POST['password']==''){
+        echo 'Choose a password';
+        exit;
     }
-    if($size>=5)
-        echo 'Great!';
+    $pwd = input_clean($_POST['password']);
+    check_password($pwd);
 }
-if(empty($_POST['password']) || $_POST['password']=='')
-    echo 'Choose a password';
+
+/******************/
+function check_password($pass){
+    $length = constant('LENGTH');
+    $size = strlen($pass);
+    $error = '';
+
+    if($size<$length){
+        $error = 'Too short';
+    }
+    if($size>=$length){
+        $error = 'Great!';
+    }
+    if(!preg_match('/[0-9]+/',$pass)){
+        $error = "Invalid password";
+    }
+    
+    if(!preg_match('/[\W]+/',$pass)){
+        $error = "Invalid password";
+    }
+    
+    if(!preg_match('/[A-Z]+/',$pass)){
+        $error = "Invalid password";
+    }
+    
+    if(!preg_match('/[a-z]+/',$pass)){
+        $error = "Invalid password";
+    }
+    echo $error;
+}
+/******************/
 ?>
