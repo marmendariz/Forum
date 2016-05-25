@@ -50,6 +50,23 @@ $cat_search_executed = false;
                 exit;
             }   
 
+?>
+
+<br><br><br>
+<div class="row">
+        <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
+
+<h3> Didn't Find What You Were Looking For? </h3>
+<form method = 'post' action = 'search_submit.php' id = searchform>
+<input type = 'text' name ='search_field' value = <? echo $cat_input_search ?> >
+<input type = 'submit' name = 'submit2' class='button' value = 'Search'>
+</form>
+       
+        </div>
+</div>
+
+<?
+
 /*********** What type of Search *************/
 
     $search_type = $_POST['search_type'];
@@ -73,7 +90,9 @@ $cat_search_executed = false;
         $cat_search_executed = true;
         //row 2
         //columns 2
-        echo "<h3>The Following Categories Were Found: </h3> <br>";
+
+       echo "<h3>The Following Categories Were Found: </h3> <br>";
+
         //close columns 2
         //close row 2
 
@@ -123,95 +142,10 @@ $cat_search_executed = false;
 
     }
 
-
-
-
-
-
     }
 
 }
 ?>
 
-
-<div class="row">
-        <div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>
-            <div class='slick_class'>
-                <center><a href='show_parent_cat.php'><h1><img src="img/Logo.png"></h1></a></center>
-                <center><a href='show_child_cat.php?cat_id=2'><h1><img src="img/Math.png"></h1></a></center>
-                <center><a href='show_child_cat.php?cat_id=6'><h1><img src="img/Computer Science.png"></h1></a></center>
-            </div>
- 
-<h3> Search Details </h3>
-<p> Search Category Titles and Text</p>
-<form method = 'post' action = 'search_submit.php' id = searchform>
-<input type = 'text' name ='search_field'>
-<input type = 'submit' name = 'submit2' class='button' value = 'Search'>
-</form>
-
-
-       
-        </div>
-</div>
-
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/foundation.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="slick/slick.min.js"></script>
-    <script type="text/javascript">
-        $(document).foundation();
-        
-        var addAncHide = true;
-        $(document).ready(function(){
-
-            $('#addAncSection').hide();
-
-            $('#addAnc').on('click', function(){
-                var button = $('#addAnc');
-                if(addAncHide){
-                    $('#addAncSection').show();
-                    addAncHide = false;
-                    button.val('Collapse');
-                }
-                else{
-                    $('#addAncSection').hide();
-                    addAncHide = true;
-                    button.val('Expand');
-                }
-            });
-
-
-            var width = $(window).width();
-            var height = $(window).height();
-            
-            if(width <= 1023 && height <= 768){
-                $('.slick_class').slick({
-                    dots: false,
-                    swipeToSlide: true,
-                    arrows:false,
-                    autoplay:true,
-                    autoplaySpeed: 3000,
-                    infinite: true,
-                    speed: 800,
-                    slidesToShow: 1,
-                    adaptiveHeight: false
-                });
-            }
-            else{
-                $('.slick_class').slick({
-                    dots: true,
-                    swipeToSlide: false,
-                    arrows:false,
-                    autoplay:true,
-                    autoplaySpeed: 3000,
-                    infinite: true,
-                    speed: 800,
-                    slidesToShow: 1,
-                    adaptiveHeight: false
-                });
-
-            }
-        });
-    </script>
- </body>
+</body>
 </html>
