@@ -51,15 +51,27 @@ if(!($db = db_connect())){
     echo "Database error<br>";
     exit;
 }
+
 $query = 'select * from category where cat_level=2';
 $stmt = $db->prepare($query);
 $stmt->execute();
 $stmt->store_result();
 $stmt->bind_result($cat_id, $cat_name, $cat_level, $cat_text, $parent_cat_id);
 while($stmt->fetch()){
-    echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name<h3></a>";
-    echo "<p>&nbsp &nbsp &nbsp &nbsp$cat_text</p>"; 
-    echo '<hr>';
+        echo "<hr>";
+        echo "<div class='row'>";
+        echo "<div class ='small-6 medium-6 large-6 columns'>";
+        echo "<a href='show_child_cat.php?cat_id=$cat_id'><h3 style='color:#008cbb;'>$cat_name</h3></a>";
+        echo "<p>&nbsp &nbsp &nbsp &nbsp".stripslashes($cat_text)."</p>";
+        echo "</div>";
+
+        echo "<div class = 'small-6 medium-6 large-6 columns text-right'><br>";
+        //if($logged_in && $user_type == 2){         
+            echo "<a href='create_new.php?parent_cat_id=$cat_id'class='small round button'>Create New SubCategory</a><br/>";
+        //}    
+        echo "</div>"; 
+        echo "</div>"; 
+
 }
 
 $stmt->close();
