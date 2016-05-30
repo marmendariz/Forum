@@ -66,7 +66,48 @@ if(isset($_SESSION['valid_user'])){
         echo "Administrator";
     else
         echo "No Valid User Type Found";
+
+
+    $query = 'select com_count from user_com_count where user_name=?';
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('s',$username);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($com_count);
+    $stmt->fetch();
+
+    $query = 'select dis_count from user_dis_count where user_name=?';
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('s',$username);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($dis_count);
+    $stmt->fetch();
+
+    $query = 'select Comment_Upvotes, Comment_Downvotes  from user_com_uvdv where user_name=?';
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('s',$username);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($com_upvote, $com_downvote);
+    $stmt->fetch();
+
     
+    $query = 'select Dis_Upvotes, Dis_Downvotes  from user_dis_uvdv where user_name=?';
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('s',$username);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($dis_upvote, $dis_downvote);
+    $stmt->fetch();
+
+
+    $up_count = $com_upvote + $dis_upvote;
+    $down_count = $com_downvote + $dis_downvote;
+
+    $stmt->close();
+    $db->close();
+
     echo "</h4>";
     echo "</div>";
     echo "<div class='columns panel text-center  large-8 large-centered medium-8 medium-centered  small-10 small-centered '>";
