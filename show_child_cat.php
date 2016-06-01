@@ -154,7 +154,7 @@ if($rows){
 if($user_type==2){
     echo "<div class='row'>";
     echo "<div class='large-centered columns large-4 small-centered'>";
-echo "<a href='create_new.php?parent_cat_id=$parent_cat_id'class='medium round button'>Create New Category Here!</a><br/>";
+echo "<a href='create_new.php?parent_cat_id=$cat_id_verified'class='medium round button'>Create New Category Here!</a><br/>";
 echo "</div>";
 echo "</div>";
 }
@@ -192,12 +192,11 @@ if($logged_in){
  if($user_type == 2){
 if (!($discussion_flag)) {
 // This variable has been retrieved from the database 
-    echo "<a href='create_new_discussion.php?cat_id=$parent_cat_id'class='medium round button'>Create New Discussion Here!</a><br/>";
+    echo "<a href='create_new_discussion.php?cat_id=$cat_id_verified'class='medium round button'>Create New Discussion Here!</a><br/>";
+    
 }
 }
 }
-
-
  
 if ($discussion_flag){ 
     // parent_cat_id was not set because there wasn't a category who had the passed in value as a parent
