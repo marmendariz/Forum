@@ -145,6 +145,29 @@ if($fnStat && $mnStat && $lnStat && $emStat && $unStat && $pwStat){
     }
     $stmt->close();
     $db->close();
+
+    echo"
+<div class='row'>
+<div class='large-7 large-centered columns panel medium-7 medium-centered small-10 small-centered'>
+    <div class='row'>
+      <div class='large-8 columns large-centered text-center medium-8 medium-centered'>
+        <h5>Account successfully created!</h5>
+        <h5>Please <a href='login.php'>login here</a></h5>
+      </div>
+    </div>
+</div>
+</div>
+<script src='js/vendor/jquery.js'></script>
+    <script src='js/jquery.maskedinput.min.js' type='text/javascript'></script>
+<script src='js/foundation.min.js'></script>
+    <script>
+        $(document).foundation();
+    </script>
+</body>
+</html>
+";
+
+exit;
 }
 /*********************************************************/
 }
@@ -261,11 +284,10 @@ else
     <div class='row'>
       <div class='large-6 columns'>
         <label for='password'><b>Password</b></label>
+        <p id='password_policy'>Must be at least 8 characters, with at least one uppercase, 
+        one number, and one special character</p>
         <input type="password" id = 'password' 
-        name='password' required maxlength="20"
-        class='has-tip tip-top' aria-haspopup='true'
-        title='Must be at least 8 characters, with at least one uppercase, 
-        one number, and one special character' data-tooltip/>
+        name='password' required maxlength="20"/>
       </div> 
 <?php
         
