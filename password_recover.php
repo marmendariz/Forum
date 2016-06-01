@@ -45,6 +45,9 @@ if(isset($_POST['new_password']) && isset($_POST['password'])){
     $stmt->store_result();
     $stmt->bind_result($userid);
     $stmt->fetch();
+    if($userid == 0){
+        header("Location: https://www.cs.csubak.edu/~quadcore/Forum/");
+    }
 
     //echo "<br><br><br> $userid";
     if($userid != 0){
@@ -71,8 +74,9 @@ if(isset($_POST['new_password']) && isset($_POST['password'])){
             $stmt->close();
         }
         $db->close();
-        //header("Location: login.php");
+        header("Location: login.php");
     }
+
 }   
 
 else if(!isset($_GET['hash']) || empty($_GET['hash']))

@@ -46,19 +46,28 @@ if(isset($_POST['username']) && isset($_POST['email'])){
             $query2 = 'select user_id from user where user_name = ?';
             $stmt2 = $db->prepare($query2);
             $stmt2->bind_param('s', $username2);
-            $stmt2->execute();
+            if(!$stmt2->execute()){
+                echo '<br><br> Error in userid';
+            }
             $stmt2->store_result();
             $stmt2->bind_result($user_id);
             $stmt2->fetch();
 
-            $query3 = 'Insert into reset_password (user_id , hash) values (?,?)';
+            $stmt2->close();
+            $date = date('Y-m-d H:i:s'); 
+            $query3 = "Insert into reset_password values (?,'".date('Y-m-d H:i:s')."',?)";
             $stmt3= $db->prepare($query3);
-            $stmt3->bind_param('ss',$user_id,$hash);
-            $stmt3->execute();
+            $stmt3->bind_param('is',$user_id,$hash);
+            if(!$stmt3->execute()){
+                echo'<br><br> Error';
+                echo $user_id;
+                echo $date;
+                echo $hash;
+            }
 
 
 
-            echo "usernames matched";
+            //echo "usernames matched";
             $email_failed=false;
 
             $to      = $email; // Send email to our user
@@ -73,16 +82,19 @@ if(isset($_POST['username']) && isset($_POST['email'])){
                 ------------------------
 
                 Please click this link to reset your password:
-                http://www.cs.csubak.edu/~quadcore/mark/temp/Forum/password_recover.php?hash='.$hash.'
+                http://www.cs.csubak.edu/~quadcore/Forum/password_recover.php?hash='.$hash.'
 
                 '; // Our message above including the link
 
             $headers = 'From:noreply@quadcore.cs.csubak.edu' . "\r\n"; // Set from headers
             mail($to, $subject, $message, $headers); // Send our email
 
+            header("Location:https://www.cs.csubak.edu/~quadcore/Forum/right.php");
+
         }
         else{
             $email_failed=true;
+            header("Location:https://www.cs.csubak.edu/~quadcore/Forum/wrong.php");
         }
 
 
@@ -172,7 +184,7 @@ if(isset($_SESSION['valid_user'])){
     </div>
 
 <?php
-if($email_failed){
+/*if($email_failed){
     echo "
         <div class='row'>
         <div class='columns large-4 large-centered text-center'>
@@ -181,7 +193,7 @@ if($email_failed){
         </div>
         ";
 
-}
+}*/
 ?>
 
 
