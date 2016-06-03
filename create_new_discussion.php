@@ -159,7 +159,28 @@ $cat_level_backup = $cat_level_verified;
                  exit;
              }
              $stmt->close();
+  
+             /************** Insert in Database -- Category contains Discussion **************/
+             $date = date('Y-m-d H:i:s'); 
+            $type = 1;
+             $user_edit_dis_insert = 'INSERT INTO user_edit_dis (user_id, dis_id, edit_date, edit_type) VALUES (?,?,?,?)';
+             
+             $stmt = $db->prepare($user_edit_dis_insert);
  
+             $stmt->bind_param('iisi', $user_id, $dis_id2, $date, $type);
+             $stmt->execute();
+            /*Redirects */
+            header("Location: discussion.php?dis_id=$dis_id2");
+            /* if (!$stmt->execute()) {
+                 echo '<br><br><br>Error inserting into user_edit_dis<br>';
+                 echo '<br><br><br>dis_id2<br>';
+                 $stmt->close();
+                 //$db->close();
+                 exit;
+             }*/
+
+             $stmt->close();
+
          }
       }
   

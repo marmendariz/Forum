@@ -172,12 +172,25 @@ echo "<div class='panel'>";
         $stmt->execute();
         $stmt->store_result();
         $stmt->bind_result($cat_id, $dis_id1, $dis_id2, $dis_name, $dis_text, $dis_flag, $upvote_count, $downvote_count);
-
-            echo "<h3 class='text-center'>Discussions</h3>";
+        
+        echo "<h3 class='text-center'>Discussions</h3>";
         while($stmt->fetch()){
             echo "<hr>";
+            echo "<div class = 'row'>";
+            echo "<div class = 'columns small-4 medium-6 large-6 text-left'>";
+
             echo "<a href='discussion.php?dis_id=$dis_id1'><h3 style='color:#008cbb;'>$dis_name</h3></a>";
             echo "<p>&nbsp &nbsp &nbsp &nbsp".stripslashes($dis_text)."</p>";
+            echo "</div>";
+            echo "<div class = 'small-5 medium-6 large-6 columns text-right'><br>";
+            if($logged_in && $user_type == 2){         
+                echo "<a href='edit_discussion.php?dis_id=$dis_id1'class='small round button'>Edit This Discussion</a><br/>"; 
+                echo "</div>";
+                echo "<hr>";
+                echo "</div>";
+         }  
+
+
         }
     }
     else
