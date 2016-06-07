@@ -162,7 +162,7 @@ $cat_level_backup = $cat_level_verified;
   
              /************** Insert in Database -- Category contains Discussion **************/
              $date = date('Y-m-d H:i:s'); 
-            $type = 1;
+            $type = 0;
              $user_edit_dis_insert = 'INSERT INTO user_edit_dis (user_id, dis_id, edit_date, edit_type) VALUES (?,?,?,?)';
              
              $stmt = $db->prepare($user_edit_dis_insert);
