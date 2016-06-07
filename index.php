@@ -4,6 +4,37 @@
     force_ssl();
     session_start();
     auto_login();
+
+    function draw_bar_graph($width, $height, $data, $max_value, $filename) {
+        // create the empty graph image
+        $img = imagecreatetruecolor ($width, $height);
+        // set background with black text and grey graphics
+        $bg_color = imagecolorallocate($img, 255, 255, 255);
+        $text_color = imagecolorallocate($img, 255, 255, 255);
+        $bar_color = imagecolorallocate($img, 0, 0, 0);
+        $border_color = imagecolorallocate($img, 192, 192, 192);
+
+        // fill the background
+        imagefilledrectangle($img, 0, 0, $width, $height, $bg_color);
+
+        // draw the bars
+        $bar_width = $width / ((count($data) * 2) + 1);
+
+        for ($i=0; $i<count($data); $i++) {
+            imagefilledrectangle($img, ($i * $bar_width * 2) + $bar_width, $height, 
+                ($i * $bar_width * 2) + ($bar_width * 2) , $height - (($height/ $max_value) * $data[$i][1]), $bar_color);
+            imagestringup ($img, 5, ($i * $bar_width * 2) + ($bar_width), $height-5, $data[$i][0], $text_color);
+        }
+            // draw a rectangle around the whole thing
+        imagerectangle($img, 0, 0, $width-1, $height-1, $border_color);
+        
+            //draw a range up the left side of the graph
+            //imagestring($img, 5,0,$height - ($i * ($height/ $max_value)), $i, $bar_color);
+        
+        // write the graph image to a file
+        imagepng ($img, $filename, 5);
+    }
+
 ?>
 
 <!doctype html>
@@ -254,9 +285,57 @@
                 echo "</div> ";
                 $i++;
         }
+        
+        /***************************** Discussion Ratings ****************************/
+     echo "</div>";
+     echo "<div class='columns panel text-center large-11 large-centered medium-11 medium-centered small-11 small-centered'>";
+        echo "<h3 style='color: #008cbb' >Most Popular Discussions:</h3>";
 
+        $query = 'SELECT dis_id, dis_name, dis_text, Dis_Rating FROM dis_rating NATURAL JOIN discussion ORDER BY Dis_Rating desc';
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($disid, $disname, $distext, $disrating);
+ 
+        $i = 0;
 
+        while($i < 2 && $stmt->fetch()){ 
+                echo " <div class='text-left'> ";
+                echo "<hr>";
+                echo "<a href='discussion.php?dis_id=$disid'> <h4 style='color: #008cbb'> $disname </h4></a>";
+                echo " <h5> &nbsp &nbsp &nbsp &nbsp $distext </h5> ";
+                echo "</div> ";
+                $i++;
+        }
 
+        /*************** Make Bar Graph **************/
+        $dis_names = array();
+        $dis_ratings = array();
+        $graph_array = array(array());
+
+        $query = 'SELECT dis_id, dis_name, dis_text, Dis_Rating FROM dis_rating NATURAL JOIN discussion ORDER BY Dis_Rating desc';
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($disid, $disname, $distext, $disrating);
+ 
+        $i = 0;
+
+        while($i < 5 && $stmt->fetch()){ 
+            //$dis_names[] = $disname;
+            //$dis_ratings[] = $disrating;
+            $graph_array[$i][0] = $disname; 
+            $graph_array[$i][1] = $disrating; 
+                $i++;
+        }
+        
+        /*$graph_array[0][0] = "value1";
+        $graph_array[0][1] = 2;
+        $graph_array[1][0] = "value2";
+        $graph_array[1][1] = 4;*/
+echo"<br>";
+        draw_bar_graph(480, 240, $graph_array, 40, "img/graph_pic.png");
+        echo "<img src= 'img/graph_pic.png'/>";
 ?>
     </div>
 </div>

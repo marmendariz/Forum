@@ -1,11 +1,4 @@
-[02-May-2016 14:56:40 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/sarahbeth/Forum/show_child_cat.php on line 199
-[02-May-2016 14:56:40 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/sarahbeth/Forum/show_child_cat.php on line 200
-[02-May-2016 14:59:14 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/sarahbeth/Forum/show_child_cat.php on line 207
-[02-May-2016 14:59:14 America/Los_Angeles] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/stu/quadcore/public_html/sarahbeth/Forum/show_child_cat.php on line 208
-[07-May-2016 03:08:51 America/Los_Angeles] PHP Warning:  mysqli_stmt::close(): Couldn't fetch mysqli_stmt in /home/stu/quadcore/public_html/kevin/Forum/discussion.php on line 303
-[11-May-2016 10:34:24 America/Los_Angeles] PHP Fatal error:  Call to a member function close() on a non-object in /home/stu/quadcore/public_html/temp/Forum/email_password.php on line 112
-[02-Jun-2016 16:17:54 America/Los_Angeles] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/stu/quadcore/public_html/sarahbeth/Forum/edit_discussion.php on line 30
-[02-Jun-2016 18:08:19 America/Los_Angeles] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/stu/quadcore/public_html/sarahbeth/Forum/edit_discussion.php on line 35
-[02-Jun-2016 18:09:28 America/Los_Angeles] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/stu/quadcore/public_html/sarahbeth/Forum/edit_discussion.php on line 35
-[02-Jun-2016 18:14:36 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '>' in /home/stu/quadcore/public_html/sarahbeth/Forum/edit_discussion.php on line 148
-[02-Jun-2016 18:39:11 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/stu/quadcore/public_html/sarahbeth/Forum/show_child_cat.php on line 195
+[06-Jun-2016 16:07:22 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ']' in /home/stu/quadcore/public_html/sarahbeth/Forum/index.php on line 15
+[06-Jun-2016 16:07:52 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '++' (T_INC), expecting ')' in /home/stu/quadcore/public_html/sarahbeth/Forum/index.php on line 23
+[06-Jun-2016 16:08:26 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ';' in /home/stu/quadcore/public_html/sarahbeth/Forum/index.php on line 25
+[06-Jun-2016 16:19:06 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '[' in /home/stu/quadcore/public_html/sarahbeth/Forum/index.php on line 332
