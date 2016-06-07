@@ -185,10 +185,14 @@ echo "<div class='panel'>";
             echo "<div class = 'small-5 medium-6 large-6 columns text-right'><br>";
             if($logged_in && $user_type == 2){         
                 echo "<a href='edit_discussion.php?dis_id=$dis_id1'class='small round button'>Edit This Discussion</a><br/>"; 
+                //echo "</div>";
+                //echo "<hr>";
+                //echo "</div>";
+            } 
+
                 echo "</div>";
                 echo "<hr>";
                 echo "</div>";
-         }  
 
 
         }
